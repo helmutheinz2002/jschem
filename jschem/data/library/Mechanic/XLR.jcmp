@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component>
+   <Text text="J" fontSize="160" y="-400" x="-150" mobile="true"></Text>
+   <Text text="XLR Jack" visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   <Text visible="false" fontSize="160" y="384" x="100" mobile="true"></Text>
+   <Arc orientation="3" radius="240" y="300"></Arc>
+   <Pin y="600">
+      <Text text="1" fontSize="144" x="60" mobile="true"></Text>
+      <Text visible="false" fontSize="144" y="-60" x="360" mobile="true"></Text>
+   </Pin>
+   <Pin y="300" x="300">
+      <Text text="3" fontSize="144" y="-240" mobile="true"></Text>
+      <Text visible="false" fontSize="144" y="-60" x="360" mobile="true"></Text>
+   </Pin>
+   <Pin>
+      <Text text="2" fontSize="144" y="-180" x="120" mobile="true"></Text>
+      <Text visible="false" fontSize="144" y="-60" x="360" mobile="true"></Text>
+   </Pin>
+   <Arc orientation="3" radius="36" y="300" x="120"></Arc>
+   <Arc orientation="3" radius="36" y="420"></Arc>
+   <Arc orientation="3" radius="36" y="180"></Arc>
+   <Line dy="120" y="480"></Line>
+   <Line dx="120" y="300" x="180"></Line>
+   <Line dy="-120" y="120"></Line>
+</Component>

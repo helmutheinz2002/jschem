@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component version="2">
+   <Text text="IC" fontSize="160" key="PART_ID" y="-250" mobile="true" x="-100"></Text>
+   <Text text="74LS166" fontSize="160" key="PART_NAME" y="-50" mobile="true" x="-100"></Text>
+   <Text visible="false" fontSize="160" key="ORDER_NR" y="384" mobile="true" x="100"></Text>
+   <Text visible="false" fontSize="160" key="PART_MODEL" y="576" mobile="true" x="100"></Text>
+   <Square height="4800" width="1500" y="200" x="250"></Square>
+   <Pin y="2100">
+      <Text text="10" fontName="Monospaced" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Pin y="2500">
+      <Text text="11" fontName="Monospaced" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Pin y="500" x="2000">
+      <Text text="13" fontName="Monospaced" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Line dx="-250" y="2100" x="250"></Line>
+   <Line dx="-250" y="2500" x="250"></Line>
+   <Line dx="250" y="500" x="1750"></Line>
+   <Text text="A" fontName="Monospaced" fontSize="160" y="450" x="350"></Text>
+   <Text text="B" fontName="Monospaced" fontSize="160" y="850" x="350"></Text>
+   <Text text="Q" fontName="Monospaced" fontSize="160" y="450" x="1550"></Text>
+   <Pin y="2900">
+      <Text text="12" fontName="Monospaced" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Line dx="-250" y="2900" x="250"></Line>
+   <Text text="C" fontName="Monospaced" fontSize="160" y="1250" x="350"></Text>
+   <Pin y="500">
+      <Text text="2" fontName="Monospaced" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Line dx="-250" y="500" x="250"></Line>
+   <Pin y="900">
+      <Text text="3" fontName="Monospaced" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Line dx="-250" y="900" x="250"></Line>
+   <Pin y="1300">
+      <Text text="4" fontName="Monospaced" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Line dx="-250" y="1300" x="250"></Line>
+   <Pin y="1700">
+      <Text text="5" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Pin y="3300">
+      <Text text="14" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Text text="D" fontName="Monospaced" fontSize="160" y="1650" x="350"></Text>
+   <Text text="E" fontName="Monospaced" fontSize="160" y="2050" x="350"></Text>
+   <Text text="F" fontName="Monospaced" fontSize="160" y="2450" x="350"></Text>
+   <Text text="G" fontName="Monospaced" fontSize="160" y="2850" x="350"></Text>
+   <Text text="H" fontName="Monospaced" fontSize="160" y="3250" x="350"></Text>
+   <Text text="Ser" fontName="Monospaced" fontSize="160" y="3450" x="1350"></Text>
+   <Pin y="3500" x="2000">
+      <Text text="1" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Text text="Clk" fontName="Monospaced" fontSize="160" y="3950" x="350"></Text>
+   <Line dx="-250" y="3300" x="250"></Line>
+   <Line dx="-250" y="3500" x="2000"></Line>
+   <Line dx="250" y="4400" x="1350"></Line>
+   <Text text="Clr" fontName="Monospaced" fontSize="160" y="4450" x="1350"></Text>
+   <Text text="ClkInh" fontName="Monospaced" fontSize="160" y="4450" x="350"></Text>
+   <Pin y="4000">
+      <Text text="7" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Pin y="4500">
+      <Text text="6" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Line dx="250" y="4000"></Line>
+   <Line dx="250" y="4500"></Line>
+   <Line dx="250" y="4500" x="1750"></Line>
+   <Pin y="4500" x="2000">
+      <Text text="9" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Text text="Sh/Ld" fontName="Monospaced" fontSize="160" y="3950" x="1150"></Text>
+   <Line dx="150" y="3900" x="1450"></Line>
+   <Pin y="4000" x="2000">
+      <Text text="15" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Line dx="250" y="4000" x="1750"></Line>
+   <Line dx="250" y="1700"></Line>
+   <Line dy="-200" y="200" x="1000"></Line>
+   <Pin x="1000">
+      <Text text="16" fontName="Monospaced" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Text text="Vcc" fontName="Monospaced" fontSize="160" y="300" x="850"></Text>
+   <Pin y="5250" x="1000">
+      <Text text="16" fontName="Monospaced" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Line dy="250" y="5000" x="1000"></Line>
+   <Text text="GND" fontName="Monospaced" fontSize="160" y="4800" x="850"></Text>
+</Component>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component version="2">
+   <Text text="V" fontSize="160" y="-100" key="PART_ID" mobile="true" x="-300"></Text>
+   <Text text="PCL82" fontSize="160" y="100" key="PART_NAME" mobile="true" x="-300"></Text>
+   <Text visible="false" fontSize="160" y="384" key="ORDER_NR" mobile="true" x="100"></Text>
+   <Text text="6BM8P" visible="false" fontSize="160" y="576" key="PART_MODEL" mobile="true" x="100"></Text>
+   <Line dy="-500" y="500" x="750"></Line>
+   <Line dx="-50" y="950" x="900"></Line>
+   <Line dx="-50" y="950" x="750"></Line>
+   <Line dx="-50" y="950" x="600"></Line>
+   <Pin orientation="4" y="950">
+      <Text orientation="4" text="3" visible="false" fontSize="160" y="100" key="PIN_NR" mobile="true" x="-100"></Text>
+      <Text orientation="4" visible="false" fontSize="160" y="192" key="PIN_NAME" mobile="true" x="100"></Text>
+      <Text orientation="4" text="3" fontSize="160" y="100" mobile="true" x="-50"></Text>
+   </Pin>
+   <Pin orientation="4" x="750">
+      <Text orientation="4" text="1" visible="false" fontSize="160" y="-50" key="PIN_NR" mobile="true" x="-100"></Text>
+      <Text orientation="4" visible="false" fontSize="160" y="192" key="PIN_NAME" mobile="true" x="100"></Text>
+      <Text orientation="4" text="6" fontSize="160" mobile="true" x="200"></Text>
+   </Pin>
+   <Line dx="450" y="950"></Line>
+   <Line dx="-50" y="950" x="1050"></Line>
+   <Line dx="600" y="500" x="450"></Line>
+   <Arc orientation="1" radius="500" arcType="5" y="950" x="750"></Arc>
+   <Arc orientation="5" radius="500" arcType="5" y="650" x="750"></Arc>
+   <Line dy="300" y="650" x="250"></Line>
+   <Line orientation="4" dy="550" y="1100" x="450"></Line>
+   <Pin orientation="4" y="1650" x="450">
+      <Text orientation="4" text="4" visible="false" fontSize="160" y="-150" key="PIN_NR" mobile="true" x="-100"></Text>
+      <Text orientation="4" visible="false" fontSize="160" y="192" key="PIN_NAME" mobile="true" x="100"></Text>
+      <Text orientation="4" text="2" fontSize="160" y="-150" mobile="true" x="-100"></Text>
+   </Pin>
+   <Line orientation="4" dx="-600" y="1100" x="450"></Line>
+   <Line orientation="4" dy="100" y="1100" x="1050"></Line>
+   <Line orientation="4" dx="300" y="150" x="1050"></Line>
+   <Line orientation="4" dx="300" y="1450" x="1050"></Line>
+   <Line dx="-50" y="800" x="900"></Line>
+   <Line dx="-50" y="800" x="750"></Line>
+   <Line dx="-50" y="800" x="600"></Line>
+   <Pin orientation="4" y="800">
+      <Text orientation="4" text="2" visible="false" fontSize="160" y="-200" key="PIN_NR" mobile="true" x="-100"></Text>
+      <Text orientation="4" visible="false" fontSize="160" y="192" key="PIN_NAME" mobile="true" x="100"></Text>
+      <Text orientation="4" text="7" fontSize="160" y="-200" mobile="true" x="-50"></Text>
+   </Pin>
+   <Line dx="450" y="800"></Line>
+   <Line dx="-50" y="800" x="1050"></Line>
+   <Line dx="-50" y="650" x="800"></Line>
+   <Line dx="-50" y="650" x="650"></Line>
+   <Line dx="-50" y="650" x="500"></Line>
+   <Line dx="-50" y="650" x="950"></Line>
+   <Line orientation="4" dx="-100" dy="-100" y="1100" x="1050"></Line>
+   <Line orientation="4" dy="-300" y="1000" x="1150"></Line>
+   <Line orientation="4" dx="50" dy="-50" y="700" x="1150"></Line>
+   <Line orientation="4" dx="50" y="650" x="1100"></Line>
+</Component>

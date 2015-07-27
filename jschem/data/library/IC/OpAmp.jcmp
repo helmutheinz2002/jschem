@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component version="2">
+   <Text text="OP" fontSize="160" y="-150" key="PART_ID" x="400" mobile="true"></Text>
+   <Text visible="false" fontSize="160" y="192" key="PART_NAME" x="100" mobile="true"></Text>
+   <Text visible="false" fontSize="160" y="384" key="ORDER_NR" x="100" mobile="true"></Text>
+   <Text visible="false" fontSize="160" y="576" key="PART_MODEL" x="100" mobile="true"></Text>
+   <Pin y="200">
+      <Text text="1" visible="false" fontSize="160" key="PIN_NR" x="100" mobile="true"></Text>
+      <Text text="Inverting Input" visible="false" fontSize="160" y="192" key="PIN_NAME" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin y="700">
+      <Text text="2" visible="false" fontSize="160" key="PIN_NR" x="100" mobile="true"></Text>
+      <Text text="Non-Inverting Input" visible="false" fontSize="160" y="192" key="PIN_NAME" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin y="450" x="1000">
+      <Text text="3" visible="false" fontSize="160" key="PIN_NR" x="100" mobile="true"></Text>
+      <Text text="Output" visible="false" fontSize="160" y="192" key="PIN_NAME" x="100" mobile="true"></Text>
+   </Pin>
+   <Line dy="900" x="150"></Line>
+   <Line dx="700" dy="-450" y="900" x="150"></Line>
+   <Line dx="-700" dy="-450" y="450" x="850"></Line>
+   <Line dx="-150" y="200" x="150"></Line>
+   <Line dx="-150" y="700" x="150"></Line>
+   <Line dx="150" y="450" x="850"></Line>
+   <Line dx="100" y="650" x="200"></Line>
+   <Line dy="100" y="600" x="250"></Line>
+   <Line dx="100" y="250" x="200"></Line>
+</Component>

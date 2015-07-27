@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component version="2">
+   <Text text="R" fontSize="160" key="PART_ID" y="400" x="450" mobile="true"></Text>
+   <Text visible="false" fontSize="160" key="PART_NAME" y="192" x="100" mobile="true"></Text>
+   <Text visible="false" fontSize="160" key="ORDER_NR" y="384" x="100" mobile="true"></Text>
+   <Text visible="false" fontSize="160" key="PART_MODEL" y="576" x="100" mobile="true"></Text>
+   <Pin x="150">
+      <Text text="1" visible="false" key="PIN_NR" y="-50" x="150" mobile="true"></Text>
+      <Text visible="false" key="PIN_NAME" y="240" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin y="900" x="150">
+      <Text text="2" visible="false" key="PIN_NR" y="-50" x="150" mobile="true"></Text>
+      <Text visible="false" key="PIN_NAME" y="240" x="100" mobile="true"></Text>
+   </Pin>
+   <Line dx="-300" dy="100" y="250" x="300"></Line>
+   <Line dx="300" dy="100" y="350"></Line>
+   <Line dx="-300" dy="100" y="450" x="300"></Line>
+   <Line dx="300" dy="100" y="550"></Line>
+   <Line dx="-150" dy="50" y="650" x="300"></Line>
+   <Line dx="-150" dy="-50" y="250" x="300"></Line>
+   <Line dy="-200" y="200" x="150"></Line>
+   <Line dy="200" y="700" x="150"></Line>
+</Component>

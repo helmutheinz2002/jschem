@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component version="2">
+   <Text visible="false" fontSize="160" key="PART_ID" x="100" mobile="true"></Text>
+   <Text visible="false" fontSize="160" y="192" key="PART_NAME" x="100" mobile="true"></Text>
+   <Text visible="false" fontSize="160" y="384" key="ORDER_NR" x="100" mobile="true"></Text>
+   <Text visible="false" fontSize="160" y="576" key="PART_MODEL" x="100" mobile="true"></Text>
+   <Line orientation="1" dx="-200" y="600" x="500"></Line>
+   <Line orientation="1" dx="200" y="200" x="500"></Line>
+   <Pin orientation="1" y="800" x="500">
+      <Text orientation="3" visible="false" fontSize="160" key="PIN_NR" x="100" mobile="true"></Text>
+      <Text orientation="3" visible="false" fontSize="160" y="192" key="PIN_NAME" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin orientation="1" x="500">
+      <Text orientation="3" visible="false" fontSize="160" key="PIN_NR" x="100" mobile="true"></Text>
+      <Text orientation="3" visible="false" fontSize="160" y="192" key="PIN_NAME" x="100" mobile="true"></Text>
+   </Pin>
+   <Arc orientation="1" radius="50" y="650" x="1350"></Arc>
+   <Arc orientation="1" radius="50" y="150" x="1350"></Arc>
+   <Line orientation="1" dx="450" dy="-100" y="600" x="1350"></Line>
+   <Line orientation="1" dx="-100" y="700" x="1350"></Line>
+   <Line orientation="1" dx="100" y="100" x="1350"></Line>
+   <Pin orientation="1" y="800" x="1350">
+      <Text orientation="3" visible="false" fontSize="160" key="PIN_NR" x="100" mobile="true"></Text>
+      <Text orientation="3" visible="false" fontSize="160" y="192" key="PIN_NAME" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin orientation="1" x="1350">
+      <Text orientation="3" visible="false" fontSize="160" key="PIN_NR" x="100" mobile="true"></Text>
+      <Text orientation="3" visible="false" fontSize="160" y="192" key="PIN_NAME" x="100" mobile="true"></Text>
+   </Pin>
+   <Square height="400" color="-16777216" width="950" y="200"></Square>
+   <Line dx="400" color="-16777216" dy="400" y="200" x="400"></Line>
+   <Line dx="-400" color="-16777216" dy="-400" y="600" x="600"></Line>
+   <Line dx="50" color="-16777216" y="400" x="950"></Line>
+   <Line dx="50" color="-16777216" y="400" x="1050"></Line>
+   <Line dx="50" color="-16777216" y="400" x="1150"></Line>
+   <Line dx="50" color="-16777216" y="400" x="1250"></Line>
+</Component>

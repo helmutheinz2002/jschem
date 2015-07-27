@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component mobile="false" orientation="0" y="0" visible="true" x="0">
+   <Text mobile="true" text="IC" fontStyle="0" fontSize="160" orientation="0" y="-250" visible="true" x="250" fontName="Monospaced"></Text>
+   <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="384" visible="false" x="100" fontName="Monospaced"></Text>
+   <Square width="1000" mobile="false" height="650" orientation="0" y="0" visible="true" x="250"></Square>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="1000" visible="true" x="750" arcType="0">
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="0" visible="false" x="100" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="300" visible="true" x="0" arcType="0">
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="0" visible="false" x="100" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="300" visible="true" x="1500" arcType="0">
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="0" visible="false" x="100" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Line mobile="false" dx="0" orientation="0" y="650" visible="true" dy="350" x="750"></Line>
+   <Line mobile="false" dx="-250" orientation="0" y="300" visible="true" dy="0" x="250"></Line>
+   <Line mobile="false" dx="250" orientation="0" y="300" visible="true" dy="0" x="1250"></Line>
+</Component>

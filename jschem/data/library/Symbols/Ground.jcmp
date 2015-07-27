@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Symbol y="0" visible="true" orientation="0" x="0" mobile="false">
+   <Text y="0" visible="false" text="Ground" orientation="0" x="100" mobile="true" fontSize="160" fontStyle="0" fontName="SansSerif"></Text>
+   <Pin radius="50" y="0" visible="true" orientation="0" x="150" arcType="0" mobile="false">
+      <Text y="0" visible="false" text="" orientation="0" x="100" mobile="true" fontSize="160" fontStyle="0" fontName="SansSerif"></Text>
+      <Text y="192" visible="false" text="" orientation="0" x="100" mobile="true" fontSize="160" fontStyle="0" fontName="SansSerif"></Text>
+   </Pin>
+   <Line y="0" visible="true" dy="250" orientation="0" x="150" dx="0" mobile="false"></Line>
+   <Line y="250" visible="true" dy="0" orientation="0" x="0" dx="300" mobile="false"></Line>
+   <Line y="300" visible="true" dy="0" orientation="0" x="50" dx="200" mobile="false"></Line>
+   <Line y="350" visible="true" dy="0" orientation="0" x="100" dx="100" mobile="false"></Line>
+   <Arc radius="0" y="400" visible="true" orientation="0" x="150" arcType="0" mobile="false"></Arc>
+</Symbol>

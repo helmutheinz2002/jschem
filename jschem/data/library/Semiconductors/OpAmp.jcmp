@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component mobile="false" orientation="0" y="0" visible="true" x="0">
+   <Text mobile="true" text="IC" fontStyle="0" fontSize="160" orientation="0" y="-350" visible="true" x="750" fontName="Monospaced"></Text>
+   <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="384" visible="false" x="100" fontName="Monospaced"></Text>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="250" visible="true" arcType="0" x="0">
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="50" visible="false" x="200" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="1050" visible="true" arcType="0" x="0">
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="-200" visible="false" x="200" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Polygon mobile="false" orientation="0" y="0" visible="true" x="400" points="0,-100;0,1400;1100,650"></Polygon>
+   <Line mobile="false" dx="400" orientation="0" y="250" visible="true" dy="0" x="0"></Line>
+   <Line mobile="false" dx="400" orientation="0" y="1050" visible="true" dy="0" x="0"></Line>
+   <Line mobile="false" dx="200" orientation="0" y="650" visible="true" dy="0" x="1500"></Line>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="650" visible="true" arcType="0" x="1700">
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="-250" visible="false" x="-150" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Text mobile="false" text="+" fontStyle="0" fontSize="160" orientation="0" y="200" visible="true" x="500" fontName="Monospaced"></Text>
+   <Text mobile="false" text="-" fontStyle="0" fontSize="160" orientation="0" y="950" visible="true" x="500" fontName="Monospaced"></Text>
+</Component>

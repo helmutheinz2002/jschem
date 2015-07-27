@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component>
+   <Text text="J" fontSize="160" y="-400" x="50" mobile="true"></Text>
+   <Text text="RCA Jack" visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   <Text visible="false" fontSize="160" y="384" x="100" mobile="true"></Text>
+   <Line dy="120" y="120" x="120"></Line>
+   <Pin y="240" x="120">
+      <Text text="1" visible="false" fontSize="144" y="-180" x="-216" mobile="true"></Text>
+      <Text visible="false" fontSize="144" y="-60" x="-360" mobile="true"></Text>
+   </Pin>
+   <Arc orientation="2" radius="120" arcType="3" x="120"></Arc>
+   <Arc orientation="3" radius="36" x="120"></Arc>
+   <Line dx="-60" x="60"></Line>
+   <Pin>
+      <Text text="2" visible="false" fontSize="144" y="-180" x="-216" mobile="true"></Text>
+      <Text visible="false" fontSize="144" y="-60" x="-360" mobile="true"></Text>
+   </Pin>
+</Component>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component mobile="false" orientation="0" y="0" visible="true" x="0">
+   <Text mobile="true" text="V" fontStyle="0" fontSize="160" orientation="0" y="-150" visible="true" x="-150" fontName="Monospaced"></Text>
+   <Text mobile="true" text="PCF86" fontStyle="0" fontSize="160" orientation="0" y="50" visible="true" x="-150" fontName="Monospaced"></Text>
+   <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="384" visible="false" x="100" fontName="Monospaced"></Text>
+   <Line mobile="false" dx="0" orientation="0" y="500" visible="true" dy="-500" x="750"></Line>
+   <Line mobile="false" dx="0" orientation="0" y="1100" visible="true" dy="550" x="1950"></Line>
+   <Line mobile="false" dx="-50" orientation="0" y="950" visible="true" dy="0" x="900"></Line>
+   <Line mobile="false" dx="-50" orientation="0" y="950" visible="true" dy="0" x="750"></Line>
+   <Line mobile="false" dx="-50" orientation="0" y="950" visible="true" dy="0" x="600"></Line>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="1650" visible="true" x="1950" arcType="0">
+      <Text mobile="true" text="3" fontStyle="0" fontSize="160" orientation="0" y="-200" visible="true" x="50" fontName="SansSerif"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="SansSerif"></Text>
+   </Pin>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="950" visible="true" x="0" arcType="0">
+      <Text mobile="true" text="2" fontStyle="0" fontSize="160" orientation="0" y="100" visible="true" x="50" fontName="SansSerif"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="SansSerif"></Text>
+   </Pin>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="0" visible="true" x="750" arcType="0">
+      <Text mobile="true" text="8" fontStyle="0" fontSize="160" orientation="0" y="-50" visible="true" x="-200" fontName="SansSerif"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="SansSerif"></Text>
+   </Pin>
+   <Line mobile="false" dx="-600" orientation="0" y="1100" visible="true" dy="0" x="1950"></Line>
+   <Line mobile="false" dx="450" orientation="0" y="950" visible="true" dy="0" x="0"></Line>
+   <Line mobile="false" dx="-50" orientation="0" y="950" visible="true" dy="0" x="1050"></Line>
+   <Line mobile="false" dx="600" orientation="0" y="500" visible="true" dy="0" x="450"></Line>
+   <Arc radius="500" mobile="false" orientation="1" y="950" visible="true" x="750" arcType="5"></Arc>
+   <Arc radius="500" mobile="false" orientation="5" y="650" visible="true" x="750" arcType="5"></Arc>
+   <Line mobile="false" dx="0" orientation="0" y="650" visible="true" dy="300" x="250"></Line>
+   <Line mobile="false" dx="0" orientation="0" y="1100" visible="true" dy="100" x="1350"></Line>
+   <Line mobile="false" dx="0" orientation="4" y="500" visible="true" dy="-500" x="1650"></Line>
+   <Line mobile="false" dx="0" orientation="4" y="1100" visible="true" dy="550" x="450"></Line>
+   <Line mobile="false" dx="-50" orientation="4" y="800" visible="true" dy="0" x="1500"></Line>
+   <Line mobile="false" dx="-50" orientation="4" y="800" visible="true" dy="0" x="1650"></Line>
+   <Line mobile="false" dx="-50" orientation="4" y="800" visible="true" dy="0" x="1800"></Line>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="4" y="1650" visible="true" x="450" arcType="0">
+      <Text mobile="true" text="1" fontStyle="0" fontSize="160" orientation="4" y="-200" visible="true" x="150" fontName="SansSerif"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="SansSerif"></Text>
+   </Pin>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="4" y="800" visible="true" x="2400" arcType="0">
+      <Text mobile="true" text="6" fontStyle="0" fontSize="160" orientation="4" y="-200" visible="true" x="150" fontName="SansSerif"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="SansSerif"></Text>
+   </Pin>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="4" y="0" visible="true" x="1650" arcType="0">
+      <Text mobile="true" text="7" fontStyle="0" fontSize="160" orientation="4" y="-50" visible="true" x="-100" fontName="SansSerif"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="SansSerif"></Text>
+   </Pin>
+   <Line mobile="false" dx="-600" orientation="4" y="1100" visible="true" dy="0" x="450"></Line>
+   <Line mobile="false" dx="450" orientation="4" y="800" visible="true" dy="0" x="2400"></Line>
+   <Line mobile="false" dx="-50" orientation="4" y="800" visible="true" dy="0" x="1350"></Line>
+   <Line mobile="false" dx="600" orientation="4" y="500" visible="true" dy="0" x="1950"></Line>
+   <Arc radius="500" mobile="false" orientation="7" y="950" visible="true" x="1650" arcType="5"></Arc>
+   <Arc radius="500" mobile="false" orientation="3" y="650" visible="true" x="1650" arcType="5"></Arc>
+   <Line mobile="false" dx="0" orientation="4" y="650" visible="true" dy="300" x="2150"></Line>
+   <Line mobile="false" dx="0" orientation="4" y="1100" visible="true" dy="100" x="1050"></Line>
+   <Line mobile="false" dx="100" orientation="4" y="150" visible="true" dy="0" x="1650"></Line>
+   <Line mobile="false" dx="100" orientation="4" y="150" visible="true" dy="0" x="1450"></Line>
+   <Line mobile="false" dx="100" orientation="4" y="150" visible="true" dy="0" x="1250"></Line>
+   <Line mobile="false" dx="100" orientation="4" y="150" visible="true" dy="0" x="1050"></Line>
+   <Line mobile="false" dx="100" orientation="4" y="150" visible="true" dy="0" x="850"></Line>
+   <Line mobile="false" dx="100" orientation="4" y="1450" visible="true" dy="0" x="1650"></Line>
+   <Line mobile="false" dx="100" orientation="4" y="1450" visible="true" dy="0" x="1450"></Line>
+   <Line mobile="false" dx="100" orientation="4" y="1450" visible="true" dy="0" x="1250"></Line>
+   <Line mobile="false" dx="100" orientation="4" y="1450" visible="true" dy="0" x="1050"></Line>
+   <Line mobile="false" dx="100" orientation="4" y="1450" visible="true" dy="0" x="850"></Line>
+   <Line mobile="false" dx="-50" orientation="0" y="800" visible="true" dy="0" x="900"></Line>
+   <Line mobile="false" dx="-50" orientation="0" y="800" visible="true" dy="0" x="750"></Line>
+   <Line mobile="false" dx="-50" orientation="0" y="800" visible="true" dy="0" x="600"></Line>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="800" visible="true" x="0" arcType="0">
+      <Text mobile="true" text="9" fontStyle="0" fontSize="160" orientation="0" y="-200" visible="true" x="50" fontName="SansSerif"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="SansSerif"></Text>
+   </Pin>
+   <Line mobile="false" dx="450" orientation="0" y="800" visible="true" dy="0" x="0"></Line>
+   <Line mobile="false" dx="-50" orientation="0" y="800" visible="true" dy="0" x="1050"></Line>
+   <Line mobile="false" dx="-50" orientation="0" y="650" visible="true" dy="0" x="800"></Line>
+   <Line mobile="false" dx="-50" orientation="0" y="650" visible="true" dy="0" x="650"></Line>
+   <Line mobile="false" dx="-50" orientation="0" y="650" visible="true" dy="0" x="500"></Line>
+   <Line mobile="false" dx="-50" orientation="0" y="650" visible="true" dy="0" x="950"></Line>
+   <Line mobile="false" dx="-100" orientation="4" y="1100" visible="true" dy="-100" x="1050"></Line>
+   <Line mobile="false" dx="0" orientation="4" y="1000" visible="true" dy="-300" x="1150"></Line>
+   <Line mobile="false" dx="50" orientation="4" y="700" visible="true" dy="-50" x="1150"></Line>
+   <Line mobile="false" dx="50" orientation="4" y="650" visible="true" dy="0" x="1100"></Line>
+   <Line mobile="false" dx="300" orientation="0" y="1200" visible="true" dy="0" x="1050"></Line>
+</Component>

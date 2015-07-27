@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component>
+   <Text visible="false" fontSize="160" mobile="true" x="100"></Text>
+   <Text visible="false" fontSize="160" y="192" mobile="true" x="100"></Text>
+   <Text visible="false" fontSize="160" y="384" mobile="true" x="100"></Text>
+   <Line dy="-480" color="-16777216" y="720" x="120"></Line>
+   <Line dy="600" color="-16777216" y="180" x="192"></Line>
+   <Line dx="168" color="-16777216" y="720" x="192"></Line>
+   <Line dx="144" color="-16777216" y="240" x="204"></Line>
+   <Line dx="120" color="-16777216" y="480" x="240"></Line>
+   <Line dy="240" color="-16777216" y="480" x="360"></Line>
+   <Line dx="84" dy="-48" color="-16777216" y="480" x="216"></Line>
+   <Line dy="96" color="-16777216" y="432" x="300"></Line>
+   <Line dx="-84" dy="-48" color="-16777216" y="528" x="300"></Line>
+   <Line dy="72" color="-16777216" y="444" x="288"></Line>
+   <Line dx="12" dy="48" color="-16777216" y="456" x="264"></Line>
+   <Pin color="-16777216" y="720">
+      <Text text="2" visible="false" color="-16777216" fontSize="144" y="-180" mobile="true" x="120"></Text>
+      <Text text="gate" visible="false" color="-16777216" fontSize="144" y="-60" mobile="true" x="360"></Text>
+   </Pin>
+   <Pin color="-16777216" y="960" x="360">
+      <Text text="3" visible="false" color="-16777216" fontSize="144" y="-180" mobile="true" x="120"></Text>
+      <Text text="source" visible="false" color="-16777216" fontSize="144" y="-60" mobile="true" x="360"></Text>
+   </Pin>
+   <Line dy="240" color="-16777216" y="720" x="360"></Line>
+   <Line dy="-240" color="-16777216" y="240" x="360"></Line>
+   <Pin color="-16777216" x="360">
+      <Text text="1" visible="false" color="-16777216" fontSize="144" y="-180" mobile="true" x="120"></Text>
+      <Text text="drain" visible="false" color="-16777216" fontSize="144" y="-60" mobile="true" x="360"></Text>
+   </Pin>
+   <Line dx="120" color="-16777216" y="720"></Line>
+</Component>

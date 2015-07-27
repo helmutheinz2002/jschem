@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component version="2">
+   <Text visible="false" fontSize="160" key="PART_ID" mobile="true" x="100"></Text>
+   <Text visible="false" fontSize="160" key="PART_NAME" y="192" mobile="true" x="100"></Text>
+   <Text visible="false" fontSize="160" key="ORDER_NR" y="384" mobile="true" x="100"></Text>
+   <Text visible="false" fontSize="160" key="PART_MODEL" y="576" mobile="true" x="100"></Text>
+   <Arc orientation="2" color="-16777216" radius="300" arcType="3" y="300" x="150"></Arc>
+   <Line dy="600" color="-16777216" x="150"></Line>
+   <Pin color="-16777216" y="450">
+      <Text text="2" fontName="Monospaced" visible="false" color="-16777216" fontSize="160" mobile="true" x="100"></Text>
+   </Pin>
+   <Pin color="-16777216" y="150">
+      <Text text="1" fontName="Monospaced" visible="false" color="-16777216" fontSize="160" mobile="true" x="100"></Text>
+   </Pin>
+   <Line dx="-400" color="-16777216" y="450" x="400"></Line>
+   <Line dx="-400" color="-16777216" y="150" x="400"></Line>
+   <Pin color="-16777216" y="300" x="600">
+      <Text text="3" fontName="Monospaced" visible="false" color="-16777216" fontSize="160" mobile="true" x="100"></Text>
+   </Pin>
+   <Line dx="150" color="-16777216" y="300" x="450"></Line>
+</Component>

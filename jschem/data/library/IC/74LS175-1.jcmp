@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component>
+   <Text text="IC" fontSize="160" y="-400" x="450" mobile="true"></Text>
+   <Text text="74LS175" fontSize="160" y="-200" x="450" mobile="true"></Text>
+   <Text visible="false" fontSize="160" y="384" x="100" mobile="true"></Text>
+   <Pin y="400">
+      <Text visible="false" fontSize="160" x="100" mobile="true"></Text>
+      <Text visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin y="400" x="1500">
+      <Text visible="false" fontSize="160" x="100" mobile="true"></Text>
+      <Text visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin y="900" x="1500">
+      <Text visible="false" fontSize="160" x="100" mobile="true"></Text>
+      <Text visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   </Pin>
+   <Square height="1400" width="950" x="300"></Square>
+   <Pin y="1650" x="750">
+      <Text visible="false" fontSize="160" x="100" mobile="true"></Text>
+      <Text visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   </Pin>
+   <Line dx="300" y="400"></Line>
+   <Line dx="-250" y="400" x="1500"></Line>
+   <Line dx="-250" y="900" x="1500"></Line>
+   <Line dy="-250" y="1650" x="750"></Line>
+   <Text text="D" fontSize="160" y="350" x="400"></Text>
+   <Text text="Q" fontSize="160" y="350" x="1050"></Text>
+   <Text text="Q" fontSize="160" y="850" x="1050"></Text>
+   <Text text="Clr" fontSize="160" y="1200" x="650"></Text>
+   <Text text="Clk" fontSize="160" y="850" x="400"></Text>
+   <Line dx="100" y="800" x="1050"></Line>
+   <Line dx="200" y="1150" x="650"></Line>
+   <Pin y="900">
+      <Text visible="false" fontSize="160" x="100" mobile="true"></Text>
+      <Text visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   </Pin>
+   <Line dx="300" y="900"></Line>
+</Component>

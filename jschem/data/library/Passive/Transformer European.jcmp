@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component y="0" x="0" color="-16777216" visible="true" mobile="false" orientation="0">
+   <Text fontStyle="0" fontSize="160" y="0" x="100" color="-16777216" visible="false" mobile="true" orientation="0" text="" fontName="SansSerif"></Text>
+   <Text fontStyle="0" fontSize="160" y="192" x="100" color="-16777216" visible="false" mobile="true" orientation="0" text="" fontName="SansSerif"></Text>
+   <Text fontStyle="0" fontSize="160" y="384" x="100" color="-16777216" visible="false" mobile="true" orientation="0" text="" fontName="SansSerif"></Text>
+   <Square fillColor="-16777216" y="0" x="450" height="2000" color="-16777216" visible="true" mobile="false" orientation="0" width="100"></Square>
+   <Square fillColor="-16777216" y="0" x="750" height="2000" color="-16777216" visible="true" mobile="false" orientation="0" width="100"></Square>
+   <Line y="0" x="650" dx="0" color="-16777216" visible="true" mobile="false" dy="2000" orientation="0"></Line>
+   <Line y="0" x="550" dx="-550" color="-16777216" visible="true" mobile="false" dy="0" orientation="0"></Line>
+   <Line y="2000" x="550" dx="-550" color="-16777216" visible="true" mobile="false" dy="0" orientation="0"></Line>
+   <Line y="0" x="1300" dx="-550" color="-16777216" visible="true" mobile="false" dy="0" orientation="0"></Line>
+   <Line y="2000" x="1300" dx="-550" color="-16777216" visible="true" mobile="false" dy="0" orientation="0"></Line>
+   <Pin arcType="0" fillColor="-16777216" y="0" x="0" color="-16777216" radius="50" visible="true" mobile="false" orientation="0">
+      <Text fontStyle="0" fontSize="160" y="0" x="100" color="-16777216" visible="false" mobile="true" orientation="0" text="1" fontName="SansSerif"></Text>
+      <Text fontStyle="0" fontSize="160" y="192" x="100" color="-16777216" visible="false" mobile="true" orientation="0" text="" fontName="SansSerif"></Text>
+   </Pin>
+   <Pin arcType="0" fillColor="-16777216" y="2000" x="0" color="-16777216" radius="50" visible="true" mobile="false" orientation="0">
+      <Text fontStyle="0" fontSize="160" y="0" x="100" color="-16777216" visible="false" mobile="true" orientation="0" text="2" fontName="SansSerif"></Text>
+      <Text fontStyle="0" fontSize="160" y="192" x="100" color="-16777216" visible="false" mobile="true" orientation="0" text="" fontName="SansSerif"></Text>
+   </Pin>
+   <Pin arcType="0" fillColor="-16777216" y="2000" x="1300" color="-16777216" radius="50" visible="true" mobile="false" orientation="0">
+      <Text fontStyle="0" fontSize="160" y="0" x="100" color="-16777216" visible="false" mobile="true" orientation="0" text="3" fontName="SansSerif"></Text>
+      <Text fontStyle="0" fontSize="160" y="192" x="100" color="-16777216" visible="false" mobile="true" orientation="0" text="" fontName="SansSerif"></Text>
+   </Pin>
+   <Pin arcType="0" fillColor="-16777216" y="0" x="1300" color="-16777216" radius="50" visible="true" mobile="false" orientation="0">
+      <Text fontStyle="0" fontSize="160" y="0" x="100" color="-16777216" visible="false" mobile="true" orientation="0" text="4" fontName="SansSerif"></Text>
+      <Text fontStyle="0" fontSize="160" y="192" x="100" color="-16777216" visible="false" mobile="true" orientation="0" text="" fontName="SansSerif"></Text>
+   </Pin>
+</Component>

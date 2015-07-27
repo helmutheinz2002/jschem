@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component visible="true" color="-16777216" x="0" mobile="false" orientation="0" y="0">
+   <Text visible="true" color="-16777216" x="0" text="V" fontStyle="0" fontName="SansSerif" fontSize="160" mobile="true" orientation="0" y="-200"></Text>
+   <Text visible="true" color="-16777216" x="-150" text="PCL82" fontStyle="0" fontName="SansSerif" fontSize="160" mobile="true" orientation="0" y="0"></Text>
+   <Text visible="false" color="-16777216" x="100" text="" fontStyle="0" fontName="SansSerif" fontSize="160" mobile="true" orientation="0" y="384"></Text>
+   <Line visible="true" color="-16777216" dx="0" x="1650" mobile="false" orientation="4" y="500" dy="-500"></Line>
+   <Line visible="true" color="-16777216" dx="0" x="450" mobile="false" orientation="4" y="1100" dy="550"></Line>
+   <Line visible="true" color="-16777216" dx="-50" x="1500" mobile="false" orientation="4" y="950" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="-50" x="1650" mobile="false" orientation="4" y="950" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="-50" x="1800" mobile="false" orientation="4" y="950" dy="0"></Line>
+   <Pin arcType="0" visible="true" color="-16777216" fillColor="-16777216" x="450" mobile="false" orientation="4" radius="50" y="1650">
+      <Text visible="true" color="-16777216" x="-200" text="8" fontStyle="0" fontName="SansSerif" fontSize="160" mobile="true" orientation="0" y="-150"></Text>
+      <Text visible="false" color="-16777216" x="100" text="" fontStyle="0" fontName="SansSerif" fontSize="160" mobile="true" orientation="0" y="192"></Text>
+   </Pin>
+   <Pin arcType="0" visible="true" color="-16777216" fillColor="-16777216" x="2400" mobile="false" orientation="0" radius="50" y="950">
+      <Text visible="true" color="-16777216" x="-150" text="3" fontStyle="0" fontName="SansSerif" fontSize="160" mobile="true" orientation="0" y="100"></Text>
+      <Text visible="false" color="-16777216" x="100" text="" fontStyle="0" fontName="SansSerif" fontSize="160" mobile="true" orientation="0" y="192"></Text>
+   </Pin>
+   <Pin arcType="0" visible="true" color="-16777216" fillColor="-16777216" x="1650" mobile="false" orientation="0" radius="50" y="0">
+      <Text visible="true" color="-16777216" x="-200" text="6" fontStyle="0" fontName="SansSerif" fontSize="160" mobile="true" orientation="0" y="-50"></Text>
+      <Text visible="false" color="-16777216" x="100" text="" fontStyle="0" fontName="SansSerif" fontSize="160" mobile="true" orientation="0" y="192"></Text>
+   </Pin>
+   <Line visible="true" color="-16777216" dx="-600" x="450" mobile="false" orientation="4" y="1100" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="450" x="2400" mobile="false" orientation="4" y="950" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="-50" x="1350" mobile="false" orientation="4" y="950" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="600" x="1950" mobile="false" orientation="4" y="500" dy="0"></Line>
+   <Arc arcType="5" visible="true" color="-16777216" x="1650" mobile="false" orientation="7" radius="500" y="950"></Arc>
+   <Arc arcType="5" visible="true" color="-16777216" x="1650" mobile="false" orientation="3" radius="500" y="650"></Arc>
+   <Line visible="true" color="-16777216" dx="0" x="2150" mobile="false" orientation="4" y="650" dy="300"></Line>
+   <Line visible="true" color="-16777216" dx="0" x="1050" mobile="false" orientation="4" y="1100" dy="100"></Line>
+   <Line visible="true" color="-16777216" dx="0" x="750" mobile="false" orientation="0" y="500" dy="-500"></Line>
+   <Line visible="true" color="-16777216" dx="0" x="1950" mobile="false" orientation="0" y="1100" dy="550"></Line>
+   <Line visible="true" color="-16777216" dx="-50" x="900" mobile="false" orientation="0" y="800" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="-50" x="750" mobile="false" orientation="0" y="800" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="-50" x="600" mobile="false" orientation="0" y="800" dy="0"></Line>
+   <Pin arcType="0" visible="true" color="-16777216" fillColor="-16777216" x="1950" mobile="false" orientation="0" radius="50" y="1650">
+      <Text visible="true" color="-16777216" x="-200" text="2" fontStyle="0" fontName="SansSerif" fontSize="160" mobile="true" orientation="0" y="-150"></Text>
+      <Text visible="false" color="-16777216" x="100" text="" fontStyle="0" fontName="SansSerif" fontSize="160" mobile="true" orientation="0" y="192"></Text>
+   </Pin>
+   <Pin arcType="0" visible="true" color="-16777216" fillColor="-16777216" x="0" mobile="false" orientation="0" radius="50" y="800">
+      <Text visible="true" color="-16777216" x="50" text="1" fontStyle="0" fontName="SansSerif" fontSize="160" mobile="true" orientation="0" y="100"></Text>
+      <Text visible="false" color="-16777216" x="100" text="" fontStyle="0" fontName="SansSerif" fontSize="160" mobile="true" orientation="0" y="192"></Text>
+   </Pin>
+   <Pin arcType="0" visible="true" color="-16777216" fillColor="-16777216" x="750" mobile="false" orientation="0" radius="50" y="0">
+      <Text visible="true" color="-16777216" x="100" text="9" fontStyle="0" fontName="SansSerif" fontSize="160" mobile="true" orientation="0" y="-50"></Text>
+      <Text visible="false" color="-16777216" x="100" text="" fontStyle="0" fontName="SansSerif" fontSize="160" mobile="true" orientation="0" y="192"></Text>
+   </Pin>
+   <Line visible="true" color="-16777216" dx="-600" x="1950" mobile="false" orientation="0" y="1100" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="450" x="0" mobile="false" orientation="0" y="800" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="-50" x="1050" mobile="false" orientation="0" y="800" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="600" x="450" mobile="false" orientation="0" y="500" dy="0"></Line>
+   <Arc arcType="5" visible="true" color="-16777216" x="750" mobile="false" orientation="1" radius="500" y="950"></Arc>
+   <Arc arcType="5" visible="true" color="-16777216" x="750" mobile="false" orientation="5" radius="500" y="650"></Arc>
+   <Line visible="true" color="-16777216" dx="0" x="250" mobile="false" orientation="0" y="650" dy="300"></Line>
+   <Line visible="true" color="-16777216" dx="0" x="1350" mobile="false" orientation="0" y="1100" dy="100"></Line>
+   <Line visible="true" color="-16777216" dx="100" x="750" mobile="false" orientation="0" y="150" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="100" x="950" mobile="false" orientation="0" y="150" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="100" x="1150" mobile="false" orientation="0" y="150" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="100" x="1350" mobile="false" orientation="0" y="150" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="100" x="1550" mobile="false" orientation="0" y="150" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="100" x="750" mobile="false" orientation="0" y="1450" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="100" x="950" mobile="false" orientation="0" y="1450" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="100" x="1150" mobile="false" orientation="0" y="1450" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="100" x="1350" mobile="false" orientation="0" y="1450" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="100" x="1550" mobile="false" orientation="0" y="1450" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="-50" x="1500" mobile="false" orientation="4" y="800" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="-50" x="1650" mobile="false" orientation="4" y="800" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="-50" x="1800" mobile="false" orientation="4" y="800" dy="0"></Line>
+   <Pin arcType="0" visible="true" color="-16777216" fillColor="-16777216" x="2400" mobile="false" orientation="0" radius="50" y="800">
+      <Text visible="true" color="-16777216" x="-150" text="7" fontStyle="0" fontName="SansSerif" fontSize="160" mobile="true" orientation="0" y="-200"></Text>
+      <Text visible="false" color="-16777216" x="100" text="" fontStyle="0" fontName="SansSerif" fontSize="160" mobile="true" orientation="0" y="192"></Text>
+   </Pin>
+   <Line visible="true" color="-16777216" dx="450" x="2400" mobile="false" orientation="4" y="800" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="-50" x="1350" mobile="false" orientation="4" y="800" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="-50" x="1600" mobile="false" orientation="4" y="650" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="-50" x="1750" mobile="false" orientation="4" y="650" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="-50" x="1900" mobile="false" orientation="4" y="650" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="-50" x="1450" mobile="false" orientation="4" y="650" dy="0"></Line>
+   <Line visible="true" color="-16777216" dx="-100" x="1350" mobile="false" orientation="0" y="1100" dy="-100"></Line>
+   <Line visible="true" color="-16777216" dx="0" x="1250" mobile="false" orientation="0" y="1000" dy="-300"></Line>
+   <Line visible="true" color="-16777216" dx="50" x="1250" mobile="false" orientation="0" y="700" dy="-50"></Line>
+   <Line visible="true" color="-16777216" dx="50" x="1300" mobile="false" orientation="0" y="650" dy="0"></Line>
+</Component>

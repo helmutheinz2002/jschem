@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component>
+   <Text text="V" fontSize="160" y="-200" x="-50" mobile="true"></Text>
+   <Text text="PCL86" fontSize="160" x="-50" mobile="true"></Text>
+   <Text visible="false" fontSize="160" y="384" x="100" mobile="true"></Text>
+   <Line orientation="4" dy="550" y="1100" x="450"></Line>
+   <Pin orientation="4" y="1650" x="450">
+      <Text orientation="4" text="2" fontSize="160" y="-150" x="-100" mobile="true"></Text>
+      <Text orientation="0" visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   </Pin>
+   <Line orientation="4" dx="-600" y="1100" x="450"></Line>
+   <Line orientation="4" dy="100" y="1100" x="1050"></Line>
+   <Line dy="-500" y="500" x="750"></Line>
+   <Line dx="-50" y="800" x="900"></Line>
+   <Line dx="-50" y="800" x="750"></Line>
+   <Line dx="-50" y="800" x="600"></Line>
+   <Pin y="800">
+      <Text orientation="0" text="1" fontSize="160" y="100" x="50" mobile="true"></Text>
+      <Text orientation="0" visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin x="750">
+      <Text orientation="0" text="9" fontSize="160" y="-50" x="100" mobile="true"></Text>
+      <Text orientation="0" visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   </Pin>
+   <Line dx="450" y="800"></Line>
+   <Line dx="-50" y="800" x="1050"></Line>
+   <Line dx="600" y="500" x="450"></Line>
+   <Arc orientation="1" radius="500" arcType="5" y="950" x="750"></Arc>
+   <Arc orientation="5" radius="500" arcType="5" y="650" x="750"></Arc>
+   <Line dy="300" y="650" x="250"></Line>
+   <Line dx="300" y="150" x="750"></Line>
+   <Line dx="300" y="1450" x="750"></Line>
+</Component>

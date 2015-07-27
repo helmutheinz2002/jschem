@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component version="2">
+   <Text text="IC" fontSize="160" y="650" key="PART_ID" x="700" mobile="true"></Text>
+   <Text text="LM339/3" fontSize="160" y="850" key="PART_NAME" x="700" mobile="true"></Text>
+   <Text visible="false" fontSize="160" y="384" key="ORDER_NR" x="100" mobile="true"></Text>
+   <Text visible="false" fontSize="160" y="576" key="PART_MODEL" x="100" mobile="true"></Text>
+   <Pin y="200">
+      <Text orientation="0" text="10" fontSize="160" y="-250" key="PIN_NR" x="-100" mobile="true"></Text>
+      <Text orientation="0" visible="false" fontSize="160" y="192" key="PIN_NAME" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin y="700">
+      <Text orientation="0" text="11" fontSize="160" y="-250" key="PIN_NR" x="-100" mobile="true"></Text>
+      <Text orientation="0" visible="false" fontSize="160" y="192" key="PIN_NAME" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin y="450" x="1000">
+      <Text orientation="0" text="13" fontSize="160" y="-250" key="PIN_NR" x="-100" mobile="true"></Text>
+      <Text orientation="0" visible="false" fontSize="160" y="192" key="PIN_NAME" x="100" mobile="true"></Text>
+   </Pin>
+   <Line dy="900" x="150"></Line>
+   <Line dx="700" dy="-450" y="900" x="150"></Line>
+   <Line dx="-700" dy="-450" y="450" x="850"></Line>
+   <Line dx="-150" y="200" x="150"></Line>
+   <Line dx="-150" y="700" x="150"></Line>
+   <Line dx="150" y="450" x="850"></Line>
+   <Line dx="100" y="650" x="200"></Line>
+   <Line dy="100" y="600" x="250"></Line>
+   <Line dx="100" y="250" x="200"></Line>
+</Component>

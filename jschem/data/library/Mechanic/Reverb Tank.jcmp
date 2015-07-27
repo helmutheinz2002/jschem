@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component version="2">
+   <Text text="Reverb Tank" fontSize="160" y="-650" key="PART_ID" x="150" mobile="true"></Text>
+   <Text text="4AB31C" fontSize="160" y="-450" key="PART_NAME" x="150" mobile="true"></Text>
+   <Text visible="false" fontSize="160" y="384" key="ORDER_NR" x="100" mobile="true"></Text>
+   <Text visible="false" fontSize="160" y="576" key="PART_MODEL" x="100" mobile="true"></Text>
+   <Pin y="500">
+      <Text orientation="0" text="2" fontName="Monospaced" visible="false" fontSize="160" key="PIN_NR" x="100" mobile="true"></Text>
+      <Text orientation="0" fontName="Monospaced" visible="false" fontSize="160" y="192" key="PIN_NAME" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin orientation="6">
+      <Text orientation="0" text="1" fontName="Monospaced" visible="false" fontSize="160" key="PIN_NR" x="100" mobile="true"></Text>
+      <Text orientation="0" fontName="Monospaced" visible="false" fontSize="160" y="192" key="PIN_NAME" x="100" mobile="true"></Text>
+   </Pin>
+   <Arc radius="250" arcType="4" y="750" x="850"></Arc>
+   <Arc orientation="2" radius="250" arcType="4" y="750" x="850"></Arc>
+   <Arc orientation="3" radius="250" arcType="4" y="750" x="850"></Arc>
+   <Arc radius="250" arcType="4" y="750" x="1200"></Arc>
+   <Arc orientation="2" radius="250" arcType="4" y="750" x="500"></Arc>
+   <Arc orientation="3" radius="250" arcType="4" y="750" x="1200"></Arc>
+   <Arc orientation="2" radius="250" arcType="4" y="750" x="1200"></Arc>
+   <Arc radius="250" arcType="4" y="750" x="1550"></Arc>
+   <Arc orientation="3" radius="250" arcType="4" y="750" x="1550"></Arc>
+   <Arc orientation="2" radius="250" arcType="4" y="750" x="1550"></Arc>
+   <Arc radius="250" arcType="4" y="750" x="1900"></Arc>
+   <Arc orientation="3" radius="250" arcType="4" y="750" x="1900"></Arc>
+   <Arc orientation="2" radius="250" arcType="4" y="750" x="1900"></Arc>
+   <Arc radius="250" arcType="4" y="750" x="2250"></Arc>
+   <Arc radius="250" arcType="5" y="750" x="2250"></Arc>
+   <Arc orientation="4" radius="250" arcType="5" y="750" x="500"></Arc>
+   <Square orientation="2" height="1300" width="2450" y="1100" x="2600"></Square>
+   <Arc orientation="4" radius="250" arcType="4" y="250" x="1550"></Arc>
+   <Arc orientation="6" radius="250" arcType="4" y="250" x="1550"></Arc>
+   <Arc orientation="5" radius="250" arcType="4" y="250" x="1550"></Arc>
+   <Arc orientation="4" radius="250" arcType="4" y="250" x="1200"></Arc>
+   <Arc orientation="6" radius="250" arcType="4" y="250" x="1900"></Arc>
+   <Arc orientation="5" radius="250" arcType="4" y="250" x="1900"></Arc>
+   <Arc orientation="6" radius="250" arcType="4" y="250" x="2250"></Arc>
+   <Arc orientation="4" radius="250" arcType="4" y="250" x="1900"></Arc>
+   <Arc orientation="5" radius="250" arcType="4" y="250" x="1200"></Arc>
+   <Arc orientation="6" radius="250" arcType="4" y="250" x="1200"></Arc>
+   <Arc orientation="4" radius="250" arcType="4" y="250" x="850"></Arc>
+   <Arc orientation="5" radius="250" arcType="4" y="250" x="850"></Arc>
+   <Arc orientation="6" radius="250" arcType="4" y="250" x="850"></Arc>
+   <Arc orientation="4" radius="250" arcType="4" y="250" x="500"></Arc>
+   <Arc orientation="4" radius="250" arcType="5" y="250" x="500"></Arc>
+   <Arc radius="250" arcType="5" y="250" x="2250"></Arc>
+   <Line orientation="6" dy="600" y="550" x="500"></Line>
+   <Line dx="250" y="500" x="50"></Line>
+   <Line dx="-300" x="300"></Line>
+   <Pin orientation="4" y="500" x="2750">
+      <Text orientation="0" text="4" fontName="Monospaced" visible="false" fontSize="160" key="PIN_NR" x="100" mobile="true"></Text>
+      <Text orientation="0" fontName="Monospaced" visible="false" fontSize="160" y="192" key="PIN_NAME" x="100" mobile="true"></Text>
+   </Pin>
+   <Line orientation="2" dx="300" x="2750"></Line>
+   <Pin orientation="2" x="2750">
+      <Text orientation="0" text="3" fontName="Monospaced" visible="false" fontSize="160" key="PIN_NR" x="100" mobile="true"></Text>
+      <Text orientation="0" fontName="Monospaced" visible="false" fontSize="160" y="192" key="PIN_NAME" x="100" mobile="true"></Text>
+   </Pin>
+   <Line orientation="2" dx="-300" y="500" x="2450"></Line>
+   <Line orientation="6" dy="600" y="550" x="450"></Line>
+   <Arc orientation="4" radius="100" arcType="4" y="250" x="300"></Arc>
+   <Arc orientation="5" radius="100" arcType="4" y="250" x="300"></Arc>
+   <Arc orientation="7" radius="100" arcType="4" y="100" x="300"></Arc>
+   <Arc orientation="4" radius="100" arcType="3" y="400" x="300"></Arc>
+   <Arc orientation="5" radius="100" arcType="4" y="400" x="300"></Arc>
+   <Arc orientation="7" radius="100" arcType="4" y="250" x="300"></Arc>
+   <Arc orientation="4" radius="100" arcType="3" y="100" x="300"></Arc>
+   <Arc orientation="6" radius="100" arcType="4" y="250" x="2450"></Arc>
+   <Arc orientation="7" radius="100" arcType="4" y="250" x="2450"></Arc>
+   <Arc orientation="5" radius="100" arcType="4" y="400" x="2450"></Arc>
+   <Arc orientation="6" radius="100" arcType="3" y="100" x="2450"></Arc>
+   <Arc orientation="7" radius="100" arcType="4" y="100" x="2450"></Arc>
+   <Arc orientation="5" radius="100" arcType="4" y="250" x="2450"></Arc>
+   <Arc orientation="6" radius="100" arcType="3" y="400" x="2450"></Arc>
+   <Line orientation="6" dy="600" y="550" x="2250"></Line>
+   <Line orientation="6" dy="600" y="550" x="2300"></Line>
+</Component>

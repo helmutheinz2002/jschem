@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project basedir=".." default="Dist" name="Platforms">
+	<target name="init">
+		<property name="PACKAGE_PATH" value="org/heinz/framework"/>
+		<property name="JAR_FILE" value="build/platforms-1.0.jar"/>
+		<property name="CLASS_PATH" value="lib/looks-2.0.4.jar:lib/osxadapter.jar;lib/itext-1.4.jar;lib/registry.jar;lib/cmdline.jar"/>
+	</target>
+	
+	<target name="Dist-Source" depends="init" description="Create a source distribution bundle">
+		<delete file="build/${SRC_BUNDLE}"/>
+		
+		<zip destfile="build/${SRC_BUNDLE}">
+			<fileset dir=".">
+				<include name="**"/>
+				<exclude name="build/**"/>
+				<exclude name="bin/**"/>
+			</fileset>
+		</zip>
+	</target>
+	
+	<target name="Dist" depends="-compile,-jar" description="Create a JAR distribution bundle">
+	</target>
+	
+	<target name="-compile" depends="init" description="Compile classes">
+		<delete dir="build/*"/>
+		
+		<mkdir dir="build/tmp"/>
+		<javac classpath="${CLASS_PATH}" debug="true" source="1.4" target="1.4" srcdir="src" destdir="build/tmp" includes="**/*.java"/>
+	</target>
+	
+	<target name="-jar" depends="init" description="Erzeugt das JAR-File">
+		<copy todir="build/tmp">
+			<fileset dir="." includes="data/**"/>
+		</copy>
+
+		<copy file="data/translations/Application.properties" tofile="build/tmp/data/translations/Application_en.properties"/>
+
+		<delete>
+			<fileset dir="build/tmp" includes="**/*.java"/>
+		</delete>
+
+		<jar basedir="build/tmp" compress="true" jarfile="${JAR_FILE}">
+			<manifest>
+				<attribute name="Main-Class" value="org.heinz.framework.examples.TestApp"/>
+			</manifest>
+			<include name="**"/>
+		</jar>
+		<delete dir="build/tmp"/>
+	</target>
+	
+</project>

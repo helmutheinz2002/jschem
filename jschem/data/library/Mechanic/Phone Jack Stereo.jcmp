@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component>
+   <Text text="J" y="-300" x="250" mobile="true"></Text>
+   <Text text="Phone Jack Stereo" visible="false" y="240" x="100" mobile="true"></Text>
+   <Text visible="false" y="480" x="100" mobile="true"></Text>
+   <Line dx="-600" x="1150"></Line>
+   <Line dx="-150" dy="150" x="550"></Line>
+   <Line dx="-150" dy="-150" y="150" x="400"></Line>
+   <Line dx="1000" y="450" x="150"></Line>
+   <Line dx="150" dy="-150" y="300" x="550"></Line>
+   <Line dx="150" dy="150" y="150" x="700"></Line>
+   <Line dx="300" y="300" x="850"></Line>
+   <Pin x="1150">
+      <Text visible="false" x="100" mobile="true"></Text>
+      <Text visible="false" y="240" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin y="300" x="1150">
+      <Text visible="false" x="100" mobile="true"></Text>
+      <Text visible="false" y="240" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin y="450" x="1150">
+      <Text visible="false" x="100" mobile="true"></Text>
+      <Text visible="false" y="240" x="100" mobile="true"></Text>
+   </Pin>
+   <Square height="450" width="150"></Square>
+</Component>

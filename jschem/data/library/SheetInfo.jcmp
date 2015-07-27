@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component version="2">
+   <Text text="SheetInfo" visible="false" fontSize="160" key="PART_ID" x="100" mobile="true"></Text>
+   <Text visible="false" fontSize="160" key="PART_NAME" y="192" x="100" mobile="true"></Text>
+   <Text visible="false" fontSize="160" key="ORDER_NR" y="384" x="100" mobile="true"></Text>
+   <Text visible="false" fontSize="160" key="PART_MODEL" y="576" x="100" mobile="true"></Text>
+   <Square height="1800" width="9000"></Square>
+   <Line dx="9000" y="600"></Line>
+   <Line dx="9000" y="1200"></Line>
+   <Line dy="600" y="1200" x="3000"></Line>
+   <Line dy="600" y="1200" x="6000"></Line>
+   <Line dx="3000" y="1500" x="3000"></Line>
+   <Text text="Company Name" fontStyle="1" fontSize="500" key="COMPANY_NAME" y="100" x="500" mobile="true"></Text>
+   <Text text="Schematic Name" fontStyle="1" fontSize="500" y="700" x="500" mobile="true"></Text>
+   <Text text="Designer" key="DESIGNER" y="1300" x="100" mobile="true"></Text>
+   <Text text="Page #" fontSize="350" y="1300" x="6100" mobile="true"></Text>
+   <Text text="Rev 1.0" y="1260" x="3800" mobile="true"></Text>
+   <Text text="2009-01-19" y="1560" x="3800" mobile="true"></Text>
+</Component>

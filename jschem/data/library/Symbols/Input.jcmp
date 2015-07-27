@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Symbol mobile="false" visible="true" color="-16777216" orientation="0" y="0" x="0">
+   <Text mobile="true" visible="true" color="-16777216" fontSize="160" text="Input" fontName="SansSerif" orientation="0" y="50" x="200" fontStyle="0"></Text>
+   <Pin mobile="false" radius="50" visible="true" color="-16777216" orientation="0" y="150" arcType="0" x="1000">
+      <Text mobile="true" visible="false" color="-16777216" fontSize="160" text="1" fontName="SansSerif" orientation="0" y="0" x="100" fontStyle="0"></Text>
+      <Text mobile="true" visible="false" color="-16777216" fontSize="160" text="" fontName="SansSerif" orientation="0" y="192" x="100" fontStyle="0"></Text>
+   </Pin>
+   <Line mobile="false" visible="true" color="-16777216" dx="-150" orientation="0" y="150" dy="150" x="1000"></Line>
+   <Line mobile="false" visible="true" color="-16777216" dx="-850" orientation="0" y="300" dy="0" x="850"></Line>
+   <Line mobile="false" visible="true" color="-16777216" dx="0" orientation="0" y="300" dy="-300" x="0"></Line>
+   <Line mobile="false" visible="true" color="-16777216" dx="850" orientation="0" y="0" dy="0" x="0"></Line>
+   <Line mobile="false" visible="true" color="-16777216" dx="150" orientation="0" y="0" dy="150" x="850"></Line>
+</Symbol>

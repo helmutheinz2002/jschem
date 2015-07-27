@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component>
+   <Text text="T" fontName="Monospaced" fontSize="160" y="-200" x="50" mobile="true"></Text>
+   <Text text="Connector 3-Pin" fontName="Monospaced" visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   <Text fontName="Monospaced" visible="false" fontSize="160" y="384" x="100" mobile="true"></Text>
+   <Pin y="1200" x="200">
+      <Text text="3" fontName="Monospaced" visible="false" fontSize="160" x="100" mobile="true"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin y="200" x="200">
+      <Text text="1" fontName="Monospaced" visible="false" fontSize="160" x="100" mobile="true"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin y="700" x="200">
+      <Text text="2" fontName="Monospaced" visible="false" fontSize="160" x="100" mobile="true"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   </Pin>
+   <Square height="1400" width="400"></Square>
+</Component>

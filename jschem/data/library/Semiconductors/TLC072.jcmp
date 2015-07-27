@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component>
+   <Text visible="false" fontSize="160" mobile="true" x="100"></Text>
+   <Text text="TLC072" fontSize="160" y="600" mobile="true" x="500"></Text>
+   <Text visible="false" fontSize="160" y="384" mobile="true" x="100"></Text>
+   <Pin y="360">
+      <Text text="3" fontSize="144" y="-187" mobile="true" x="180"></Text>
+      <Text text="+IN" visible="false" fontSize="144" mobile="true"></Text>
+   </Pin>
+   <Pin y="1080">
+      <Text text="2" fontSize="144" y="-180" mobile="true" x="177"></Text>
+      <Text text="-IN" visible="false" fontSize="144" mobile="true"></Text>
+   </Pin>
+   <Pin y="1440" x="960">
+      <Text text="4" fontSize="144" y="-379" mobile="true" x="91"></Text>
+      <Text text="V-" visible="false" fontSize="144" mobile="true"></Text>
+   </Pin>
+   <Pin x="960">
+      <Text text="8" fontSize="144" y="230" mobile="true" x="91"></Text>
+      <Text text="V+" visible="false" fontSize="144" mobile="true"></Text>
+   </Pin>
+   <Pin y="720" x="1920">
+      <Text text="1" fontSize="144" y="-242" mobile="true" x="-372"></Text>
+      <Text text="OUT" visible="false" fontSize="144" mobile="true"></Text>
+   </Pin>
+   <Line dx="360" y="360"></Line>
+   <Line dx="360" y="1080"></Line>
+   <Line dx="420" y="720" x="1500"></Line>
+   <Line dy="-408" y="408" x="960"></Line>
+   <Line dy="405" y="1034" x="960"></Line>
+   <Line dx="120" y="360" x="480"></Line>
+   <Line dy="120" y="300" x="540"></Line>
+   <Line dx="120" y="1080" x="480"></Line>
+   <Line dx="-1140" dy="-660" y="720" x="1500"></Line>
+   <Line dx="-1140" dy="660" y="720" x="1500"></Line>
+   <Line dy="-1320" y="1380" x="360"></Line>
+</Component>

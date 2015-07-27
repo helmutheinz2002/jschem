@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component visible="true" orientation="0" y="0" mobile="false" x="0">
+   <Text fontStyle="0" visible="true" fontSize="160" text="V" fontName="SansSerif" orientation="0" y="-200" mobile="true" x="100"></Text>
+   <Text fontStyle="0" visible="false" fontSize="160" text="" fontName="SansSerif" orientation="0" y="192" mobile="true" x="100"></Text>
+   <Text fontStyle="0" visible="false" fontSize="160" text="" fontName="SansSerif" orientation="0" y="384" mobile="true" x="100"></Text>
+   <Pin arcType="0" visible="true" radius="50" orientation="0" y="500" mobile="false" x="0">
+      <Text fontStyle="0" visible="true" fontSize="160" text="4" fontName="SansSerif" orientation="0" y="-200" mobile="true" x="-150"></Text>
+      <Text fontStyle="0" visible="false" fontSize="160" text="" fontName="SansSerif" orientation="0" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Line visible="true" dy="-300" orientation="0" y="500" mobile="false" x="0" dx="0"></Line>
+   <Line visible="true" dy="-200" orientation="0" y="200" mobile="false" x="0" dx="200"></Line>
+   <Line visible="true" dy="200" orientation="0" y="0" mobile="false" x="200" dx="200"></Line>
+   <Line visible="true" dy="300" orientation="0" y="200" mobile="false" x="400" dx="0"></Line>
+   <Pin arcType="0" visible="true" radius="50" orientation="0" y="500" mobile="false" x="400">
+      <Text fontStyle="0" visible="true" fontSize="160" text="5" fontName="SansSerif" orientation="0" y="-200" mobile="true" x="50"></Text>
+      <Text fontStyle="0" visible="false" fontSize="160" text="" fontName="SansSerif" orientation="0" y="192" mobile="true" x="100"></Text>
+   </Pin>
+</Component>

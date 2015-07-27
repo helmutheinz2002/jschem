@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component version="2">
+   <Text text="M" fontSize="160" key="PART_ID" y="-250" mobile="true" x="-100"></Text>
+   <Text text="IRF820" fontSize="160" key="PART_NAME" y="-100" mobile="true" x="-100"></Text>
+   <Text visible="false" fontSize="160" key="ORDER_NR" y="384" mobile="true" x="100"></Text>
+   <Text text="IRF820" visible="false" fontSize="160" key="PART_MODEL" y="576" mobile="true" x="100"></Text>
+   <Arc orientation="4" radius="400" y="500" x="500"></Arc>
+   <Pin orientation="4" y="650">
+      <Text text="2" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Line orientation="4" dx="400" y="650" x="400"></Line>
+   <Pin orientation="4" x="600">
+      <Text text="1" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Pin orientation="4" y="1000" x="600">
+      <Text text="3" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Line orientation="4" dy="250" x="600"></Line>
+   <Line orientation="4" dx="150" y="250" x="600"></Line>
+   <Line orientation="4" dy="-250" y="1000" x="600"></Line>
+   <Line orientation="4" dx="150" y="750" x="600"></Line>
+   <Line orientation="4" dy="700" y="150" x="450"></Line>
+   <Line orientation="4" dy="600" y="200" x="400"></Line>
+   <Line orientation="4" dy="-250" y="750" x="600"></Line>
+   <Line orientation="4" dx="150" y="500" x="600"></Line>
+   <Polygon orientation="4" fillColor="-16777216" points="0,0;-100,-50;-100,50" y="500" x="450"></Polygon>
+</Component>

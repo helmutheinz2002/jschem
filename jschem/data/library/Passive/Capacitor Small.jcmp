@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component mobile="false" y="0" visible="true" orientation="0" x="0">
+   <Text mobile="true" text="C" fontStyle="0" fontSize="160" y="-100" visible="true" orientation="0" fontName="Monospaced" x="50"></Text>
+   <Text mobile="true" text="" fontStyle="0" fontSize="160" y="192" visible="false" orientation="0" fontName="Monospaced" x="100"></Text>
+   <Text mobile="true" text="" fontStyle="0" fontSize="160" y="384" visible="false" orientation="0" fontName="Monospaced" x="100"></Text>
+   <Arc radius="150" mobile="false" y="250" visible="true" orientation="0" arcType="5" x="150"></Arc>
+   <Arc radius="150" mobile="false" y="250" visible="true" orientation="3" arcType="5" x="350"></Arc>
+   <Line mobile="false" dx="0" y="0" visible="true" orientation="0" dy="200" x="200"></Line>
+   <Line mobile="false" dx="0" y="0" visible="true" orientation="0" dy="200" x="300"></Line>
+   <Line mobile="false" dx="50" y="100" visible="true" orientation="0" dy="0" x="150"></Line>
+   <Line mobile="false" dx="50" y="100" visible="true" orientation="0" dy="0" x="300"></Line>
+   <Pin fillColor="-16777216" radius="50" mobile="false" y="250" visible="true" orientation="0" arcType="0" x="0">
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" y="0" visible="false" orientation="0" fontName="Monospaced" x="100"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" y="192" visible="false" orientation="0" fontName="Monospaced" x="100"></Text>
+   </Pin>
+   <Pin fillColor="-16777216" radius="50" mobile="false" y="250" visible="true" orientation="0" arcType="0" x="500">
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" y="0" visible="false" orientation="0" fontName="Monospaced" x="100"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" y="192" visible="false" orientation="0" fontName="Monospaced" x="100"></Text>
+   </Pin>
+</Component>

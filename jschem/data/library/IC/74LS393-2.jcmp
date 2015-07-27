@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component version="2">
+   <Text text="IC" fontName="Monospaced" fontSize="160" key="PART_ID" y="-500" mobile="true" x="550"></Text>
+   <Text text="74LS393/2" fontName="Monospaced" fontSize="160" key="PART_NAME" y="-300" mobile="true" x="350"></Text>
+   <Text fontName="Monospaced" visible="false" fontSize="160" key="ORDER_NR" y="384" mobile="true" x="100"></Text>
+   <Text visible="false" fontSize="160" key="PART_MODEL" y="576" mobile="true" x="100"></Text>
+   <Square height="2100" width="1100" x="250"></Square>
+   <Pin y="2350" x="800">
+      <Text text="12" fontName="Monospaced" visible="false" fontSize="160" mobile="true" x="100"></Text>
+   </Pin>
+   <Pin y="800">
+      <Text text="13" fontName="Monospaced" visible="false" fontSize="160" mobile="true" x="100"></Text>
+   </Pin>
+   <Pin y="1800" x="1600">
+      <Text text="8" fontName="Monospaced" visible="false" fontSize="160" mobile="true" x="100"></Text>
+   </Pin>
+   <Pin y="300" x="1600">
+      <Text text="11" fontName="Monospaced" visible="false" fontSize="160" mobile="true" x="100"></Text>
+   </Pin>
+   <Pin y="800" x="1600">
+      <Text text="10" fontName="Monospaced" visible="false" fontSize="160" mobile="true" x="100"></Text>
+   </Pin>
+   <Pin y="1300" x="1600">
+      <Text text="9" fontName="Monospaced" visible="false" fontSize="160" mobile="true" x="100"></Text>
+   </Pin>
+   <Line dx="-250" y="800" x="250"></Line>
+   <Line dx="250" y="300" x="1350"></Line>
+   <Line dx="250" y="800" x="1350"></Line>
+   <Line dx="250" y="1300" x="1350"></Line>
+   <Line dx="250" y="1800" x="1350"></Line>
+   <Line dy="250" y="2100" x="800"></Line>
+   <Text text="Q0" fontName="Monospaced" fontSize="160" y="250" x="1100"></Text>
+   <Text text="Q1" fontName="Monospaced" fontSize="160" y="750" x="1100"></Text>
+   <Text text="Q2" fontName="Monospaced" fontSize="160" y="1250" x="1100"></Text>
+   <Text text="Q3" fontName="Monospaced" fontSize="160" y="1750" x="1100"></Text>
+   <Text text="Clear" fontName="Monospaced" fontSize="160" y="1900" x="600"></Text>
+   <Text text="Clk" fontName="Monospaced" fontSize="160" y="750" x="350"></Text>
+</Component>

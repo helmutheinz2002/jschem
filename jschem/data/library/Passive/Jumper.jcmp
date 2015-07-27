@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component>
+   <Text text="B" fontName="Monospaced" fontSize="160" y="250" mobile="true" x="-150"></Text>
+   <Text fontName="Monospaced" visible="false" fontSize="160" y="192" mobile="true" x="100"></Text>
+   <Text fontName="Monospaced" visible="false" fontSize="160" y="384" mobile="true" x="100"></Text>
+   <Arc orientation="6" radius="350" arcType="3" y="350"></Arc>
+   <Pin>
+      <Text fontName="Monospaced" visible="false" fontSize="160" mobile="true" x="100"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Pin y="700">
+      <Text fontName="Monospaced" visible="false" fontSize="160" mobile="true" x="100"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" y="192" mobile="true" x="100"></Text>
+   </Pin>
+</Component>

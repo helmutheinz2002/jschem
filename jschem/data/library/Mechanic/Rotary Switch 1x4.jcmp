@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component>
+   <Text text="SW" fontName="Monospaced" fontSize="160" x="50" mobile="true"></Text>
+   <Text text="Rotary Switch 1x4" fontName="Monospaced" visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   <Text fontName="Monospaced" visible="false" fontSize="160" y="384" x="100" mobile="true"></Text>
+   <Arc radius="50" y="500" x="150"></Arc>
+   <Arc radius="50" x="550"></Arc>
+   <Arc radius="50" y="350" x="650"></Arc>
+   <Line dx="400" dy="-150" y="500" x="200"></Line>
+   <Line dx="-100" y="500" x="100"></Line>
+   <Line dx="100" x="600"></Line>
+   <Line dx="100" y="350" x="700"></Line>
+   <Pin y="500">
+      <Text visible="false" fontSize="160" x="100" mobile="true"></Text>
+      <Text visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin x="700">
+      <Text visible="false" fontSize="160" x="100" mobile="true"></Text>
+      <Text visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin y="350" x="800">
+      <Text visible="false" fontSize="160" x="100" mobile="true"></Text>
+      <Text visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   </Pin>
+   <Arc radius="50" y="700" x="650"></Arc>
+   <Arc radius="50" y="1050" x="550"></Arc>
+   <Line dx="100" y="700" x="700"></Line>
+   <Line dx="100" y="1050" x="600"></Line>
+   <Pin y="700" x="800">
+      <Text visible="false" fontSize="160" x="100" mobile="true"></Text>
+      <Text visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin y="1050" x="700">
+      <Text visible="false" fontSize="160" x="100" mobile="true"></Text>
+      <Text visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   </Pin>
+</Component>

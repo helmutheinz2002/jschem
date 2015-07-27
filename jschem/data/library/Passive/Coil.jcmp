@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component version="2">
+   <Text text="L" fontSize="160" y="-300" key="PART_ID" mobile="true"></Text>
+   <Text visible="false" fontSize="160" y="192" key="PART_NAME" mobile="true" x="100"></Text>
+   <Text visible="false" fontSize="160" y="384" key="ORDER_NR" mobile="true" x="100"></Text>
+   <Text visible="false" fontSize="160" y="576" key="PART_MODEL" mobile="true" x="100"></Text>
+   <Arc orientation="1" radius="250" arcType="4" y="600"></Arc>
+   <Arc orientation="3" radius="250" arcType="4" y="600"></Arc>
+   <Arc radius="250" arcType="4" y="600"></Arc>
+   <Arc orientation="1" radius="250" arcType="4" y="250"></Arc>
+   <Arc orientation="3" radius="250" arcType="4" y="950"></Arc>
+   <Arc radius="250" arcType="4" y="950"></Arc>
+   <Arc orientation="3" radius="250" arcType="4" y="1300"></Arc>
+   <Arc orientation="1" radius="250" arcType="4" y="950"></Arc>
+   <Arc radius="250" arcType="3" y="1300"></Arc>
+   <Arc radius="250" arcType="3" y="250"></Arc>
+   <Line dx="500"></Line>
+   <Line dx="500" y="1550"></Line>
+   <Pin x="500">
+      <Text text="1" visible="false" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text visible="false" y="240" key="PIN_NAME" mobile="true" x="100"></Text>
+   </Pin>
+   <Pin y="1550" x="500">
+      <Text text="2" visible="false" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text visible="false" y="240" key="PIN_NAME" mobile="true" x="100"></Text>
+   </Pin>
+</Component>

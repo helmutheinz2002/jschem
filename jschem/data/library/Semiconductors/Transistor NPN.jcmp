@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component version="2">
+   <Text text="Q" fontSize="160" key="PART_ID" y="-150" mobile="true"></Text>
+   <Text visible="false" fontSize="160" key="PART_NAME" y="192" mobile="true" x="100"></Text>
+   <Text visible="false" fontSize="160" key="ORDER_NR" y="384" mobile="true" x="100"></Text>
+   <Text visible="false" fontSize="160" key="PART_MODEL" y="576" mobile="true" x="100"></Text>
+   <Arc radius="400" y="500" x="600"></Arc>
+   <Line dy="500" y="250" x="450"></Line>
+   <Line dx="350" dy="350" y="650" x="450"></Line>
+   <Line dx="350" dy="-350" y="350" x="450"></Line>
+   <Line dx="-450" y="500" x="450"></Line>
+   <Pin y="500">
+      <Text text="2" fontName="Monospaced" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Pin y="1000" x="800">
+      <Text text="3" fontName="Monospaced" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Pin x="800">
+      <Text text="1" fontName="Monospaced" visible="false" fontSize="160" key="PIN_NR" mobile="true" x="100"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" key="PIN_NAME" y="192" mobile="true" x="100"></Text>
+   </Pin>
+   <Polygon fillColor="-16777216" points="-50,0;-150,100;0,150" y="700" x="650"></Polygon>
+</Component>

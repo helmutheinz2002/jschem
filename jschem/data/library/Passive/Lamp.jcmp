@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component>
+   <Text text="L" fontName="Monospaced" fontSize="160" y="-400" x="400" mobile="true"></Text>
+   <Text text="Lamp" fontName="Monospaced" visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   <Text fontName="Monospaced" visible="false" fontSize="160" y="384" x="100" mobile="true"></Text>
+   <Arc radius="300" y="200" x="500"></Arc>
+   <Pin y="200">
+      <Text fontName="Monospaced" visible="false" fontSize="160" x="100" mobile="true"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   </Pin>
+   <Pin y="200" x="1000">
+      <Text fontName="Monospaced" visible="false" fontSize="160" x="100" mobile="true"></Text>
+      <Text fontName="Monospaced" visible="false" fontSize="160" y="192" x="100" mobile="true"></Text>
+   </Pin>
+   <Line dx="400" dy="-400" y="400" x="300"></Line>
+   <Line dx="400" dy="400" x="300"></Line>
+   <Line dx="-200" y="200" x="200"></Line>
+   <Line dx="200" y="200" x="800"></Line>
+</Component>

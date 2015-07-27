@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component mobile="false" orientation="0" y="0" visible="true" x="0">
+   <Text mobile="true" text="IC" fontStyle="0" fontSize="160" orientation="0" y="-500" visible="true" x="650" fontName="Monospaced"></Text>
+   <Text mobile="true" text="74LS138" fontStyle="0" fontSize="160" orientation="0" y="-300" visible="true" x="450" fontName="Monospaced"></Text>
+   <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="384" visible="false" x="100" fontName="Monospaced"></Text>
+   <Square width="1100" mobile="false" height="4100" orientation="0" y="0" visible="true" x="250"></Square>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="2300" visible="true" x="0" arcType="0">
+      <Text mobile="true" text="1" fontStyle="0" fontSize="160" orientation="0" y="0" visible="false" x="100" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="2800" visible="true" x="0" arcType="0">
+      <Text mobile="true" text="2" fontStyle="0" fontSize="160" orientation="0" y="0" visible="false" x="100" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="1800" visible="true" x="1600" arcType="0">
+      <Text mobile="true" text="12" fontStyle="0" fontSize="160" orientation="0" y="0" visible="false" x="100" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="300" visible="true" x="1600" arcType="0">
+      <Text mobile="true" text="15" fontStyle="0" fontSize="160" orientation="0" y="0" visible="false" x="100" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="800" visible="true" x="1600" arcType="0">
+      <Text mobile="true" text="14" fontStyle="0" fontSize="160" orientation="0" y="0" visible="false" x="100" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="1300" visible="true" x="1600" arcType="0">
+      <Text mobile="true" text="13" fontStyle="0" fontSize="160" orientation="0" y="0" visible="false" x="100" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Line mobile="false" dx="-250" orientation="0" y="2300" visible="true" dy="0" x="250"></Line>
+   <Line mobile="false" dx="-250" orientation="0" y="2800" visible="true" dy="0" x="250"></Line>
+   <Line mobile="false" dx="250" orientation="0" y="300" visible="true" dy="0" x="1350"></Line>
+   <Line mobile="false" dx="250" orientation="0" y="800" visible="true" dy="0" x="1350"></Line>
+   <Line mobile="false" dx="250" orientation="0" y="1300" visible="true" dy="0" x="1350"></Line>
+   <Line mobile="false" dx="250" orientation="0" y="1800" visible="true" dy="0" x="1350"></Line>
+   <Text mobile="false" text="A" fontStyle="0" fontSize="160" orientation="0" y="2250" visible="true" x="350" fontName="Monospaced"></Text>
+   <Text mobile="false" text="B" fontStyle="0" fontSize="160" orientation="0" y="2750" visible="true" x="350" fontName="Monospaced"></Text>
+   <Text mobile="false" text="0" fontStyle="0" fontSize="160" orientation="0" y="250" visible="true" x="1150" fontName="Monospaced"></Text>
+   <Text mobile="false" text="1" fontStyle="0" fontSize="160" orientation="0" y="750" visible="true" x="1150" fontName="Monospaced"></Text>
+   <Text mobile="false" text="2" fontStyle="0" fontSize="160" orientation="0" y="1250" visible="true" x="1150" fontName="Monospaced"></Text>
+   <Text mobile="false" text="3" fontStyle="0" fontSize="160" orientation="0" y="1750" visible="true" x="1150" fontName="Monospaced"></Text>
+   <Line mobile="false" dx="100" orientation="0" y="200" visible="true" dy="0" x="1150"></Line>
+   <Line mobile="false" dx="100" orientation="0" y="700" visible="true" dy="0" x="1150"></Line>
+   <Line mobile="false" dx="100" orientation="0" y="1200" visible="true" dy="0" x="1150"></Line>
+   <Line mobile="false" dx="100" orientation="0" y="1700" visible="true" dy="0" x="1150"></Line>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="3300" visible="true" x="0" arcType="0">
+      <Text mobile="true" text="3" fontStyle="0" fontSize="160" orientation="0" y="0" visible="false" x="100" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Line mobile="false" dx="-250" orientation="0" y="3300" visible="true" dy="0" x="250"></Line>
+   <Text mobile="false" text="C" fontStyle="0" fontSize="160" orientation="0" y="3250" visible="true" x="350" fontName="Monospaced"></Text>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="2300" visible="true" x="1600" arcType="0">
+      <Text mobile="true" text="11" fontStyle="0" fontSize="160" orientation="0" y="0" visible="false" x="100" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Line mobile="false" dx="250" orientation="0" y="2300" visible="true" dy="0" x="1350"></Line>
+   <Text mobile="false" text="4" fontStyle="0" fontSize="160" orientation="0" y="2250" visible="true" x="1150" fontName="Monospaced"></Text>
+   <Line mobile="false" dx="100" orientation="0" y="2200" visible="true" dy="0" x="1150"></Line>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="2800" visible="true" x="1600" arcType="0">
+      <Text mobile="true" text="10" fontStyle="0" fontSize="160" orientation="0" y="0" visible="false" x="100" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Line mobile="false" dx="250" orientation="0" y="2800" visible="true" dy="0" x="1350"></Line>
+   <Text mobile="false" text="5" fontStyle="0" fontSize="160" orientation="0" y="2750" visible="true" x="1150" fontName="Monospaced"></Text>
+   <Line mobile="false" dx="100" orientation="0" y="2700" visible="true" dy="0" x="1150"></Line>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="3300" visible="true" x="1600" arcType="0">
+      <Text mobile="true" text="9" fontStyle="0" fontSize="160" orientation="0" y="0" visible="false" x="100" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Line mobile="false" dx="250" orientation="0" y="3300" visible="true" dy="0" x="1350"></Line>
+   <Text mobile="false" text="6" fontStyle="0" fontSize="160" orientation="0" y="3250" visible="true" x="1150" fontName="Monospaced"></Text>
+   <Line mobile="false" dx="100" orientation="0" y="3200" visible="true" dy="0" x="1150"></Line>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="3800" visible="true" x="1600" arcType="0">
+      <Text mobile="true" text="7" fontStyle="0" fontSize="160" orientation="0" y="0" visible="false" x="100" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Line mobile="false" dx="250" orientation="0" y="3800" visible="true" dy="0" x="1350"></Line>
+   <Text mobile="false" text="7" fontStyle="0" fontSize="160" orientation="0" y="3750" visible="true" x="1150" fontName="Monospaced"></Text>
+   <Line mobile="false" dx="100" orientation="0" y="3700" visible="true" dy="0" x="1150"></Line>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="300" visible="true" x="0" arcType="0">
+      <Text mobile="true" text="6" fontStyle="0" fontSize="160" orientation="0" y="0" visible="false" x="100" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Line mobile="false" dx="-250" orientation="0" y="300" visible="true" dy="0" x="250"></Line>
+   <Text mobile="false" text="G1" fontStyle="0" fontSize="160" orientation="0" y="250" visible="true" x="350" fontName="Monospaced"></Text>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="800" visible="true" x="0" arcType="0">
+      <Text mobile="true" text="4" fontStyle="0" fontSize="160" orientation="0" y="0" visible="false" x="100" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Line mobile="false" dx="-250" orientation="0" y="800" visible="true" dy="0" x="250"></Line>
+   <Text mobile="false" text="G2A" fontStyle="0" fontSize="160" orientation="0" y="750" visible="true" x="350" fontName="Monospaced"></Text>
+   <Pin fillColor="-16777216" radius="50" mobile="false" orientation="0" y="1300" visible="true" x="0" arcType="0">
+      <Text mobile="true" text="5" fontStyle="0" fontSize="160" orientation="0" y="0" visible="false" x="100" fontName="Monospaced"></Text>
+      <Text mobile="true" text="" fontStyle="0" fontSize="160" orientation="0" y="192" visible="false" x="100" fontName="Monospaced"></Text>
+   </Pin>
+   <Line mobile="false" dx="-250" orientation="0" y="1300" visible="true" dy="0" x="250"></Line>
+   <Text mobile="false" text="G2B" fontStyle="0" fontSize="160" orientation="0" y="1250" visible="true" x="350" fontName="Monospaced"></Text>
+   <Line mobile="false" dx="250" orientation="0" y="1200" visible="true" dy="0" x="350"></Line>
+   <Line mobile="false" dx="250" orientation="0" y="700" visible="true" dy="0" x="350"></Line>
+</Component>
