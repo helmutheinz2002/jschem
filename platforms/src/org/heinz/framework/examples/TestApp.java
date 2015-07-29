@@ -1,3 +1,4 @@
+
 package org.heinz.framework.examples;
 
 import java.awt.Color;
@@ -41,10 +42,13 @@ import org.heinz.framework.crossplatform.utils.Translator;
 import org.heinz.framework.utils.AboutHelper;
 
 public class TestApp extends ApplicationAdapter implements MenuBarFactory, StatusBarFactory, ToolBarFactory, EditToolBarFactory, ActionListener {
-	private Application application;
-	private JPopupMenu menu;
+
+	private final Application application;
+
+	private final JPopupMenu menu;
+
 	private int docCount = 0;
-	
+
 	public static void main(String[] args) {
 		//Locale.setDefault(new Locale("iw"));
 		Platform platform = CrossPlatform.getPlatform("TestApp", args, 12032);
@@ -53,88 +57,108 @@ public class TestApp extends ApplicationAdapter implements MenuBarFactory, Statu
 		boolean mdi = platform.isDefaultMDI();
 		//boolean mdi = false;
 		platform.startApplication(si, mdi, new Runnable() {
+
+			@Override
+			@SuppressWarnings("ResultOfObjectAllocationIgnored")
 			public void run() {
 				new TestApp();
 			}
+
 		});
 	}
 
+	@SuppressWarnings("LeakingThisInConstructor")
 	public TestApp() {
 		application = CrossPlatform.getPlatform().getApplication();
 		application.setTitle("TestApp");
-		
+
 		application.addApplicationListener(this);
 		application.setMenuBarFactory(this);
 		application.setStatusBarFactory(this);
 		application.setToolBarFactory(this);
 		application.setEditToolBarFactory(this);
-		
+
 		menu = new JPopupMenu();
 		menu.add(ApplicationActions.instance().aboutItem);
 		menu.add(ApplicationActions.instance().exitItem);
 		menu.addPopupMenuListener(new PopupMenuListener() {
 
+			@Override
 			public void popupMenuCanceled(PopupMenuEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
+			@Override
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
+			@Override
 			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 				PopupMenu.preparePopupMenu((JPopupMenu) e.getSource());
 			}
-			
+
 		});
-		
+
 		application.start();
 	}
-	
+
 	private Document newDocument(String title) {
 		Document document = application.createDocument();
 		document.setTitle(title + (docCount++));
-		
+
 		document.addDocumentListener(new DocumentAdapter() {
+
+			@Override
 			public void documentClosing(Document document, boolean inApplicationQuit) throws DocumentCloseVetoException {
 				int res = JOptionPane.showConfirmDialog(document.getContainer(), "Close Document?");
-				if(res == JOptionPane.OK_OPTION)
+				if(res == JOptionPane.OK_OPTION) {
 					document.dispose();
+				}
 			}
+
 		});
-		
+
 		final int n = docCount & 1;
 		document.addStateInfoProvider(new ActionStateInfoProvider() {
+
+			@Override
 			public void addActionStateInfos(ActionStateInfos stateInfos) {
-				stateInfos.put(ActionStateInfos.STATE_INFO_NUM_SELECTED, new Integer(n));
+				stateInfos.put(ActionStateInfos.STATE_INFO_NUM_SELECTED, n);
 			}
+
 		});
 
 		JButton l = new JButton("The Document");
 		l.setOpaque(true);
 		l.setBackground(Color.red);
 		l.addMouseListener(new MouseAdapter() {
+
+			@Override
 			public void mousePressed(MouseEvent e) {
 				processPopupMenu(e);
 			}
 
+			@Override
 			public void mouseReleased(MouseEvent e) {
 				processPopupMenu(e);
 			}
+
 		});
 		document.setDocumentPane(l);
 		document.setSelected();
 		return document;
 	}
-	
+
 	private void processPopupMenu(MouseEvent e) {
 		if(e.isPopupTrigger()) {
 			menu.show(e.getComponent(), e.getX(), e.getY());
 		}
 	}
-	
+
+	@Override
 	public void about() {
 		application.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		List libraries = new ArrayList();
@@ -146,28 +170,34 @@ public class TestApp extends ApplicationAdapter implements MenuBarFactory, Statu
 		JOptionPane.showMessageDialog(application.getOptionPaneOwner(), text, Translator.translate("ABOUT_TITLE"), JOptionPane.INFORMATION_MESSAGE);
 	}
 
+	@Override
 	public void openFile(String filename) {
 		newDocument(filename);
 	}
 
+	@Override
 	public void preferences() {
 		JOptionPane.showMessageDialog(application.getOptionPaneOwner(), "Preferences");
 	}
 
+	@Override
 	public void quit() {
 		int res = JOptionPane.showConfirmDialog(application.getOptionPaneOwner(), "Exit?");
-		if(res == JOptionPane.OK_OPTION)
+		if(res == JOptionPane.OK_OPTION) {
 			System.exit(0);
+		}
 	}
 
+	@Override
 	public void applicationStarted() {
 		newDocument("Default");
 	}
 
+	@Override
 	public JMenuBar createMenuBar() {
 		final ApplicationActions ai = ApplicationActions.instance();
 		ai.addActionListener(this);
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		JMenu m = new JMenu(ai.fileMenu);
 		JMenuItem n = new JMenuItem(ai.newItem);
@@ -178,40 +208,49 @@ public class TestApp extends ApplicationAdapter implements MenuBarFactory, Statu
 		application.addCloseMenuItem(m, ai.closeItem, true);
 		application.addQuitMenuItem(m, ai.exitItem, true);
 		menuBar.add(m);
-		
+
 		JMenu t = new JMenu("Test");
 		JMenuItem t1 = new JMenuItem("Enable Prefs");
 		t1.addActionListener(new ActionListener() {
+
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				ai.preferencesItem.setEnabled(true);
 			}
+
 		});
 		JMenuItem t2 = new JMenuItem("Disable Prefs");
 		t2.addActionListener(new ActionListener() {
+
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				ai.preferencesItem.setEnabled(false);
 			}
+
 		});
 		t.add(t1);
 		t.add(t2);
 		menuBar.add(t);
-		
+
 		JMenu wm = application.getWindowMenu();
 		menuBar.add(wm);
-		
+
 		JMenu h = new JMenu(ai.helpMenu);
 		application.addAboutMenuItem(h, ai.aboutItem, false);
-		if(h.getItemCount() > 0)
+		if(h.getItemCount() > 0) {
 			menuBar.add(h);
+		}
 		return menuBar;
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == ApplicationActions.instance().newItem) {
 			newDocument("Menu");
 		}
 	}
 
+	@Override
 	public StatusBar createStatusBar() {
 		StatusBar s = new StatusBar();
 		s.addInfo(false).setText("Teil 1");
@@ -220,6 +259,7 @@ public class TestApp extends ApplicationAdapter implements MenuBarFactory, Statu
 		return s;
 	}
 
+	@Override
 	public ToolBar createToolBar() {
 		ToolBar t = new ToolBar();
 		t.add(ApplicationActions.instance().cutItem);
@@ -229,6 +269,7 @@ public class TestApp extends ApplicationAdapter implements MenuBarFactory, Statu
 		return t;
 	}
 
+	@Override
 	public EditToolBar createEditToolBar() {
 		EditToolBar t = new EditToolBar(null);
 		t.add(ApplicationActions.instance().zoomInItem);
@@ -236,4 +277,5 @@ public class TestApp extends ApplicationAdapter implements MenuBarFactory, Statu
 		t.add(ApplicationActions.instance().zoomFitItem);
 		return t;
 	}
+
 }

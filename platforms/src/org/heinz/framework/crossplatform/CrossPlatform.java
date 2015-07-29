@@ -1,3 +1,4 @@
+
 package org.heinz.framework.crossplatform;
 
 import java.awt.Toolkit;
@@ -9,13 +10,15 @@ import org.heinz.framework.crossplatform.platforms.windows.WindowsPlatform;
 import org.heinz.framework.crossplatform.utils.Translator;
 
 public abstract class CrossPlatform {
+
 	private static Platform platform;
-	
+
+	@SuppressWarnings("ResultOfObjectAllocationIgnored")
 	public static Platform getPlatform(String applicationName, String[] args, int portNr) {
 		if(platform == null) {
 			String os = System.getProperty("os.name").toLowerCase();
 			new Translator("Application");
-		
+
 			if(os.startsWith("mac os x")) {
 				// Set the properties before starting AWT/Swing
 				MacOsProperties.setProperties(applicationName);
@@ -29,32 +32,34 @@ public abstract class CrossPlatform {
 				platform = new UnixPlatform(applicationName, args, portNr);
 			}
 		}
-		
+
 		return platform;
 	}
-	
+
 	public static Platform getPlatform() {
-		if(platform == null)
+		if(platform == null) {
 			throw new IllegalStateException("No platform created yet");
-		
+		}
+
 		return platform;
 	}
-	
+
 	public static String getOsInfo() {
 		String s = "";
 		s += System.getProperty("os.name") + " " + System.getProperty("os.arch") + " " + System.getProperty("os.version");
 		return s;
 	}
-	
+
 	public static String getJavaInfo() {
 		String s = "";
 		s += System.getProperty("java.version") + " " + System.getProperty("java.vm.vendor") + " " + System.getProperty("java.vm.name");
 		return s;
 	}
-	
+
 	public static String getOsJavaInfo() {
 		String s = "";
 		s += getOsInfo() + "\n" + getJavaInfo();
 		return s;
 	}
+
 }

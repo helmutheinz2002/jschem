@@ -1,3 +1,4 @@
+
 package org.heinz.framework.crossplatform.platforms.unix;
 
 import java.awt.Point;
@@ -9,14 +10,17 @@ import org.heinz.framework.utils.FileExtensionEnsurer;
 import org.heinz.framework.utils.ViewUtils;
 
 public class MultipleFrameUnixApplication extends MultipleFrameApplication implements UnixApplication {
+
 	public MultipleFrameUnixApplication() {
 		super(false);
-		
+
 		Point defaultPosition = ViewUtils.getDefaultWindowPosition();
 		windowStacker.setStartPosition(defaultPosition);
 	}
-	
+
+	@Override
 	public File selectFile(File defaultFile, UniversalFileFilter fileFilter, FileExtensionEnsurer extEnsurer, boolean save, String title) {
 		return UnixFileSelection.selectFile(getDialogOwner(null), defaultFile, fileFilter, extEnsurer, save, title);
 	}
+
 }

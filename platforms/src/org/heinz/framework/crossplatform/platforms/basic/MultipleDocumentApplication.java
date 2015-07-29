@@ -1,3 +1,4 @@
+
 package org.heinz.framework.crossplatform.platforms.basic;
 
 import java.awt.Component;
@@ -48,24 +49,36 @@ import org.heinz.framework.utils.FileDragAndDrop;
 import org.heinz.framework.utils.ViewUtils;
 
 public abstract class MultipleDocumentApplication extends JFrame implements Application, ActionStateInfoProvider {
-	private JDesktopPane desktop;
+
+	private final JDesktopPane desktop;
+
 	protected WindowStacker windowStacker = new WindowStacker();
+
 	protected ApplicationListenerSupport als = new ApplicationListenerSupport(this);
-	private List documents = new ArrayList();
-	private WindowMenuHelper windowMenuHelper;
+
+	private final List documents = new ArrayList();
+
+	private final WindowMenuHelper windowMenuHelper;
+
 	private JMenu windowMenu = new JMenu();
-	final private boolean openDocsMaximized; 
-	final private boolean withMenuDisable; 
+
+	final private boolean openDocsMaximized;
+
+	final private boolean withMenuDisable;
+
 	private MenuBarFactory menuBarFactory;
+
 	private EditToolBarFactory editToolBarFactory;
+
 	private ToolBar toolBar;
-	
+
+	@SuppressWarnings({"ResultOfObjectAllocationIgnored", "LeakingThisInConstructor"})
 	public MultipleDocumentApplication(boolean openDocsMaximized, boolean withMenuDisable) {
 		this.openDocsMaximized = openDocsMaximized;
 		this.withMenuDisable = withMenuDisable;
-		
+
 		windowMenuHelper = new WindowMenuHelper(this, true, withMenuDisable);
-		
+
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		desktop = new JDesktopPane();
 		GridBagConstraints c = new GridBagConstraints();
@@ -77,93 +90,112 @@ public abstract class MultipleDocumentApplication extends JFrame implements Appl
 		c.anchor = GridBagConstraints.LINE_START;
 		getContentPane().setLayout(new GridBagLayout());
 		getContentPane().add(desktop, c);
-		
+
 		setSize(ViewUtils.getDefaultWindowSize());
 		setLocation(ViewUtils.getDefaultWindowPosition());
 		setIconImage(IconLoader.instance().loadImage("data/icons/application/application.png"));
-		
+
 		addWindowListener(new WindowAdapter() {
+
+			@Override
 			public void windowOpened(WindowEvent e) {
 				// Use invokeLater to avoid hanging splash screen
 				SwingUtilities.invokeLater(new Runnable() {
+
+					@Override
 					public void run() {
 						als.fireApplicationStarted();
 					}
+
 				});
 			}
 
+			@Override
 			public void windowClosing(WindowEvent e) {
-				if(als.getListenerCount() == 0)
+				if(als.getListenerCount() == 0) {
 					System.exit(0);
-				else
+				} else {
 					als.fireQuit();
+				}
 			}
+
 		});
-		
+
 		new ApplicationUndoManager(this);
 		ApplicationActions actions = new ApplicationActions();
 		new ApplicationActionStateProvider(this, actions);
 		actions.addStateInfoProvider(this);
-		
+
 		new FileDragAndDrop(this) {
+
+			@Override
 			public void filesDropped(List files) {
 				openFilesLater(files);
 			}
+
 		};
 
 		windowMenu = new JMenu(ApplicationActions.instance().windowMenu);
 		applyComponentOrientation(ComponentOrientation.getOrientation(Locale.getDefault()));
 	}
-	
+
 	protected void openFilesLater(final List files) {
 		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
 			public void run() {
-				for(Iterator it=files.iterator(); it.hasNext();) {
+				for(Iterator it = files.iterator(); it.hasNext();) {
 					File file = (File) it.next();
 					openFile(file.getAbsolutePath());
 				}
 			}
+
 		});
 	}
-	
+
 	protected InternalDocument createDocumentImpl() {
 		return new InternalDocument();
 	}
-	
+
 	private void activeDocumentChanged(InternalDocument document) {
 		updateWindowMenus();
 		ApplicationActions.instance().setActionStates();
 	}
-	
+
 	public void about() {
 		als.fireAbout();
 	}
-	
+
 	public void preferences() {
 		als.firePreferences();
 	}
-	
+
 	public void quit() {
-		if(als.getListenerCount() > 0)
+		if(als.getListenerCount() > 0) {
 			als.fireQuit();
-		else
+		} else {
 			System.exit(0);
+		}
 	}
-	
+
+	@Override
 	public Document createDocument() {
 		final InternalDocument document = createDocumentImpl();
 		desktop.add(document);
 		Dimension d = desktop.getSize();
 		document.setLocation(windowStacker.getNextPosition());
 		document.setSize(ViewUtils.getDefaultWindowSize(d));
-		
+
 		documents.add(document);
-		
+
 		document.addDocumentListener(new DocumentAdapter() {
+
+			@Override
 			public void documentActivated(Document document) {
 				activeDocumentChanged((InternalDocument) document);
 			}
 
+			@Override
 			public void documentClosed(Document document) {
 				removeDocument(document);
 				ApplicationActions.instance().setActionStates();
@@ -173,61 +205,74 @@ public abstract class MultipleDocumentApplication extends JFrame implements Appl
 				}
 			}
 
+			@Override
 			public void documentDeactivated(Document document) {
 				activeDocumentChanged(null);
 			}
-			
+
 		});
 		document.addInternalFrameListener(new InternalFrameAdapter() {
+
+			@Override
 			public void internalFrameDeiconified(InternalFrameEvent e) {
 				updateWindowMenus();
 			}
 
+			@Override
 			public void internalFrameIconified(InternalFrameEvent e) {
 				updateWindowMenus();
 			}
+
 		});
-		
+
 		document.addPropertyChangeListener(new PropertyChangeListener() {
+
+			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				if(evt.getPropertyName().equals(JInternalFrame.TITLE_PROPERTY))
+				if(evt.getPropertyName().equals(JInternalFrame.TITLE_PROPERTY)) {
 					updateWindowMenus();
+				}
 			}
+
 		});
-		
+
 		if(openDocsMaximized) {
 			try {
 				document.setMaximum(true);
-			} catch (PropertyVetoException e) {
+			} catch(PropertyVetoException e) {
 			}
 		}
-		
+
 		updateWindowMenus();
-		
+
 		if(editToolBarFactory != null) {
 			final EditToolBar editToolBar = AccessoryHelper.createEditToolBar(editToolBarFactory, document.getContentPane());
 			editToolBar.setDocument(document);
 			document.setEditToolBar(editToolBar);
 			document.addInternalFrameListener(new InternalFrameAdapter() {
+
+				@Override
 				public void internalFrameActivated(InternalFrameEvent e) {
 					editToolBar.fireCurrentTool();
 				}
+
 			});
 		}
-		
+
 		als.fireDocumentCreated(document);
 		return document;
 	}
 
 	private Document getTopDocument() {
-		if(documents.size() == 0)
+		if(documents.isEmpty()) {
 			return null;
+		}
 
 		InternalDocument topDoc = null;
-		
+
 		try {
 			int z = Integer.MAX_VALUE;
-			for(Iterator it=documents.iterator(); it.hasNext();) {
+			for(Iterator it = documents.iterator(); it.hasNext();) {
 				InternalDocument doc = (InternalDocument) it.next();
 				int cz = desktop.getIndexOf(doc);
 				if(!doc.isIcon() && (cz < z)) {
@@ -240,19 +285,22 @@ public abstract class MultipleDocumentApplication extends JFrame implements Appl
 		}
 		return topDoc;
 	}
-	
+
 	protected void updateWindowMenus() {
 		windowMenuHelper.update(windowMenu);
 	}
-	
+
+	@Override
 	public void start() {
 		setVisible(true);
 	}
 
+	@Override
 	public void addApplicationListener(ApplicationListener listener) {
 		als.addApplicationListener(listener);
 	}
 
+	@Override
 	public Frame getDialogOwner(Document document) {
 		return this;
 	}
@@ -260,38 +308,47 @@ public abstract class MultipleDocumentApplication extends JFrame implements Appl
 	public void openFile(String filename) {
 		setVisible(true);
 		setExtendedState(getExtendedState() & ~JFrame.ICONIFIED);
-		
-		if(filename != null)
+
+		if(filename != null) {
 			als.fireOpenFile(filename);
+		}
 	}
 
 	protected JMenuBar createMenuBar() {
 		return AccessoryHelper.createMenuBar(menuBarFactory, withMenuDisable);
 	}
-	
+
+	@Override
 	public void setMenuBarFactory(MenuBarFactory menuBarFactory) {
 		this.menuBarFactory = menuBarFactory;
-		if(menuBarFactory == null)
+		if(menuBarFactory == null) {
 			return;
-		
-		JMenuBar menuBar = createMenuBar(); 
+		}
+
+		JMenuBar menuBar = createMenuBar();
 		setJMenuBar(menuBar);
 	}
 
+	@Override
 	public void setStatusBarFactory(StatusBarFactory statusBarFactory) {
-		if(statusBarFactory != null)
+		if(statusBarFactory != null) {
 			AccessoryHelper.createStatusBar(statusBarFactory, getContentPane());
+		}
 	}
 
+	@Override
 	public void setToolBarFactory(ToolBarFactory toolBarFactory) {
-		if(toolBarFactory != null)
+		if(toolBarFactory != null) {
 			toolBar = AccessoryHelper.createToolBar(toolBarFactory, getContentPane());
+		}
 	}
-	
+
+	@Override
 	public void setEditToolBarFactory(EditToolBarFactory editToolBarFactory) {
 		this.editToolBarFactory = editToolBarFactory;
 	}
-	
+
+	@Override
 	public List getDocuments() {
 		return documents;
 	}
@@ -300,80 +357,107 @@ public abstract class MultipleDocumentApplication extends JFrame implements Appl
 		documents.remove(document);
 		updateWindowMenus();
 	}
-	
+
+	@Override
 	public JMenu getWindowMenu() {
 		return windowMenu;
 	}
 
+	@Override
 	public void addAboutMenuItem(JMenu menu, Action action, boolean separator) {
 		MenuHelper.addMenuItem(menu, action, separator, new Runnable() {
+
+			@Override
 			public void run() {
 				als.fireAbout();
 			}
+
 		});
 	}
 
+	@Override
 	public void addPreferencesMenuItem(JMenu menu, Action action, boolean separator) {
 		MenuHelper.addMenuItem(menu, action, separator, new Runnable() {
+
+			@Override
 			public void run() {
 				als.firePreferences();
 			}
+
 		});
 	}
 
+	@Override
 	public void addQuitMenuItem(JMenu menu, Action action, boolean separator) {
 		MenuHelper.addMenuItem(menu, action, separator, new Runnable() {
+
+			@Override
 			public void run() {
 				als.fireQuit();
 			}
+
 		});
 	}
 
+	@Override
 	public void addCloseMenuItem(JMenu menu, Action action, boolean separator) {
 		MenuHelper.addMenuItem(menu, action, separator, new Runnable() {
+
+			@Override
+			@SuppressWarnings("CallToPrintStackTrace")
 			public void run() {
 				InternalDocument document = (InternalDocument) getActiveDocument();
-				if(document != null)
+				if(document != null) {
 					try {
 						document.close();
-					} catch (DocumentCloseVetoException e) {
+					} catch(DocumentCloseVetoException e) {
 						e.printStackTrace();
 					}
+				}
 			}
+
 		});
 	}
 
 	protected boolean isWindowMenu(JMenu menu) {
 		return menu == windowMenu;
 	}
-	
+
+	@Override
 	public Component getOptionPaneOwner() {
 		return this;
 	}
 
+	@Override
 	public Document getActiveDocument() {
-		for(Iterator it=documents.iterator(); it.hasNext();) {
+		for(Iterator it = documents.iterator(); it.hasNext();) {
 			InternalDocument document = (InternalDocument) it.next();
-			if(document.isSelected())
+			if(document.isSelected()) {
 				return document;
+			}
 		}
 		return null;
 	}
-	
+
+	@Override
 	public ToolBar getToolBar(Document document) {
 		return toolBar;
 	}
-	
+
+	@Override
 	public void addActionStateInfos(ActionStateInfos stateInfos) {
 		Document document = getActiveDocument();
-		if(document != null)
+		if(document != null) {
 			document.addActionStateInfos(stateInfos);
+		}
 	}
-	
+
+	@Override
 	public void closeAllDocuments() throws DocumentCloseVetoException {
-		for(Iterator it=new ArrayList(documents).iterator(); it.hasNext();) {
+		for(Iterator it = new ArrayList(documents).iterator(); it.hasNext();) {
 			InternalDocument document = (InternalDocument) it.next();
 			document.close();
 		}
 	}
+
 }

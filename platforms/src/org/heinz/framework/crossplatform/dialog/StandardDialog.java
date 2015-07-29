@@ -1,3 +1,4 @@
+
 package org.heinz.framework.crossplatform.dialog;
 
 import java.awt.BorderLayout;
@@ -31,50 +32,62 @@ import org.heinz.framework.crossplatform.PlatformDefaults;
 import org.heinz.framework.crossplatform.utils.Translator;
 
 public class StandardDialog extends JDialog implements ActionListener {
+
 	public static final int OK_CANCEL_BUTTONS = 0;
+
 	public static final int CLOSE_BUTTON = 1;
-	
+
 	public static final int CLOSE_PRESSED = 0;
+
 	public static final int CANCEL_PRESSED = 1;
+
 	public static final int OK_PRESSED = 2;
-	
+
 	private JButton okButton;
+
 	private JButton cancelButton;
+
 	private StandardDialogPanel editPanel;
+
 	private int result = CANCEL_PRESSED;
+
 	private int buttons;
+
 	private boolean reverseButtons;
 
 	public static int showDialog(Window owner, StandardDialogPanel editPanel, Dimension minSize) {
 		return showDialog(owner, editPanel, OK_CANCEL_BUTTONS, minSize);
 	}
-	
+
 	public static int showDialog(Window owner, StandardDialogPanel editPanel) {
 		return showDialog(owner, editPanel, OK_CANCEL_BUTTONS, null);
 	}
-	
+
 	public static int showDialog(Window owner, StandardDialogPanel editPanel, int buttons) {
 		return showDialog(owner, editPanel, buttons, null);
 	}
-	
+
 	public static int showDialog(Window owner, StandardDialogPanel editPanel, int buttons, Dimension minSize) {
-		StandardDialog d = null;
-		if(owner instanceof Dialog)
+		StandardDialog d;
+		if(owner instanceof Dialog) {
 			d = new StandardDialog((Dialog) owner, editPanel, buttons);
-		else
+		} else {
 			d = new StandardDialog((Frame) owner, editPanel, buttons);
+		}
 		d.pack();
 		editPanel.prepareToShow();
 
 		Dimension dd = d.getSize();
 		if(minSize != null) {
-			if (dd.width < minSize.width)
+			if(dd.width < minSize.width) {
 				dd.width = minSize.width;
-			if (dd.height < minSize.height)
+			}
+			if(dd.height < minSize.height) {
 				dd.height = minSize.height;
+			}
 			d.setSize(dd);
 		}
-		
+
 		Point p = new Point(0, 0);
 		Dimension od = Toolkit.getDefaultToolkit().getScreenSize();
 		if(owner != null) {
@@ -86,7 +99,7 @@ public class StandardDialog extends JDialog implements ActionListener {
 		}
 		d.setLocation(p.x + (od.width - dd.width) / 2, p.y + (od.height - dd.height) / 2);
 		d.setVisible(true);
-		
+
 		return d.result;
 	}
 
@@ -103,17 +116,20 @@ public class StandardDialog extends JDialog implements ActionListener {
 	private void init(final StandardDialogPanel editPanel, int buttons) {
 		this.editPanel = editPanel;
 		this.buttons = buttons;
-		
+
 		reverseButtons = CrossPlatform.getPlatform().getPlatformDefaults().getBool(PlatformDefaults.REVERSE_BUTTON_ORDER);
-		
+
 		addWindowListener(new WindowAdapter() {
+
+			@Override
 			public void windowClosing(WindowEvent e) {
 				editPanel.cancel();
 			}
+
 		});
-		
+
 		setTitle(editPanel.getTitle());
-		
+
 		getContentPane().setLayout(new BorderLayout());
 
 		JPanel lp = new JPanel(new BorderLayout());
@@ -126,7 +142,7 @@ public class StandardDialog extends JDialog implements ActionListener {
 		lp.add(BorderLayout.EAST, buttonPanel);
 
 		List buttonList = new ArrayList();
-		
+
 		if(buttons == OK_CANCEL_BUTTONS) {
 			okButton = new JButton(Translator.translate("OK"));
 			cancelButton = new JButton(Translator.translate("CANCEL"));
@@ -142,43 +158,50 @@ public class StandardDialog extends JDialog implements ActionListener {
 			getRootPane().setDefaultButton(cancelButton);
 		}
 
-		for(Iterator it=buttonList.iterator(); it.hasNext();) {
+		for(Iterator it = buttonList.iterator(); it.hasNext();) {
 			JButton b = (JButton) it.next();
 			buttonPanel.add(b);
 		}
-		
+
 		ActionListener actionListener = new ActionListener() {
+
+			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				editPanel.cancel();
 				setVisible(false);
 			}
+
 		};
 
 		KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
 		getRootPane().registerKeyboardAction(actionListener, stroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
-		
+
 		applyComponentOrientation(ComponentOrientation.getOrientation(Locale.getDefault()));
 	}
 
 	private void addButton(List buttons, JButton button) {
-		if(reverseButtons)
+		if(reverseButtons) {
 			buttons.add(0, button);
-		else
+		} else {
 			buttons.add(button);
+		}
 	}
-	
+
+	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == okButton) {
+		if(e.getSource() == okButton) {
 			editPanel.ok();
 			result = OK_PRESSED;
 		} else {
-			if(buttons == CLOSE_BUTTON)
+			if(buttons == CLOSE_BUTTON) {
 				result = CLOSE_PRESSED;
-			else if(buttons == OK_CANCEL_BUTTONS)
+			} else if(buttons == OK_CANCEL_BUTTONS) {
 				result = CANCEL_PRESSED;
+			}
 			editPanel.cancel();
 		}
 
 		setVisible(false);
 	}
+
 }

@@ -1,3 +1,4 @@
+
 package org.heinz.framework.crossplatform.platforms.macos;
 
 import java.awt.Component;
@@ -24,54 +25,67 @@ import org.heinz.framework.crossplatform.utils.UniversalFileFilter;
 import org.heinz.framework.utils.FileExtensionEnsurer;
 
 public class MultipleFrameMacOsApplication extends MultipleFrameApplication implements OSXApp {
+
 	private JFrame hiddenFrame;
+
 	private boolean hiddenDocument;
-	
+
+	@SuppressWarnings("ResultOfObjectAllocationIgnored")
 	public MultipleFrameMacOsApplication() {
 		super(true);
-		
+
 		hiddenFrame = new JFrame();
 		hiddenFrame.setUndecorated(true);
 		hiddenFrame.setSize(new Dimension(0, 0));
 		hiddenFrame.setLocation(-10, -10);
 		hiddenFrame.setVisible(true);
-		
+
 		hiddenFrame.addWindowListener(new WindowAdapter() {
+
+			@Override
 			public void windowOpened(WindowEvent e) {
 				als.fireApplicationStarted();
 			}
 
+			@Override
 			public void windowActivated(WindowEvent e) {
 				JOptionPane.setRootFrame(hiddenFrame);
 			}
+
 		});
-		
+
 		JOptionPane.setRootFrame(hiddenFrame);
-		
+
 		windowStacker.setStartPosition(new Point(10, 30));
 		new MacOsApplicationSupport(als);
 	}
-	
+
+	@Override
 	protected JMenuBar createMenuBar() {
 		JMenuBar menuBar = super.createMenuBar();
 		MenuHelper.cleanMenus(menuBar, true, false, false);
 		return menuBar;
 	}
-	
+
+	@Override
 	protected void lastDocumentClosed() {
 		// No problem on Mac OS X
 	}
 
+	@Override
 	public Frame getDialogOwner(Document document) {
-		if(document == null)
+		if(document == null) {
 			return hiddenFrame;
+		}
 		return (FrameDocument) document;
 	}
 
+	@Override
 	protected boolean isDocumentInCreation() {
 		return super.isDocumentInCreation() || hiddenDocument;
 	}
 
+	@Override
 	public synchronized void setMenuBarFactory(MenuBarFactory menuBarFactory) {
 		super.setMenuBarFactory(menuBarFactory);
 		hiddenDocument = true;
@@ -79,20 +93,25 @@ public class MultipleFrameMacOsApplication extends MultipleFrameApplication impl
 		hiddenDocument = false;
 	}
 
+	@Override
 	public void addAboutMenuItem(JMenu menu, Action action, boolean separator) {
 		// Menu item is built-in on Mac OS X
 	}
 
+	@Override
 	public void addPreferencesMenuItem(JMenu menu, Action action, boolean separator) {
 		// Menu item is built-in on Mac OS X
 	}
 
+	@Override
 	public void addQuitMenuItem(JMenu menu, Action action, boolean separator) {
 		// Menu item is built-in on Mac OS X
 	}
 
+	@Override
 	public File selectFile(File defaultFile, UniversalFileFilter fileFilter, FileExtensionEnsurer extEnsurer, boolean save, String title) {
 		Component owner = getActiveDocument() != null ? getActiveDocument().getContainer() : getOptionPaneOwner();
-		return MacOsFileSelection.selectFile(getDialogOwner(null), owner , defaultFile, fileFilter, extEnsurer, save, title);
+		return MacOsFileSelection.selectFile(getDialogOwner(null), owner, defaultFile, fileFilter, extEnsurer, save, title);
 	}
+
 }

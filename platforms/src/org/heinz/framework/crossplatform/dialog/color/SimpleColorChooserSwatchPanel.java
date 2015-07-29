@@ -1,3 +1,4 @@
+
 package org.heinz.framework.crossplatform.dialog.color;
 
 import java.awt.Color;
@@ -10,11 +11,16 @@ import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 
 public abstract class SimpleColorChooserSwatchPanel extends JPanel implements MouseListener {
-	private Color[] colors;
-	private int rows;
-	private int cols;
-	private int fieldSize;
-	
+
+	private final Color[] colors;
+
+	private final int rows;
+
+	private final int cols;
+
+	private final int fieldSize;
+
+	@SuppressWarnings("LeakingThisInConstructor")
 	public SimpleColorChooserSwatchPanel(Color[] colors, int rows, int cols, int fieldSize) {
 		this.colors = colors;
 		this.rows = rows;
@@ -24,42 +30,49 @@ public abstract class SimpleColorChooserSwatchPanel extends JPanel implements Mo
 		setPreferredSize(d);
 		addMouseListener(this);
 	}
-	
+
+	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		
-		for(int r=0; r<rows; r++) {
+
+		for(int r = 0; r < rows; r++) {
 			int y = r * fieldSize;
-			
-			for(int c=0; c<cols; c++) {
+
+			for(int c = 0; c < cols; c++) {
 				int x = c * fieldSize;
 				Color col = colors[r * cols + c];
 				g.setColor(col);
-				g.fillRect(x, y, fieldSize-1, fieldSize-1);
+				g.fillRect(x, y, fieldSize - 1, fieldSize - 1);
 			}
 		}
 	}
 
 	protected abstract void colorChanged(Color color);
-	
+
+	@Override
 	public void mouseClicked(MouseEvent e) {
 		Point p = e.getPoint();
 		int selRow = p.y / fieldSize;
 		int selCol = p.x / fieldSize;
 		int idx = selRow * cols + selCol;
-		
+
 		colorChanged(colors[idx]);
 	}
 
+	@Override
 	public void mouseEntered(MouseEvent e) {
 	}
 
+	@Override
 	public void mouseExited(MouseEvent e) {
 	}
 
+	@Override
 	public void mousePressed(MouseEvent e) {
 	}
 
+	@Override
 	public void mouseReleased(MouseEvent e) {
 	}
+
 }

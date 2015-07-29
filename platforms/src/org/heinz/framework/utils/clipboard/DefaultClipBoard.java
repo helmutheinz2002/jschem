@@ -1,3 +1,4 @@
+
 package org.heinz.framework.utils.clipboard;
 
 import java.awt.datatransfer.DataFlavor;
@@ -10,8 +11,10 @@ public class DefaultClipBoard extends SystemClipBoard {
 		super(DataFlavor.stringFlavor);
 	}
 
+	@Override
 	public void post(Object data) {
 		Transferable transferData = new StringSelection((String) data);
 		clipboard.setContents(transferData, this);
 	}
+
 }

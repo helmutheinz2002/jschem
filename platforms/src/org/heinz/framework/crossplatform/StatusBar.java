@@ -1,3 +1,4 @@
+
 package org.heinz.framework.crossplatform;
 
 import java.awt.GridBagConstraints;
@@ -13,22 +14,23 @@ import javax.swing.border.Border;
 import org.heinz.framework.utils.OutputStreamWindow;
 
 public class StatusBar extends JPanel {
+
 	private int count;
-	
+
 	public StatusBar() {
 		setLayout(new GridBagLayout());
 		addButton();
 	}
-	
+
 	public void setFixedSize(JComponent c) {
 		c.setPreferredSize(c.getPreferredSize());
 	}
-	
+
 	public JLabel addInfo(boolean fill) {
-		Border innerBorder = BorderFactory.createEmptyBorder(2, 10, 2, 10); 
+		Border innerBorder = BorderFactory.createEmptyBorder(2, 10, 2, 10);
 		Border outerBorder = BorderFactory.createEtchedBorder();
 		Border infoBorder = BorderFactory.createCompoundBorder(outerBorder, innerBorder);
-		
+
 		JLabel l = new JLabel();
 		l.setBorder(infoBorder);
 
@@ -49,7 +51,7 @@ public class StatusBar extends JPanel {
 
 		return l;
 	}
-	
+
 	private void addButton() {
 		GridBagConstraints c = new GridBagConstraints();
 		c.insets = new Insets(1, 2, 1, 2);
@@ -57,7 +59,8 @@ public class StatusBar extends JPanel {
 		c.gridy = 0;
 		c.anchor = GridBagConstraints.LINE_START;
 		c.fill = GridBagConstraints.BOTH;
-		
+
 		add(OutputStreamWindow.instance().createButton(), c);
 	}
+
 }
