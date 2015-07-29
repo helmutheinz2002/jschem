@@ -14,14 +14,18 @@ package org.heinz.framework.crossplatform.utils.export;
  * @author bwalter
  */
 public abstract class AbstractExporter implements Exporter {
-	private ExportFormat[] supportedExportFormats;
-	
-	/** Creates a new instance of AbstractExporter */
+
+	private final ExportFormat[] supportedExportFormats;
+
+	/** Creates a new instance of AbstractExporter
+	 * @param supportedExportFormats */
 	public AbstractExporter(ExportFormat[] supportedExportFormats) {
 		this.supportedExportFormats = supportedExportFormats;
 	}
-	
+
+	@Override
 	public ExportFormat[] getSupportedFormats() {
 		return supportedExportFormats;
 	}
+
 }

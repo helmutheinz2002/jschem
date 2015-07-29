@@ -1,6 +1,4 @@
-//******************************************************************************
-// IndexGif89Frame.java
-//******************************************************************************
+
 package org.heinz.framework.crossplatform.utils.gif;
 
 
@@ -26,24 +24,27 @@ package org.heinz.framework.crossplatform.utils.gif;
  */
 public class IndexGif89Frame extends Gif89Frame {
 
-  //----------------------------------------------------------------------------
-  /** Construct a IndexGif89Frame from color-index pixel data.
-   *
-   * @param width
-   *   Width of the bitmap.
-   * @param height
-   *   Height of the bitmap.
-   * @param ci_pixels
-   *   Array containing at least width*height color-index pixels.
-   */
-  public IndexGif89Frame(int width, int height, byte ci_pixels[])
-  {
-    theWidth = width;
-    theHeight = height;
-    ciPixels = new byte[theWidth * theHeight];
-    System.arraycopy(ci_pixels, 0, ciPixels, 0, ciPixels.length);
-  }
+	//----------------------------------------------------------------------------
+	/** Construct a IndexGif89Frame from color-index pixel data.
+	 *
+	 * @param width
+	 *   Width of the bitmap.
+	 * @param height
+	 *   Height of the bitmap.
+	 * @param ci_pixels
+	 *   Array containing at least width*height color-index pixels.
+	 */
+	public IndexGif89Frame(int width, int height, byte ci_pixels[]) {
+		theWidth = width;
+		theHeight = height;
+		ciPixels = new byte[theWidth * theHeight];
+		System.arraycopy(ci_pixels, 0, ciPixels, 0, ciPixels.length);
+	}
 
-  //----------------------------------------------------------------------------
-  Object getPixelSource() { return ciPixels; }  
+	//----------------------------------------------------------------------------
+	@Override
+	Object getPixelSource() {
+		return ciPixels;
+	}
+
 }

@@ -1,3 +1,4 @@
+
 package org.heinz.framework.crossplatform.utils;
 
 import java.awt.Toolkit;
@@ -18,28 +19,33 @@ import javax.swing.KeyStroke;
 import org.heinz.framework.crossplatform.Application;
 
 public class Translator {
+
 	public static final String DEFAULT_RESOURCEBUNDLE_PATH = Application.DEFAULT_DATA_PATH + "translations/";
-	
+
 	private static final String LOCALE_TOKEN = "LOCALE";
+
 	private static final String TRANSLATOR_TOKEN = "TRANSLATOR_NAME";
-	
+
 	private static Translator instance;
-	private List bundles = new ArrayList();
-	
+
+	private final List bundles = new ArrayList();
+
 	public static Translator instance() {
 		return instance;
 	}
-	
+
+	@SuppressWarnings("LeakingThisInConstructor")
 	public Translator(String baseName) {
-		if(instance == null)
+		if(instance == null) {
 			instance = this;
-		else
+		} else {
 			throw new UnsupportedOperationException("translator exists");
+		}
 
 		addBundle(baseName);
 	}
-	
-	public void addBundle(String baseName) {
+
+	public final void addBundle(String baseName) {
 		ResourceBundle bundle = null;
 		try {
 			ResourceBundle.getBundle(baseName);
@@ -49,33 +55,32 @@ public class Translator {
 		}
 		bundles.add(new BundleInfo(baseName, bundle, Locale.getDefault()));
 	}
-	
+
 	public String getTranslation(String key) {
 		return getTranslation(key, Locale.getDefault());
 	}
-	
+
 	public String getTranslation(String key, Locale locale) {
-		for(Iterator it=bundles.iterator(); it.hasNext();) {
+		for(Iterator it = bundles.iterator(); it.hasNext();) {
 			BundleInfo bi = (BundleInfo) it.next();
 			try {
 				return bi.getBundle(locale).getString(key);
 			} catch(MissingResourceException ex) {
 			}
 		}
-		
+
 		throw new MissingResourceException("Not found: " + key, "String", key);
 	}
-	
+
 	public static String translate(String key) {
 		return instance.getTranslation(key);
 	}
-	
+
 	public Map getAvailableTranslations() {
 		Locale[] locales = Locale.getAvailableLocales();
 		Map localesByLanguage = new HashMap();
-		
-		for(int i=0; i<locales.length; i++) {
-			Locale l = locales[i];
+
+		for(Locale l : locales) {
 			List ls = (List) localesByLanguage.get(l.getLanguage());
 			if(ls == null) {
 				ls = new ArrayList();
@@ -83,30 +88,31 @@ public class Translator {
 			}
 			ls.add(l);
 		}
-		
-		String defaultLocale = null;
+
+		String defaultLocale;
 		Map translators = new HashMap();
 		try {
 			defaultLocale = getTranslation(LOCALE_TOKEN);
 		} catch(MissingResourceException mex) {
 			return translators;
 		}
-		
+
 		translators.put(Locale.getDefault(), getTranslation(TRANSLATOR_TOKEN));
 
-		for(Iterator it=localesByLanguage.keySet().iterator(); it.hasNext();) {
+		for(Iterator it = localesByLanguage.keySet().iterator(); it.hasNext();) {
 			String language = (String) it.next();
-			
+
 			Locale locale = new Locale(language);
 			String locStr = getTranslation(LOCALE_TOKEN, locale);
-			if(locStr.equals(defaultLocale))
+			if(locStr.equals(defaultLocale)) {
 				continue;
-			
+			}
+
 			translators.put(locale, getTranslation(TRANSLATOR_TOKEN, locale));
 		}
 		return translators;
 	}
-	
+
 	public KeyStroke getAccelerator(String menuToken, String platform) {
 		String token = menuToken + "_ACC_" + platform.toUpperCase();
 		try {
@@ -114,63 +120,75 @@ public class Translator {
 			return parseAccelerator(acc);
 		} catch(MissingResourceException mex) {
 		}
-		
+
 		return null;
 	}
-	
+
+	@SuppressWarnings({"UseSpecificCatch", "CallToPrintStackTrace"})
 	private static KeyStroke parseAccelerator(String accString) {
 		int modifiers = 0;
 		int keycode = 0;
-		
+
 		StringTokenizer st = new StringTokenizer(accString, "-");
 		String token = null;
 		int menuMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
-		
+
 		while(true) {
 			token = st.nextToken().toUpperCase();
-			if(!st.hasMoreTokens())
+			if(!st.hasMoreTokens()) {
 				break;
-			
-			if(token.equals("CTRL"))
-				modifiers = modifiers | menuMask;
-			else if(token.equals("ALT"))
-				modifiers = modifiers | KeyEvent.ALT_DOWN_MASK;
-			else if(token.equals("SHIFT"))
-				modifiers = modifiers | KeyEvent.SHIFT_DOWN_MASK;
+			}
+
+			switch(token) {
+				case "CTRL":
+					modifiers = modifiers | menuMask;
+					break;
+				case "ALT":
+					modifiers = modifiers | KeyEvent.ALT_DOWN_MASK;
+					break;
+				case "SHIFT":
+					modifiers = modifiers | KeyEvent.SHIFT_DOWN_MASK;
+					break;
+			}
 		}
-		
+
 		String vk = "VK_" + token;
 		try {
 			Field f = KeyEvent.class.getDeclaredField(vk);
 			Integer i = (Integer) f.get(null);
-			keycode = i.intValue();
-		} catch (Exception e) {
+			keycode = i;
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return KeyStroke.getKeyStroke(keycode, modifiers);
 	}
-	
+
 	//------------------------------------------------------------------------
-	
+
 	class BundleInfo {
+
 		String bundleBaseName;
+
 		Map bundlesByLocale = new HashMap();
-		
+
 		public BundleInfo(String bundleBaseName, ResourceBundle bundle, Locale locale) {
 			this.bundleBaseName = bundleBaseName;
 			bundlesByLocale.put(locale, bundle);
 		}
-		
+
 		public ResourceBundle getBundle(Locale locale) {
 			ResourceBundle b = (ResourceBundle) bundlesByLocale.get(locale);
 			if(b == null) {
 				ResourceBundle rb = ResourceBundle.getBundle(bundleBaseName, locale);
-				if(!rb.getLocale().equals(locale))
+				if(!rb.getLocale().equals(locale)) {
 					bundlesByLocale.put(locale, rb);
+				}
 				b = rb;
 			}
 			return b;
 		}
+
 	}
+
 }

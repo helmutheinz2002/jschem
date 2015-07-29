@@ -1,3 +1,4 @@
+
 package org.heinz.framework.crossplatform.utils;
 
 import java.awt.event.ActionEvent;
@@ -20,10 +21,13 @@ import org.heinz.framework.crossplatform.DocumentListener;
 import org.heinz.framework.crossplatform.platforms.basic.ApplicationActions;
 
 public class WindowMenuHelper {
-	private Application application;
-	private boolean isMDI;
-	private boolean activateDisabledMenu;
-	
+
+	private final Application application;
+
+	private final boolean isMDI;
+
+	private final boolean activateDisabledMenu;
+
 	public WindowMenuHelper(Application application, boolean isMDI, boolean activateDisabledMenu) {
 		this.application = application;
 		this.isMDI = isMDI;
@@ -32,129 +36,163 @@ public class WindowMenuHelper {
 
 	public void update(final JMenu menu) {
 		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			@SuppressWarnings("null")
 			public void run() {
 				final List docs = application.getDocuments();
 				final Document doc = application.getActiveDocument();
-				
+
 				menu.removeAll();
-				
+
 				JMenuItem miniItem = new JMenuItem((String) ApplicationActions.instance().miniWindowItem.getValue(Action.NAME));
 				menu.add(miniItem);
 				miniItem.setEnabled((doc != null) && !doc.isIconified());
 				miniItem.addActionListener(new ActionListener() {
+
+					@Override
 					public void actionPerformed(ActionEvent e) {
 						doc.setIconified(true);
 					}
+
 				});
-				
+
 				JMenuItem maxiItem = new JMenuItem((String) ApplicationActions.instance().maxiWindowItem.getValue(Action.NAME));
 				menu.add(maxiItem);
 				maxiItem.setEnabled(doc != null);
 				maxiItem.addActionListener(new ActionListener() {
+
+					@Override
 					public void actionPerformed(ActionEvent e) {
-						if(doc.isMaximized())
+						if(doc.isMaximized()) {
 							doc.setMaximized(false);
-						else {
+						} else {
 							doc.setIconified(false);
 							doc.setMaximized(true);
 						}
 					}
+
 				});
 				menu.addSeparator();
-				
+
 				JMenuItem nextItem = new JMenuItem((String) ApplicationActions.instance().nextWindowItem.getValue(Action.NAME));
 				menu.add(nextItem);
 				nextItem.setEnabled((docs.size() > 1) && (doc != null));
 				nextItem.addActionListener(new ActionListener() {
+
+					@Override
 					public void actionPerformed(ActionEvent e) {
 						nextDocument(docs, doc, 1);
 					}
+
 				});
 
 				JMenuItem prevItem = new JMenuItem((String) ApplicationActions.instance().prevWindowItem.getValue(Action.NAME));
 				menu.add(prevItem);
 				prevItem.setEnabled((docs.size() > 1) && (doc != null));
 				prevItem.addActionListener(new ActionListener() {
+
+					@Override
 					public void actionPerformed(ActionEvent e) {
 						nextDocument(docs, doc, -1);
 					}
+
 				});
-				
+
 				if(!isMDI) {
 					menu.addSeparator();
-					
+
 					JMenuItem allToFrontItem = new JMenuItem((String) ApplicationActions.instance().allToFrontItem.getValue(Action.NAME));
 					menu.add(allToFrontItem);
 					allToFrontItem.setEnabled(docs.size() > 0);
 					allToFrontItem.addActionListener(new ActionListener() {
+
+						@Override
 						public void actionPerformed(ActionEvent e) {
 							allToFront(docs, false);
 						}
+
 					});
 				}
 
-				if(docs.size() > 0)
+				if(docs.size() > 0) {
 					menu.addSeparator();
-				
-				for(Iterator it=docs.iterator(); it.hasNext();) {
+				}
+
+				for(Iterator it = docs.iterator(); it.hasNext();) {
 					final Document d = (Document) it.next();
 					String t = d.getTitle();
-					if(d.isIconified())
+					if(d.isIconified()) {
 						t = "(" + t + ")";
-					
+					}
+
 					final JCheckBoxMenuItem item = new JCheckBoxMenuItem(t);
-					
+
 					item.addActionListener(new ActionListener() {
+
+						@Override
 						public void actionPerformed(ActionEvent e) {
 							d.setIconified(false);
 							d.setSelected();
 						}
+
 					});
-					
+
 					final DocumentListener dl = new DocumentAdapter() {
+
+						@Override
 						public void documentActivated(Document document) {
 							item.setSelected(true);
 						}
-						
+
+						@Override
 						public void documentDeactivated(Document document) {
 							item.setSelected(false);
 						}
-						
+
+						@Override
 						public void documentClosed(Document document) {
 							document.removeDocumentListener(this);
 						}
+
 					};
-					
+
 					d.addDocumentListener(dl);
 
 					item.addHierarchyListener(new HierarchyListener() {
+
+						@Override
 						public void hierarchyChanged(HierarchyEvent e) {
 							if((e.getChangeFlags() & HierarchyEvent.PARENT_CHANGED) != 0) {
-								if(e.getSource() == item)
+								if(e.getSource() == item) {
 									d.removeDocumentListener(dl);
+								}
 							}
 						}
+
 					});
-					if(d.isSelected())
+					if(d.isSelected()) {
 						item.setSelected(true);
-					
+					}
+
 					menu.add(item);
 				}
-				
+
 				if(activateDisabledMenu) {
 					menu.setEnabled(MenuHelper.hasActiveEntries(menu));
 					MenuHelper.activateMenuDisabledState(menu);
 				}
 			}
+
 		});
 	}
-	
+
 	public static void allToFront(List docs, boolean withIconified) {
-		for(Iterator it=docs.iterator(); it.hasNext();) {
+		for(Iterator it = docs.iterator(); it.hasNext();) {
 			Document d = (Document) it.next();
-			if(!d.isIconified())
+			if(!d.isIconified()) {
 				d.setSelected();
-			else {
+			} else {
 				if(withIconified) {
 					d.setIconified(false);
 					d.setSelected();
@@ -164,18 +202,22 @@ public class WindowMenuHelper {
 	}
 
 	private void nextDocument(List docs, Document d, int offset) {
-		if(d == null)
+		if(d == null) {
 			return;
-		
+		}
+
 		int idx = docs.indexOf(d);
 		int nidx = idx + offset;
-		if(nidx >= docs.size())
+		if(nidx >= docs.size()) {
 			nidx = 0;
-		if(nidx < 0)
+		}
+		if(nidx < 0) {
 			nidx = docs.size() - 1;
-		
+		}
+
 		Document nd = (Document) docs.get(nidx);
 		nd.setIconified(false);
 		nd.setSelected();
 	}
+
 }

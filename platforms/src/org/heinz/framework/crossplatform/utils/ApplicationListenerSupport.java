@@ -1,3 +1,4 @@
+
 package org.heinz.framework.crossplatform.utils;
 
 import java.util.Iterator;
@@ -19,46 +20,47 @@ public class ApplicationListenerSupport extends AbstractListenerSupport {
 	public void removeApplicationListener(ApplicationListener l) {
 		removeListener(l);
 	}
-	
+
 	public void fireApplicationStarted() {
-		for(Iterator it=listeners(); it.hasNext();) {
+		for(Iterator it = listeners(); it.hasNext();) {
 			ApplicationListener l = (ApplicationListener) it.next();
 			l.applicationStarted();
 		}
 	}
-	
+
 	public void fireOpenFile(String filename) {
-		for(Iterator it=listeners(); it.hasNext();) {
+		for(Iterator it = listeners(); it.hasNext();) {
 			ApplicationListener l = (ApplicationListener) it.next();
 			l.openFile(filename);
 		}
 	}
-	
+
 	public void fireAbout() {
-		for(Iterator it=listeners(); it.hasNext();) {
+		for(Iterator it = listeners(); it.hasNext();) {
 			ApplicationListener l = (ApplicationListener) it.next();
 			l.about();
 		}
 	}
-	
+
 	public void firePreferences() {
-		for(Iterator it=listeners(); it.hasNext();) {
+		for(Iterator it = listeners(); it.hasNext();) {
 			ApplicationListener l = (ApplicationListener) it.next();
 			l.preferences();
 		}
 	}
-	
+
 	public void fireQuit() {
-		for(Iterator it=listeners(); it.hasNext();) {
+		for(Iterator it = listeners(); it.hasNext();) {
 			ApplicationListener l = (ApplicationListener) it.next();
 			l.quit();
 		}
 	}
-	
+
 	public void fireDocumentCreated(Document document) {
-		for(Iterator it=listeners(); it.hasNext();) {
+		for(Iterator it = listeners(); it.hasNext();) {
 			ApplicationListener l = (ApplicationListener) it.next();
 			l.documentCreated(document);
 		}
 	}
+
 }

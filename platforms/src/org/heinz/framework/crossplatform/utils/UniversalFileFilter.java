@@ -1,3 +1,4 @@
+
 package org.heinz.framework.crossplatform.utils;
 
 import java.io.FilenameFilter;

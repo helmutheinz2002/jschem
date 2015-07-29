@@ -12,6 +12,9 @@ package org.heinz.framework.crossplatform.utils.export;
 import java.io.File;
 
 public interface Exporter {
+
 	ExportFormat[] getSupportedFormats();
+
 	void export(ExportFormat exportFormat, File outputFile);
+
 }
