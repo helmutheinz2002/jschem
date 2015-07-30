@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist SYSTEM "file://localhost/System/Library/DTDs/PropertyList.dtd">
+<plist version="0.9">
+<dict>
+	<key>CFBundleName</key>
+	<string>JSchem</string>
+	<key>CFBundleVersion</key>
+	<string>10.2</string>
+	<key>CFBundleAllowMixedLocalizations</key>
+	<string>true</string>
+	<key>CFBundleExecutable</key>
+	<string>JavaApplicationStub</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleGetInfoString</key>
+	<string>JSchem</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleIconFile</key>
+	<string>JSchem.icns</string>
+	<key>Java</key>
+	<dict>
+		<key>VMOptions</key>
+		<string>-Xmx256mm</string>
+		<key>MainClass</key>
+		<string>org.heinz.eda.schem.JSchem</string>
+		<key>JVMVersion</key>
+		<string>1.4+</string>
+		<key>ClassPath</key>
+			<array>
+				<string>$JAVAROOT/JSchem.jar</string>
+				<string>$APP_PACKAGE/../translation.zip</string>
+			</array>
+		<key>Properties</key>
+		<dict>
+			<key>apple.laf.useScreenMenuBar</key>
+			<string>true</string>
+		</dict>
+	</dict>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>jsch</string>
+				<string>sch</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>JSchem.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>JSchem Schematics</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+		</dict>
+	</array>
+</dict>
+</plist>
