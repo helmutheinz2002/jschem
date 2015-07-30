@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.ui.beans;
 
 import java.awt.Color;
@@ -22,43 +23,57 @@ import org.heinz.framework.crossplatform.utils.IconLoader;
 import org.heinz.framework.crossplatform.utils.Translator;
 
 public class ColorButtonBean extends PropertyBean implements ActionListener {
+
 	private static final int BAR_SIZE = 4;
+
 	private JButton button;
+
 	private BufferedImage image;
-	private Image baseImage;
+
+	private final Image baseImage;
+
 	private Color color;
-	private JPopupMenu popupMenu;
-	private JMenuItem pickColorItem;
-	private JMenuItem transparentItem;
+
+	private final JPopupMenu popupMenu;
+
+	private final JMenuItem pickColorItem;
+
+	private final JMenuItem transparentItem;
+
 	private String dialogTitle;
-	
+
+	@SuppressWarnings("LeakingThisInConstructor")
 	public ColorButtonBean(String baseImageName, String title, String toolTip, final boolean allowTransparent) {
 		this.dialogTitle = Translator.translate(title);
-		
+
 		popupMenu = new JPopupMenu();
 		popupMenu.add(pickColorItem = new JMenuItem(Translator.translate("PICK_COLOR")));
 		popupMenu.add(transparentItem = new JMenuItem(Translator.translate("TRANSPARENT")));
 		pickColorItem.addActionListener(this);
 		transparentItem.addActionListener(this);
-		
+
 		ImageIcon icon = (ImageIcon) IconLoader.instance().loadIcon("menu/" + baseImageName);
 		baseImage = icon.getImage();
 		button = new JButton();
 		button.setToolTipText(Translator.translate(toolTip));
 		button.addActionListener(new ActionListener() {
+
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(allowTransparent) {
 					openPopup();
 				} else {
 					Color c = SimpleColorChooser.showColorDialog(button, dialogTitle, color);
-					if(c != null)
+					if(c != null) {
 						setColor(c);
+					}
 				}
 			}
+
 		});
 		createImage();
 	}
-	
+
 	public int addTo(JComponent parent, int startRow) {
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
@@ -67,27 +82,27 @@ public class ColorButtonBean extends PropertyBean implements ActionListener {
 		parent.add(button, c);
 		return c.gridy + 1;
 	}
-	
+
 	private void openPopup() {
 		Component parent = button.getParent();
 		Point p = button.getLocation();
 		Dimension d = button.getSize();
 		popupMenu.show(parent, p.x, p.y + d.height);
 	}
-	
+
 	public JButton getButton() {
 		return button;
 	}
-	
+
 	public void setColor(Color color) {
 		this.color = color;
 		createImage();
 	}
-	
+
 	public Color getColor() {
 		return color;
 	}
-	
+
 	private void createImage() {
 		int w = baseImage.getWidth(null);
 		int h = baseImage.getHeight(null);
@@ -102,17 +117,20 @@ public class ColorButtonBean extends PropertyBean implements ActionListener {
 		}
 		g.drawImage(baseImage, 0, 0, null);
 		g.dispose();
-		
+
 		button.setIcon(new ImageIcon(image));
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == pickColorItem) {
 			Color c = SimpleColorChooser.showColorDialog(button, dialogTitle, color);
-			if(c != null)
+			if(c != null) {
 				setColor(c);
+			}
 		} else {
 			setColor(null);
 		}
 	}
+
 }

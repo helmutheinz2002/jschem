@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.ui.beans;
 
 import java.awt.Color;
@@ -17,31 +18,43 @@ import org.heinz.framework.crossplatform.dialog.color.SimpleColorChooser;
 import org.heinz.framework.crossplatform.utils.Translator;
 
 public class ColorBean extends PropertyBean {
-	private JPanel colorField;
+
+	private final JPanel colorField;
+
 	private JButton changeButton;
-	private JButton transparentButton;
+
+	private final JButton transparentButton;
+
 	private Color color;
+
 	private String label;
-	
+
 	public ColorBean() {
 		changeButton = new JButton(Translator.translate("PICK_COLOR"));
 		changeButton.addActionListener(new ActionListener() {
+
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Color c = SimpleColorChooser.showColorDialog(changeButton, label, color);
-				if(c != null)
+				if(c != null) {
 					setColor(c);
+				}
 			}
+
 		});
-		
+
 		transparentButton = new JButton(Translator.translate("TRANSPARENT"));
 		transparentButton.addActionListener(new ActionListener() {
+
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				setColor(null);
 			}
+
 		});
-		
+
 		int fs = changeButton.getFont().getSize() + 2;
-		
+
 		colorField = new JPanel();
 		colorField.setPreferredSize(new Dimension(fs, fs));
 		colorField.setMaximumSize(new Dimension(fs, fs));
@@ -49,26 +62,26 @@ public class ColorBean extends PropertyBean {
 		colorField.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
 		setLabel("COLOR");
 	}
-	
-	public void setLabel(String label) {
+
+	public final void setLabel(String label) {
 		this.label = Translator.translate(label);
 	}
-	
+
 	public Color getColor() {
 		return color;
 	}
-	
+
 	public void setColor(Color color) {
 		this.color = color;
 		colorField.setBackground(color);
 	}
-	
+
 	public int addTo(JComponent parent, int startRow, boolean withLabel, boolean enableTransparent) {
 		GridBagConstraints c = new GridBagConstraints();
 		c.anchor = GridBagConstraints.LINE_START;
 		c.insets = DEFAULT_INSETS;
 		c.gridy = startRow;
-		
+
 		c.gridx = 0;
 		c.gridwidth = 1;
 		if(withLabel) {
@@ -82,15 +95,15 @@ public class ColorBean extends PropertyBean {
 		c.gridwidth = 3;
 		c.fill = GridBagConstraints.BOTH;
 		parent.add(changeButton, c);
-		
+
 		if(enableTransparent) {
 			c.gridx += c.gridwidth;
 			c.fill = GridBagConstraints.NONE;
 			parent.add(transparentButton, c);
 		}
-		
+
 		c.gridy++;
-		
+
 		return c.gridy;
 	}
 

@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.model.netlist;
 
 import java.awt.Point;
@@ -13,55 +14,63 @@ import org.heinz.eda.schem.model.components.Pin;
 import org.heinz.eda.schem.model.components.Wire;
 
 public class Net implements Comparable {
+
 	private final String netName;
-	private Set handlePositions = new HashSet();
-	private List pins = new ArrayList();
+
+	private final Set handlePositions = new HashSet();
+
+	private final List pins = new ArrayList();
+
 	public int netNo = -1;
-	
+
 	public Net(String netName) {
 		this.netName = netName;
 	}
-	
+
 	public void addPoint(Point handlePos) {
 		handlePositions.add(handlePos);
 	}
-	
+
 	public void addWire(Wire wire) {
 		List sh = wire.getStickyHandles();
-		
-		for(Iterator it=sh.iterator(); it.hasNext();) {
+
+		for(Iterator it = sh.iterator(); it.hasNext();) {
 			Handle h = (Handle) it.next();
 			addPoint(h.getHandlePosition().absPos);
 		}
 	}
-	
+
 	public void addPin(Component component, Pin pin) {
 		pins.add(new PinInfo(component, pin));
 	}
-	
+
 	public boolean containsPoint(Point absPos) {
 		return handlePositions.contains(absPos);
 	}
-	
+
+	@Override
 	public String toString() {
-		return "Net:'" + netName + "' Points:" + handlePositions.size() + " Pins:" + pins.size(); 
+		return "Net:'" + netName + "' Points:" + handlePositions.size() + " Pins:" + pins.size();
 	}
 
+	@Override
 	public int compareTo(Object o) {
 		return netNo - ((Net) o).netNo;
 	}
-	
+
 	//-----------------------------------------------------------------
-	
+
 	class PinInfo {
+
 		Component component;
+
 		Pin pin;
-		
+
 		public PinInfo(Component component, Pin pin) {
 			this.component = component;
 			this.pin = pin;
 		}
-	}
-	
-}
 
+	}
+
+}

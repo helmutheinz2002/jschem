@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.ui.tools;
 
 import java.awt.Point;
@@ -9,8 +10,9 @@ import org.heinz.eda.schem.model.components.Handle;
 import org.heinz.eda.schem.model.components.Line;
 
 public class LineTool extends AbstractNewTool {
-	protected boolean stopOnHandle; 
-	
+
+	protected boolean stopOnHandle;
+
 	public LineTool() {
 		super("linetool.png", false);
 	}
@@ -19,46 +21,54 @@ public class LineTool extends AbstractNewTool {
 		super(icon, false);
 	}
 
+	@Override
 	protected AbstractComponent createComponent(int x, int y) {
 		return new Line(x, y, 0, 0);
 	}
 
+	@Override
 	protected void handleMouseDown(MouseEvent e) {
 		AbstractComponent nc = getNewComponent();
 		if(nc != null) {
 			Point p = processMouseEvent(e, true);
-			if(nc.isReleased())
+			if(nc.isReleased()) {
 				nc = null;
-			
-			if(nc != null)
+			}
+
+			if(nc != null) {
 				checkSize(p);
+			}
 			done();
-			
+
 			if(nc != null) {
 				Line l = (Line) nc;
 				Handle h = (Handle) l.getHandles().get(1);
 				List hl = sheetPanel.getSheet().getHandlesAt(h.getHandlePosition().absPos);
 				boolean isOnHandle = (hl.size() > 1);
-				if(stopOnHandle && isOnHandle)
+				if(stopOnHandle && isOnHandle) {
 					return;
+				}
 			}
 			start(e.getPoint());
 		}
 		super.handleMouseDown(e);
 	}
 
+	@Override
 	protected void handleMouseMove(MouseEvent e) {
 		processMouseEvent(e, false);
 	}
-	
+
+	@Override
 	protected void handleMouseUp(MouseEvent e) {
 		processMouseEvent(e, false);
 	}
-	
+
+	@Override
 	protected void handleMouseDrag(MouseEvent e) {
 		processMouseEvent(e, false);
 	}
-	
+
 	private Point processMouseEvent(MouseEvent e, boolean withHandles) {
 		Point p = e.getPoint();
 		Point pos = sheetPanel.constrainScreenPoint(p.x, p.y, false);
@@ -68,4 +78,5 @@ public class LineTool extends AbstractNewTool {
 		line.setOffset(pos.x, pos.y, withHandles);
 		return pos;
 	}
+
 }

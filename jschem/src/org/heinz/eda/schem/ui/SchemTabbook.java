@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.ui;
 
 import java.awt.Component;
@@ -28,88 +29,94 @@ import org.heinz.framework.crossplatform.platforms.basic.ApplicationActions;
 import org.heinz.framework.crossplatform.utils.export.ExportImageProducer;
 
 public class SchemTabbook extends JTabbedPane implements SchematicsListener, ComponentListener,
-	PropertyChangeListener, ExportImageProducer, ActionStateInfoProvider {
+		PropertyChangeListener, ExportImageProducer, ActionStateInfoProvider {
+
 	public static final String PROPERTY_MOUSE_POSITION = "SchemTabbook.mousePosition";
-	
-	private Schematics schematics;
+
+	private final Schematics schematics;
+
 	private SchemEditTool editTool;
-	
+
 	public SchemTabbook(Schematics schematics) {
 		super();
 		this.schematics = schematics;
-		
+
 		setTabPlacement(JTabbedPane.BOTTOM);
 		init();
 		setSelectedIndex(0);
 	}
-	
+
 	public void setZoomForAll(double zoom) {
-		for(Iterator it=editors(); it.hasNext();) {
+		for(Iterator it = editors(); it.hasNext();) {
 			SheetPanel sp = (SheetPanel) it.next();
 			sp.setZoom(zoom);
 		}
 	}
-	
+
 	public Schematics getSchematics() {
 		return schematics;
 	}
-	
+
 	public void setEditTool(EditTool editTool) {
 		this.editTool = (SchemEditTool) editTool;
 		setEditTool(getCurrentEditor(), false);
 	}
-	
+
 	private void setEditTool(SheetPanel sheetPanel, boolean force) {
 		sheetPanel.setEditTool(editTool, force);
 	}
-	
+
 	public SheetPanel getEditorAt(int index) {
 		JScrollPane sp = (JScrollPane) getComponentAt(index);
 		return (SheetPanel) sp.getViewport().getView();
 	}
-	
+
 	public Iterator editors() {
 		List e = new ArrayList();
 		int tabs = getTabCount();
-		for(int i=0; i<tabs; i++)
+		for(int i = 0; i < tabs; i++) {
 			e.add(getEditorAt(i));
+		}
 		return e.iterator();
 	}
-	
+
 	public SheetPanel getCurrentEditor() {
 		JScrollPane sp = (JScrollPane) getSelectedComponent();
 		return (SheetPanel) sp.getViewport().getView();
 	}
-	
+
 	public Sheet getCurrentSheet() {
 		int idx = getSelectedIndex();
 		return schematics.getSheetAt(idx);
 	}
-	
+
 	private void init() {
 		int nr = 0;
-		for(Iterator it=schematics.sheets(); it.hasNext(); nr++) {
+		for(Iterator it = schematics.sheets(); it.hasNext(); nr++) {
 			Sheet sheet = (Sheet) it.next();
 			addPage(sheet, nr);
 		}
-		
+
 		schematics.addSchematicsListener(this);
-		
+
 		addChangeListener(new ChangeListener() {
+
+			@Override
 			public void stateChanged(ChangeEvent e) {
 				SheetPanel sp = getCurrentEditor();
 				setEditTool(sp, true);
 				ApplicationActions.instance().setActionStates();
 			}
+
 		});
-		
+
 		ApplicationActions.instance().setActionStates();
 	}
-	
+
 	public void release() {
 		ApplicationActions.instance().removeStateInfoProvider(this);
 	}
-	
+
 	private void addPage(Sheet sheet, int newIndex) {
 		SheetPanel sheetPanel = new SheetPanel(sheet);
 		JScrollPane sp = new JScrollPane(sheetPanel);
@@ -122,25 +129,28 @@ public class SchemTabbook extends JTabbedPane implements SchematicsListener, Com
 		setSelectedIndex(newIndex);
 		sheetPanel.setEditTool(editTool, false);
 		sheetPanel.addPropertyChangeListener(this);
-		
+
 		requestFocusInWindow();
 		ApplicationActions.instance().setActionStates();
 	}
-	
+
 	private int getSheetIndex(Sheet sheet) {
 		int idx = 0;
-		for(Iterator it=schematics.sheets(); it.hasNext(); idx++) {
+		for(Iterator it = schematics.sheets(); it.hasNext(); idx++) {
 			Sheet s = (Sheet) it.next();
-			if(sheet == s)
+			if(sheet == s) {
 				return idx;
+			}
 		}
 		return -1;
 	}
-	
+
+	@Override
 	public void sheetAdded(Sheet sheet, int newIndex) {
 		addPage(sheet, newIndex);
 	}
 
+	@Override
 	public void sheetMoved(Sheet sheet, int oldIndex, int newIndex) {
 		Component page = getComponentAt(oldIndex);
 		removeTabAt(oldIndex);
@@ -149,60 +159,75 @@ public class SchemTabbook extends JTabbedPane implements SchematicsListener, Com
 		ApplicationActions.instance().setActionStates();
 	}
 
+	@Override
 	public void componentAdded(org.heinz.eda.schem.model.components.AbstractComponent c) {
 	}
 
+	@Override
 	public void componentRemoved(org.heinz.eda.schem.model.components.AbstractComponent c) {
 	}
 
+	@Override
 	public void sheetRemoved(Sheet sheet, int oldIndex) {
 		sheet.removeComponentListener(this);
 		SheetPanel p = getEditorAt(oldIndex);
 		removeTabAt(oldIndex);
 		p.getSheet().removePropertyChangeListener(this);
 		p.release();
-		
+
 		ApplicationActions.instance().setActionStates();
 	}
 
+	@Override
+	@SuppressWarnings("ConvertToStringSwitch")
 	public void propertyChange(PropertyChangeEvent evt) {
 		if(evt.getPropertyName().equals(Sheet.PROPERTY_TITLE)) {
 			int idx = getSheetIndex((Sheet) evt.getSource());
-			if(idx >= 0)
+			if(idx >= 0) {
 				setTitleAt(idx, (String) evt.getNewValue());
+			}
 		} else if(evt.getPropertyName().equals(SheetPanel.PROPERTY_MOUSE_POSITION)) {
-			if(evt.getSource() == getCurrentEditor())
+			if(evt.getSource() == getCurrentEditor()) {
 				firePropertyChange(PROPERTY_MOUSE_POSITION, evt.getOldValue(), evt.getNewValue());
+			}
 		}
 	}
 
+	@Override
 	public BufferedImage createExportImage(int page) {
 		return schematics.getSheetAt(page).getImage();
 	}
 
+	@Override
 	public int getNumPages() {
 		return schematics.getSheetCount();
 	}
 
+	@Override
 	public void componentChanged(AbstractComponent c) {
 	}
 
+	@Override
 	public void componentWillChange(AbstractComponent c) {
 	}
 
+	@Override
 	public void handlesMoved(Map handles, Point offset, boolean dragging) {
 	}
 
+	@Override
 	public void addActionStateInfos(ActionStateInfos stateInfos) {
 		int numSheets = schematics.getSheetCount();
 		boolean isLeft = (getSelectedIndex() == 0);
-		boolean isRight = (getSelectedIndex() == (numSheets-1));
-		stateInfos.put(SchemActions.STATE_INFO_NUM_SHEETS, new Integer(numSheets));
-		stateInfos.put(SchemActions.STATE_INFO_CAN_MOVE_LEFT, new Boolean(!isLeft));
-		stateInfos.put(SchemActions.STATE_INFO_CAN_MOVE_RIGHT, new Boolean(!isRight));
-		
+		boolean isRight = (getSelectedIndex() == (numSheets - 1));
+		stateInfos.put(SchemActions.STATE_INFO_NUM_SHEETS, numSheets);
+		stateInfos.put(SchemActions.STATE_INFO_CAN_MOVE_LEFT, !isLeft);
+		stateInfos.put(SchemActions.STATE_INFO_CAN_MOVE_RIGHT, !isRight);
+
 		SheetPanel panel = getCurrentEditor();
-		if(panel != null)
+		if(panel != null) {
 			panel.addActionStateInfos(stateInfos);
+		}
 	}
+
 }

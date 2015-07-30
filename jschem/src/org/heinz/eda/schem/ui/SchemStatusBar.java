@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.ui;
 
 import java.awt.Point;
@@ -15,12 +16,18 @@ import org.heinz.framework.crossplatform.StatusBar;
 import org.heinz.framework.crossplatform.utils.Translator;
 
 public class SchemStatusBar extends StatusBar implements PropertyChangeListener, MouseMotionListener {
-	private JLabel snapGridInfoLabel;
-	private JLabel showGridInfoLabel;
-	private JLabel xInfoLabel;
-	private JLabel yInfoLabel;
-	private DecimalFormat format = new DecimalFormat("0.00");
-	
+
+	private final JLabel snapGridInfoLabel;
+
+	private final JLabel showGridInfoLabel;
+
+	private final JLabel xInfoLabel;
+
+	private final JLabel yInfoLabel;
+
+	private final DecimalFormat format = new DecimalFormat("0.00");
+
+	@SuppressWarnings("LeakingThisInConstructor")
 	public SchemStatusBar() {
 		snapGridInfoLabel = addInfo(false);
 		setSnapGridInfoLabel("XXXXXX mm");
@@ -40,38 +47,41 @@ public class SchemStatusBar extends StatusBar implements PropertyChangeListener,
 		setShowGridInfoLabel(null);
 		setPositionInfoLabel(new Point(0, 0));
 	}
-	
+
 	private void setSnapGridInfoLabel(String info) {
 		double i = (double) SchemOptions.instance().getIntOption(SchemOptions.PROPERTY_GRID_SNAP_SPACING);
 		boolean b = SchemOptions.instance().getBoolOption(SchemOptions.PROPERTY_GRID_SNAP);
-		
+
 		i = i / 100;
 		String snapGridSpacingTitle = Translator.translate("SNAP_GRID_INFO");
 		if(info == null) {
 			String val = b ? format.format(i) + "mm" : Translator.translate("OFF");
 			snapGridInfoLabel.setText(snapGridSpacingTitle + " " + val);
-		} else
+		} else {
 			snapGridInfoLabel.setText(snapGridSpacingTitle + " " + info);
+		}
 	}
-	
+
 	private void setShowGridInfoLabel(String info) {
 		double i = (double) SchemOptions.instance().getIntOption(SchemOptions.PROPERTY_GRID_SPACING);
 		boolean b = SchemOptions.instance().getBoolOption(SchemOptions.PROPERTY_GRID_VISIBLE);
-		
+
 		i = i / 100;
 		String snapGridSpacingTitle = Translator.translate("VISIBLE_GRID_INFO");
 		if(info == null) {
 			String val = b ? format.format(i) + "mm" : Translator.translate("OFF");
 			showGridInfoLabel.setText(snapGridSpacingTitle + " " + val);
-		} else
+		} else {
 			showGridInfoLabel.setText(snapGridSpacingTitle + " " + info);
+		}
 	}
-	
+
 	private void setPositionInfoLabel(Point2D p) {
 		xInfoLabel.setText(Translator.translate("POSITION_X") + " " + format.format(p.getX()) + " mm");
 		yInfoLabel.setText(Translator.translate("POSITION_Y") + " " + format.format(p.getY()) + " mm");
 	}
-	
+
+	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		if(evt.getPropertyName().equals(SchemOptions.PROPERTY_GRID_SNAP)) {
 			setSnapGridInfoLabel(null);
@@ -86,11 +96,14 @@ public class SchemStatusBar extends StatusBar implements PropertyChangeListener,
 		}
 	}
 
+	@Override
 	public void mouseDragged(MouseEvent e) {
 		setPositionInfoLabel(e.getPoint());
 	}
 
+	@Override
 	public void mouseMoved(MouseEvent e) {
 		setPositionInfoLabel(e.getPoint());
 	}
+
 }

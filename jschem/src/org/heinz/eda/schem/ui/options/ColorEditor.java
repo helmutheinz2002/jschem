@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.ui.options;
 
 import java.awt.Color;
@@ -23,11 +24,12 @@ import org.heinz.framework.crossplatform.utils.Translator;
 import org.heinz.framework.utils.AbstractOptions;
 
 public class ColorEditor extends StandardDialogPanel {
+
 	private List colors = new ArrayList();
-	
+
 	public ColorEditor() {
 		super(Translator.translate("COLORS"));
-		
+
 		setLayout(new GridBagLayout());
 		colors.add(new ColorInfo(SchemOptions.PROPERTY_COMPONENT_COLOR, "COMPONENTS"));
 		colors.add(new ColorInfo(SchemOptions.PROPERTY_SELECTED_COLOR, "SELECTED_OBJECTS"));
@@ -36,29 +38,31 @@ public class ColorEditor extends StandardDialogPanel {
 		colors.add(new ColorInfo(SchemOptions.PROPERTY_SELECTION_BOX_COLOR, "SELECTION_FRAME"));
 		colors.add(new ColorInfo(SchemOptions.PROPERTY_GRID_COLOR, "GRID"));
 		colors.add(new ColorInfo(SchemOptions.PROPERTY_HANDLE_FILL_COLOR, "HANDLES"));
-		
+
 		int r = 0;
-		for(Iterator it=colors.iterator(); it.hasNext(); r++) {
+		for(Iterator it = colors.iterator(); it.hasNext(); r++) {
 			final ColorInfo ci = (ColorInfo) it.next();
 			ci.panel = new JPanel();
 			ci.panel.setOpaque(true);
 			ci.panel.setBackground(ci.color);
 			ci.panel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
 			ci.panel.setPreferredSize(new Dimension(16, 16));
-			
+
 			GridBagConstraints c = new GridBagConstraints();
 			c.gridx = 0;
 			c.gridy = r;
 			c.insets = new Insets(5, 5, 5, 5);
 			add(ci.panel, c);
-			
+
 			final String cn = Translator.translate(ci.displayName);
 			JButton b = new JButton(cn);
 			c.gridx = 1;
 			c.fill = GridBagConstraints.BOTH;
 			add(b, c);
-			
+
 			b.addActionListener(new ActionListener() {
+
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					Color col = SimpleColorChooser.showColorDialog(ColorEditor.this, cn, ci.color);
 					if(col != null) {
@@ -66,6 +70,7 @@ public class ColorEditor extends StandardDialogPanel {
 						ci.panel.setBackground(col);
 					}
 				}
+
 			});
 		}
 
@@ -76,32 +81,38 @@ public class ColorEditor extends StandardDialogPanel {
 		c.gridwidth = 2;
 		c.insets = new Insets(15, 5, 5, 5);
 		add(defaults, c);
-		
+
 		final AbstractOptions o = SchemOptions.instance();
 		defaults.addActionListener(new ActionListener() {
+
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				for(Iterator it=colors.iterator(); it.hasNext();) {
+				for(Iterator it = colors.iterator(); it.hasNext();) {
 					final ColorInfo ci = (ColorInfo) it.next();
 					Color col = o.getColorOption(SchemOptions.getDefaultOptionName(ci.optionName));
 					ci.color = col;
 					ci.panel.setBackground(col);
 				}
 			}
+
 		});
 	}
 
+	@Override
 	public String check() {
 		return null;
 	}
 
+	@Override
 	public void ok() {
-		for(Iterator it=colors.iterator(); it.hasNext();) {
+		for(Iterator it = colors.iterator(); it.hasNext();) {
 			ColorInfo ci = (ColorInfo) it.next();
 			SchemOptions.instance().setOption(ci.optionName, ci.color);
 		}
 	}
 
 	class ColorInfo {
+
 		ColorInfo(String optionName, String displayName) {
 			this.optionName = optionName;
 			this.displayName = displayName;
@@ -109,8 +120,13 @@ public class ColorEditor extends StandardDialogPanel {
 		}
 
 		String optionName;
+
 		Color color;
+
 		String displayName;
+
 		JPanel panel;
+
 	}
+
 }

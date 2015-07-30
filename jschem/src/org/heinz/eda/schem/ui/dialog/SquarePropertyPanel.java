@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.ui.dialog;
 
 import java.awt.Point;
@@ -8,18 +9,21 @@ import org.heinz.eda.schem.ui.beans.PositionBean;
 import org.heinz.framework.crossplatform.utils.Translator;
 
 public class SquarePropertyPanel extends AbstractComponentPropertyPanel {
-	private PositionBean endPosBean;
-	
+
+	private final PositionBean endPosBean;
+
+	@SuppressWarnings("LeakingThisInConstructor")
 	public SquarePropertyPanel() {
 		super(Translator.translate("SQUARE_PROPERTIES"), true);
-		
+
 		endPosBean = new PositionBean();
 		endPosBean.setLabels("WIDTH", "HEIGHT");
 		nextRow = endPosBean.addTo(this, nextRow);
-		
+
 		addFiller();
 	}
 
+	@Override
 	public void setComponent(AbstractComponent c) {
 		super.setComponent(c);
 
@@ -30,6 +34,7 @@ public class SquarePropertyPanel extends AbstractComponentPropertyPanel {
 		fillColorBean.setColor(square.getFillColor());
 	}
 
+	@Override
 	public void ok() {
 		super.ok();
 
@@ -39,7 +44,8 @@ public class SquarePropertyPanel extends AbstractComponentPropertyPanel {
 		square.setHeight(p.y);
 		square.setFillColor(fillColorBean.getColor());
 	}
-	
+
+	@Override
 	public void prepareToShow() {
 		endPosBean.x.requestFocusInWindow();
 	}

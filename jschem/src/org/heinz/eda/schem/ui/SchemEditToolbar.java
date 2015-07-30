@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.ui;
 
 import org.heinz.eda.schem.ui.tools.ArcTool;
@@ -15,10 +16,11 @@ import org.heinz.framework.crossplatform.EditToolBar;
 import org.heinz.framework.crossplatform.EditToolListener;
 
 public class SchemEditToolbar extends EditToolBar implements EditToolListener {
+
 	public SchemEditToolbar() {
 		super(SelectionTool.class);
 		SchemActions actions = SchemActions.instance();
-		
+
 		addEditTool(actions.selectionToolItem, new SelectionTool());
 		addEditTool(actions.zoomToolItem, new ZoomTool());
 		addSeparator();
@@ -33,10 +35,13 @@ public class SchemEditToolbar extends EditToolBar implements EditToolListener {
 		addEditTool(actions.polygonToolItem, new PolygonTool());
 		addEditTool(actions.textToolItem, new TextTool());
 	}
-	
+
+	@Override
 	protected Class getNextTool(Class toolClass) {
-		if((toolClass == WireSplitTool.class) || (toolClass == ZoomTool.class) || (toolClass == LibraryTool.class))
+		if((toolClass == WireSplitTool.class) || (toolClass == ZoomTool.class) || (toolClass == LibraryTool.class)) {
 			return SelectionTool.class;
+		}
 		return super.getNextTool(toolClass);
 	}
+
 }

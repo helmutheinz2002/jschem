@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.model.xml;
 
 import java.util.ArrayList;
@@ -10,24 +11,31 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class XmlSheetReader extends XmlObjectReader {
-	private DefaultHandler handler;
+
+	private final DefaultHandler handler;
+
 	private List sheets = new ArrayList();
+
 	private Sheet sheet;
+
 	private XmlComponentReader componentReader;
-	
+
 	public XmlSheetReader() {
 		super(Sheet.PROPERTIES, Sheet.class.getPackage().getName());
-		
+
 		final String sheetClassName = getSimpleClassName(Sheet.class);
 		componentReader = new XmlComponentReader(false);
-		
+
 		handler = new DefaultHandler() {
+
+			@Override
+			@SuppressWarnings("CallToPrintStackTrace")
 			public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 				if(sheet == null) {
 					try {
 						sheet = (Sheet) createObject(qName, attributes);
 						sheets.add(sheet);
-					} catch (Exception e) {
+					} catch(Exception e) {
 						sheet = null;
 						e.printStackTrace();
 						throw new SAXException(e);
@@ -36,7 +44,8 @@ public class XmlSheetReader extends XmlObjectReader {
 					componentReader.getHandler().startElement(uri, localName, qName, attributes);
 				}
 			}
-			
+
+			@Override
 			public void endElement(String uri, String localName, String qName) throws SAXException {
 				if(qName.equals(sheetClassName)) {
 					sheet.addComponents(componentReader.getComponents());
@@ -46,14 +55,16 @@ public class XmlSheetReader extends XmlObjectReader {
 					componentReader.getHandler().endElement(uri, localName, qName);
 				}
 			}
+
 		};
 	}
-	
+
 	public DefaultHandler getHandler() {
 		return handler;
 	}
-	
+
 	public List getSheets() {
 		return sheets;
 	}
+
 }

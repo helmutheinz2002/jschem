@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem;
 
 import java.awt.Component;
@@ -90,62 +91,86 @@ import org.heinz.framework.utils.FileExtensionEnsurer;
 import org.heinz.framework.utils.cmdline.CommandLineParser;
 
 import com.lowagie.text.Rectangle;
+import org.heinz.eda.schem.ui.undo.UndoDelete;
+import org.heinz.eda.schem.ui.undo.UndoNew;
 
 public class SchemApplication implements ApplicationListener, ActionListener, EditToolBarListener, SchemDocumentProperty {
+
 	private static final float ITEXT_UNIT = 2540f / 72.0f;
+
 	private static final int PASTE_OFFSET = 10;
 
 	private Application application;
+
 	private Library library;
+
 	private String workDir;
+
 	private List initialFiles = new ArrayList();
+
 	private SchemStatusBar statusBar;
+
 	private Point pasteOffset;
-	
+
+	@SuppressWarnings({"ResultOfObjectAllocationIgnored", "LeakingThisInConstructor"})
 	public SchemApplication(String[] args) {
 		this.application = CrossPlatform.getPlatform().getApplication();
-		
+
 		application.setTitle(SchemConstants.PROGRAM_NAME);
 		application.setIconImage(IconLoader.instance().loadIcon("menu/icon.png").getImage());
-		
+
 		workDir = System.getProperty("user.home") + File.separator + "." + SchemConstants.PROGRAM_NAME.toLowerCase();
 		CommandLineParser.instance().parseArguments(args);
-		for(Iterator it=CommandLineParser.instance().getArguments().iterator(); it.hasNext();)
+		for(Iterator it = CommandLineParser.instance().getArguments().iterator(); it.hasNext();) {
 			initialFiles.add(new File((String) it.next()));
-		
+		}
+
 		Translator.instance().addBundle("JSchem");
 		new SchemClipBoard();
 		new SchemOptions(workDir);
 		SchemActions.instance().addActionListener(this);
 		ApplicationActions.instance().addActionListener(this);
-		
+
 		application.addApplicationListener(this);
 		application.setMenuBarFactory(new MenuBarFactory() {
+
+			@Override
 			public JMenuBar createMenuBar() {
 				return new SchemMenuBar(SchemApplication.this);
 			}
+
 		});
 		application.setToolBarFactory(new ToolBarFactory() {
+
+			@Override
 			public ToolBar createToolBar() {
 				return new SchemToolbar();
 			}
+
 		});
 		application.setEditToolBarFactory(new EditToolBarFactory() {
+
+			@Override
 			public EditToolBar createEditToolBar() {
 				SchemEditToolbar editToolbar = new SchemEditToolbar();
 				editToolbar.addEditToolBarListener(SchemApplication.this);
 				return editToolbar;
 			}
+
 		});
 		application.setStatusBarFactory(new StatusBarFactory() {
+
+			@Override
 			public StatusBar createStatusBar() {
 				return statusBar = new SchemStatusBar();
 			}
+
 		});
-		
+
 		application.start();
 	}
 
+	@Override
 	public void about() {
 		application.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		List libraries = new ArrayList();
@@ -162,62 +187,66 @@ public class SchemApplication implements ApplicationListener, ActionListener, Ed
 	public void updateVersion() {
 		updateLibrary(true);
 	}
-	
+
 	public void updateLibrary(boolean silent) {
 		List updateActions = library.checkLibrary();
-		
+
 		if(!silent && !Library.hasPendingUpdates(updateActions)) {
 			// Nothing to do
 			JOptionPane.showMessageDialog(application.getOptionPaneOwner(), Translator.translate("LIBRARY_UP_TO_DATE"), Translator.translate("LIBRARY_UPDATE"), JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
-		
-		if(Library.isAllNew(updateActions))
-			// All files are new, so there is no need to bother user
+
+		if(Library.isAllNew(updateActions)) // All files are new, so there is no need to bother user
+		{
 			library.updateLibrary(updateActions);
-		else {
+		} else {
 			// User must decide what to do
 			while(Library.hasPendingUpdates(updateActions)) {
 				LibraryUpdatePanel updatePanel = new LibraryUpdatePanel();
 				updatePanel.display(updateActions);
 				Dimension d = application.getSize();
 				int res = StandardDialog.showDialog(application.getDialogOwner(null), updatePanel, new Dimension(d.width * 2 / 3, d.height * 2 / 3));
-				
-				if(res == StandardDialog.OK_PRESSED)
+
+				if(res == StandardDialog.OK_PRESSED) {
 					library.updateLibrary(updateActions);
-				else
+				} else {
 					break;
+				}
 			}
 		}
 	}
 
+	@Override
 	public void applicationStarted() {
 		library = new Library(workDir);
-		
+
 		registerFileType();
-		
+
 		if(!SchemOptions.instance().getStringOption(SchemOptions.PROPERTY_LAST_PROGRAM_VERSION).equals(SchemConstants.PROGRAM_VERSION)) {
 			updateVersion();
 			SchemOptions.instance().setOption(SchemOptions.PROPERTY_LAST_PROGRAM_VERSION, SchemConstants.PROGRAM_VERSION);
 		}
-		
+
 		application.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-       	for(Iterator it=initialFiles.iterator(); it.hasNext();)
-       		loadFile((File) it.next());
-       	
-       	if(application.getDocuments().size() == 0)
-       		newFile(null, null);
-       	
+		for(Iterator it = initialFiles.iterator(); it.hasNext();) {
+			loadFile((File) it.next());
+		}
+
+		if(application.getDocuments().isEmpty()) {
+			newFile(null, null);
+		}
+
 		application.setCursor(Cursor.getDefaultCursor());
 	}
 
 	private void registerFileType() {
-		Platform platform = CrossPlatform.getPlatform(); 
+		Platform platform = CrossPlatform.getPlatform();
 		try {
 			String path = System.getProperty("executable.path");
 			String name = System.getProperty("executable.name");
 			if((path != null) && (name != null)) {
-				String exePath = path + name; 
+				String exePath = path + name;
 				platform.registerFileType("jsch", SchemConstants.PROGRAM_NAME + "." + SchemConstants.PROGRAM_VERSION, exePath);
 			}
 		} catch(Exception ex) {
@@ -229,8 +258,9 @@ public class SchemApplication implements ApplicationListener, ActionListener, Ed
 		File file = (File) document.getProperty(DOC_PROPERTY_FILE);
 		Schematics schematics = ((SchemTabbook) document.getDocumentPane()).getSchematics();
 		String title = (file == null) ? Translator.translate("NEW_SCHEMATIC") : file.getAbsolutePath();
-		if((schematics != null) && schematics.isDirty())
+		if((schematics != null) && schematics.isDirty()) {
 			title += " *";
+		}
 		document.setTitle(title);
 	}
 
@@ -238,21 +268,25 @@ public class SchemApplication implements ApplicationListener, ActionListener, Ed
 		final Document document = application.createDocument();
 		document.setIconImage(IconLoader.instance().loadIcon("menu/icon.png").getImage());
 
-		if(schematics == null)
+		if(schematics == null) {
 			schematics = new Schematics(Translator.translate("SHEET"));
-		
+		}
+
 		document.setProperty(DOC_PROPERTY_FILE, file);
-		
+
 		schematics.addPropertyChangeListener(new PropertyChangeListener() {
+
+			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
 				setTitle(document);
 			}
+
 		});
-		
+
 		SchemTabbook schemTabbook = new SchemTabbook(schematics);
 		schemTabbook.addPropertyChangeListener(statusBar);
 		document.addStateInfoProvider(schemTabbook);
-		
+
 		document.setDocumentPane(schemTabbook);
 		setTitle(document);
 		return document;
@@ -260,43 +294,43 @@ public class SchemApplication implements ApplicationListener, ActionListener, Ed
 
 	public boolean saveAs(Document document) {
 		File f = selectFile(true);
-		
+
 		if(f != null) {
 			save(document, f);
 			SchemOptions.instance().addToRecentFiles(f);
 			setTitle(document);
 			return true;
 		}
-		
+
 		return false;
 	}
 
 	public boolean save(Document document) {
 		File file = (File) document.getProperty(DocumentProperty.DOC_PROPERTY_FILE);
 
-		if(file != null)
+		if(file != null) {
 			save(document, file);
-		else
+		} else {
 			return saveAs(document);
-		
+		}
+
 		return true;
 	}
-	
+
+	@SuppressWarnings("CallToPrintStackTrace")
 	public void save(Document document, File file) {
 		SchemTabbook tb = (SchemTabbook) document.getDocumentPane();
 		Schematics schematics = tb.getSchematics();
-		
+
 		try {
 			String s = XmlSchematicsWriter.toXml(schematics);
-			FileOutputStream fos = new FileOutputStream(file);
-			ZipOutputStream zos = new ZipOutputStream(fos);
-			ZipEntry entry = new ZipEntry("schematics.xml");
-			zos.putNextEntry(entry);
-			byte[] bytes = s.getBytes("UTF-8");
-			zos.write(bytes, 0, bytes.length);
-			zos.closeEntry();
-			zos.close();
-			fos.close();
+			try(FileOutputStream fos = new FileOutputStream(file); ZipOutputStream zos = new ZipOutputStream(fos)) {
+				ZipEntry entry = new ZipEntry("schematics.xml");
+				zos.putNextEntry(entry);
+				byte[] bytes = s.getBytes("UTF-8");
+				zos.write(bytes, 0, bytes.length);
+				zos.closeEntry();
+			}
 			schematics.setDirty(false);
 			document.setProperty(DocumentProperty.DOC_PROPERTY_FILE, file);
 		} catch(Exception ex) {
@@ -307,15 +341,17 @@ public class SchemApplication implements ApplicationListener, ActionListener, Ed
 
 	public void loadFile() {
 		File f = selectFile(false);
-		if(f != null)
+		if(f != null) {
 			loadFile(f);
+		}
 	}
 
+	@SuppressWarnings({"UseSpecificCatch", "CallToPrintStackTrace"})
 	private void loadFile(File f) {
 		CrossPlatform.getPlatform().getApplication().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		String message = null;
 		try {
-			Schematics newSchematics = null;
+			Schematics newSchematics;
 			if(f.getAbsolutePath().endsWith(SchemFileFilter.SCHEM_EXTENSION)) {
 				XmlSchematicsReader r = new XmlSchematicsReader();
 				SAXParser p = SAXParserFactory.newInstance().newSAXParser();
@@ -326,7 +362,7 @@ public class SchemApplication implements ApplicationListener, ActionListener, Ed
 			} else {
 				newSchematics = ExpressImport.importFile(f);
 			}
-			
+
 			newSchematics.setDirty(false);
 			newFile(newSchematics, f);
 			SchemOptions.instance().addToRecentFiles(f);
@@ -339,24 +375,25 @@ public class SchemApplication implements ApplicationListener, ActionListener, Ed
 		} finally {
 			CrossPlatform.getPlatform().getApplication().setCursor(Cursor.getDefaultCursor());
 		}
-		
+
 		if(message != null) {
 			Component c = CrossPlatform.getPlatform().getApplication().getOptionPaneOwner();
 			JOptionPane.showMessageDialog(c, f.getAbsolutePath() + "\n\n" + Translator.translate(message), Translator.translate("ERROR"), JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	private void loadFromLib(Document document) {
 		String dir = SchemOptions.instance().getStringOption(SchemOptions.PROPERTY_LAST_LIB_DIR);
-		if((dir == null) || (dir.length() == 0))
+		if((dir == null) || (dir.length() == 0)) {
 			dir = library.getLibraryDir();
+		}
 		ComponentFileChooser fc = new ComponentFileChooser(dir, false);
 		if(fc.showOpenDialog(document.getContainer()) == ComponentFileChooser.APPROVE_OPTION) {
 			AbstractComponent c = fc.getSelectedComponent();
 			if(c != null) {
 				SchemOptions.instance().setOption(SchemOptions.PROPERTY_LAST_LIB_DIR, fc.getCurrentDirectory().getAbsolutePath());
 				SchemTabbook schemTabbook = (SchemTabbook) document.getDocumentPane();
-				SheetPanel sp = schemTabbook.getCurrentEditor(); 
+				SheetPanel sp = schemTabbook.getCurrentEditor();
 				sp.clearSelection();
 				Sheet s = schemTabbook.getCurrentSheet();
 				Point cp = sp.getCenter();
@@ -364,29 +401,32 @@ public class SchemApplication implements ApplicationListener, ActionListener, Ed
 				c.setPosition(cp.x, cp.y);
 				s.addComponent(c);
 				sp.addToSelection(c);
-				
+
 				EditToolBar editToolBar = document.getEditToolBar();
 				((LibraryTool) editToolBar.getTool(LibraryTool.class)).addToRecentComponents(fc.getSelectedFile());
-//				ApplicationUndoManager.instance().getUndoManager(document).addEdit(new UndoNew(s, c));
+				ApplicationUndoManager.instance().getUndoManager(document).addEdit(new UndoNew(s, c));
 			}
 		}
 	}
 
 	private void saveToLib(Document document) {
 		String dir = SchemOptions.instance().getStringOption(SchemOptions.PROPERTY_LAST_LIB_DIR);
-		if((dir == null) || (dir.length() == 0))
+		if((dir == null) || (dir.length() == 0)) {
 			dir = library.getLibraryDir();
+		}
 		ComponentFileChooser fc = new ComponentFileChooser(dir, true);
 		if(fc.showSaveDialog(document.getContainer()) == ComponentFileChooser.APPROVE_OPTION) {
 			File f = fc.getSelectedFile();
-			
+
 			String fn = f.getAbsolutePath();
-			if(!ComponentFileFilter.instance(true).hasExtension(fn))
+			if(!ComponentFileFilter.instance(true).hasExtension(fn)) {
 				fn += "." + ComponentFileFilter.COMPONENT_EXTENSION_JSCHEM;
-			
+			}
+
 			f = new File(fn);
-			if(f.exists() && !AbstractFileSelection.confirmOverwrite(document.getContainer(), f, "COMPONENT_EXISTS_CONFIRMATION", "COMPONENT_EXISTS_TITLE"))
+			if(f.exists() && !AbstractFileSelection.confirmOverwrite(document.getContainer(), f, "COMPONENT_EXISTS_CONFIRMATION", "COMPONENT_EXISTS_TITLE")) {
 				return;
+			}
 
 			SchemOptions.instance().setOption(SchemOptions.PROPERTY_LAST_LIB_DIR, fc.getCurrentDirectory().getAbsolutePath());
 			SchemTabbook schemTabbook = (SchemTabbook) document.getDocumentPane();
@@ -400,50 +440,56 @@ public class SchemApplication implements ApplicationListener, ActionListener, Ed
 			}
 		}
 	}
-	
+
 	private SchemTabbook getCurrentTabbook() {
 		Document document = application.getActiveDocument();
 		SchemTabbook stb = (SchemTabbook) document.getDocumentPane();
 		return stb;
 	}
-	
+
 	private File selectFile(boolean save) {
 		String title = Translator.translate(save ? "SAVE_SCHEMATICS" : "OPEN_SCHEMATICS");
 		FileExtensionEnsurer extEnsurer = (save ? new DefaultFileExtensionEnsurer(SchemFileFilter.SCHEM_EXTENSION) : null);
 		File f = CrossPlatform.getPlatform().getApplication().selectFile(null, SchemFileFilter.instance(save), extEnsurer, save, title);
-    	return f;
+		return f;
 	}
 
+	@Override
 	public void openFile(String filename) {
 		File f = new File(filename);
 		loadFile(f);
 	}
 
+	@Override
 	public void preferences() {
 		StandardDialog.showDialog(application.getDialogOwner(null), new OptionsEditor(), new Dimension(400, 300));
 	}
 
+	@Override
 	public void quit() {
 		int dirty = 0;
-		for(Iterator it=application.getDocuments().iterator(); it.hasNext();) {
+		for(Iterator it = application.getDocuments().iterator(); it.hasNext();) {
 			Document d = (Document) it.next();
 			SchemTabbook tb = (SchemTabbook) d.getDocumentPane();
 			Schematics s = tb.getSchematics();
-			if(s.isDirty())
+			if(s.isDirty()) {
 				dirty++;
+			}
 		}
 
 		int res = DefaultMessages.OPTION_REVIEW;
 		if(dirty > 0) {
-			if(dirty > 1)
+			if(dirty > 1) {
 				res = DefaultMessages.askQuit(application.getOptionPaneOwner());
-			
-			if(res == DefaultMessages.OPTION_CANCEL)
+			}
+
+			if(res == DefaultMessages.OPTION_CANCEL) {
 				return;
+			}
 			if(res == DefaultMessages.OPTION_REVIEW) {
 				try {
 					application.closeAllDocuments();
-				} catch (DocumentCloseVetoException e) {
+				} catch(DocumentCloseVetoException e) {
 					return;
 				}
 			}
@@ -452,21 +498,27 @@ public class SchemApplication implements ApplicationListener, ActionListener, Ed
 		System.exit(0);
 	}
 
+	@SuppressWarnings("CallToPrintStackTrace")
 	private void export(final Document document, Exporter exporter, String extOptionKey) {
 		ExportProvider exportProvider = new ExportProvider() {
+
+			@Override
 			public Component getComponent() {
 				return document.getContainer();
 			}
 
+			@Override
 			public AbstractOptions getOptions() {
 				return SchemOptions.instance();
 			}
+
 		};
-		
+
 		try {
 			String ext = ExportHelper.export(exportProvider, exporter, SchemOptions.instance().getStringOption(extOptionKey));
-			if(ext != null)
+			if(ext != null) {
 				SchemOptions.instance().setOption(extOptionKey, ext);
+			}
 		} catch(Exception ex) {
 			ex.printStackTrace();
 			JOptionPane.showMessageDialog(getCurrentTabbook(), Translator.translate("FILE_EXPORT_FAILED"), Translator.translate("ERROR"), JOptionPane.ERROR_MESSAGE);
@@ -475,15 +527,18 @@ public class SchemApplication implements ApplicationListener, ActionListener, Ed
 
 	private void exportSheet(final Document document) {
 		Exporter exporter = new Exporter() {
+
+			@Override
+			@SuppressWarnings("CallToPrintStackTrace")
 			public void export(ExportFormat exportFormat, File outputFile) {
 				SchemTabbook schemTabbook = (SchemTabbook) document.getDocumentPane();
 				Sheet sheet = schemTabbook.getCurrentEditor().getSheet();
-				
+
 				if(exportFormat instanceof SchemExportFormat) {
 					SchemExportFormat sef = (SchemExportFormat) exportFormat;
 					try {
 						sef.exportSheet(sheet, outputFile);
-					} catch (IOException e) {
+					} catch(IOException e) {
 						e.printStackTrace();
 						throw new IllegalArgumentException(e.getMessage());
 					}
@@ -494,16 +549,21 @@ public class SchemApplication implements ApplicationListener, ActionListener, Ed
 				ExportHelper.exportSimpleImageDocument(SchemConstants.PROGRAM_DESCRIPTION, outputFile, exportFormat, sheet.getImage(), size);
 			}
 
+			@Override
 			public ExportFormat[] getSupportedFormats() {
 				return SchemExportFormat.getDefaultSheetExportFormats();
 			}
+
 		};
-		
+
 		export(document, exporter, SchemOptions.PROPERTY_LAST_SHEET_EXPORT_EXTENSION);
 	}
-	
+
 	private void exportSchematics(final Document document) {
 		Exporter exporter = new Exporter() {
+
+			@Override
+			@SuppressWarnings("CallToPrintStackTrace")
 			public void export(ExportFormat exportFormat, File outputFile) {
 				SchemTabbook schemTabbook = (SchemTabbook) document.getDocumentPane();
 
@@ -511,7 +571,7 @@ public class SchemApplication implements ApplicationListener, ActionListener, Ed
 					SchemExportFormat sef = (SchemExportFormat) exportFormat;
 					try {
 						sef.exportSchematic(schemTabbook.getSchematics(), outputFile);
-					} catch (IOException e) {
+					} catch(IOException e) {
 						e.printStackTrace();
 						throw new IllegalArgumentException(e.getMessage());
 					}
@@ -524,124 +584,128 @@ public class SchemApplication implements ApplicationListener, ActionListener, Ed
 				ExportHelper.exportMultiImageDocument(SchemConstants.PROGRAM_DESCRIPTION, outputFile, exportFormat, schemTabbook, size);
 			}
 
+			@Override
 			public ExportFormat[] getSupportedFormats() {
 				return SchemExportFormat.getDefaultSchematicsExportFormats();
 			}
+
 		};
-		
+
 		export(document, exporter, SchemOptions.PROPERTY_LAST_SCHEMATICS_EXPORT_EXTENSION);
 	}
+
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		SchemActions sa = SchemActions.instance();
 		ApplicationActions aa = ApplicationActions.instance();
-		
-		if(e.getSource() == aa.newItem)
+
+		if(e.getSource() == aa.newItem) {
 			newFile(null, null);
-		else if(e.getSource() == aa.openItem)
+		} else if(e.getSource() == aa.openItem) {
 			loadFile();
-		else if(e.getSource() == aa.zoomInItem)
+		} else if(e.getSource() == aa.zoomInItem) {
 			getCurrentTabbook().getCurrentEditor().zoomIn();
-		else if(e.getSource() == aa.zoomOutItem)
+		} else if(e.getSource() == aa.zoomOutItem) {
 			getCurrentTabbook().getCurrentEditor().zoomOut();
-		else if(e.getSource() == aa.zoomFitItem)
+		} else if(e.getSource() == aa.zoomFitItem) {
 			getCurrentTabbook().getCurrentEditor().zoomToFit();
-		else if(e.getSource() instanceof JMenuBar)
+		} else if(e.getSource() instanceof JMenuBar) {
 			openFile((String) e.getActionCommand());
-		else if(e.getSource() == aa.saveItem)
+		} else if(e.getSource() == aa.saveItem) {
 			save(application.getActiveDocument());
-		else if(e.getSource() == aa.saveAsItem)
+		} else if(e.getSource() == aa.saveAsItem) {
 			saveAs(application.getActiveDocument());
-		else if(e.getSource() == sa.exportSchematicsItem)
+		} else if(e.getSource() == sa.exportSchematicsItem) {
 			exportSchematics(application.getActiveDocument());
-		else if(e.getSource() == sa.exportSheetItem)
+		} else if(e.getSource() == sa.exportSheetItem) {
 			exportSheet(application.getActiveDocument());
-		else if(e.getSource() == sa.libraryItem)
+		} else if(e.getSource() == sa.libraryItem) {
 			loadFromLib(application.getActiveDocument());
-		else if(e.getSource() == sa.saveComponentItem)
+		} else if(e.getSource() == sa.saveComponentItem) {
 			saveToLib(application.getActiveDocument());
-		else if (e.getSource() == sa.updateLibraryItem)
+		} else if(e.getSource() == sa.updateLibraryItem) {
 			updateLibrary(false);
-		else if (e.getSource() == aa.propertiesItem) {
+		} else if(e.getSource() == aa.propertiesItem) {
 			Document document = application.getActiveDocument();
 			SheetPanel sp = ((SchemTabbook) document.getDocumentPane()).getCurrentEditor();
 			AbstractComponent c = (AbstractComponent) sp.getSelection().get(0);
 			ComponentPropertyDialog.openDialog(application.getDialogOwner(document), c);
-		} else if (e.getSource() == sa.groupComponentItem) {
+		} else if(e.getSource() == sa.groupComponentItem) {
 			SheetPanel sheetPanel = getCurrentTabbook().getCurrentEditor();
 			AbstractComponent group = sheetPanel.getSheet().groupComponent(sheetPanel.getSelection());
 			sheetPanel.addToSelection(group);
-		} else if (e.getSource() == sa.groupSymbolItem) {
+		} else if(e.getSource() == sa.groupSymbolItem) {
 			SheetPanel sheetPanel = getCurrentTabbook().getCurrentEditor();
 			AbstractComponent group = sheetPanel.getSheet().groupSymbol(sheetPanel.getSelection());
 			sheetPanel.addToSelection(group);
-		} else if (e.getSource() == sa.ungroupItem) {
+		} else if(e.getSource() == sa.ungroupItem) {
 			SheetPanel sheetPanel = getCurrentTabbook().getCurrentEditor();
 			Sheet sheet = sheetPanel.getSheet();
 			List selection = sheetPanel.getSelection();
 			List comps = sheet.ungroup((org.heinz.eda.schem.model.components.Component) selection.get(0));
 			sheetPanel.addToSelection(comps);
-		} else if (e.getSource() == sa.newSheetItem) {
+		} else if(e.getSource() == sa.newSheetItem) {
 			Schematics schematics = getCurrentTabbook().getSchematics();
 			Sheet newSheet = schematics.addSheet(Translator.translate("SHEET"), true);
 			ApplicationUndoManager.instance().getCurrentUndoManager().addEdit(new UndoAddSheet(schematics, newSheet));
-		} else if (e.getSource() == sa.sheetLeftItem) {
+		} else if(e.getSource() == sa.sheetLeftItem) {
 			Sheet sheet = getCurrentTabbook().getCurrentSheet();
 			Schematics schematics = getCurrentTabbook().getSchematics();
 			schematics.moveSheet(sheet, true);
 			ApplicationUndoManager.instance().getCurrentUndoManager().addEdit(new UndoMoveSheet(schematics, sheet, true));
-		} else if (e.getSource() == sa.sheetRightItem) {
+		} else if(e.getSource() == sa.sheetRightItem) {
 			Sheet sheet = getCurrentTabbook().getCurrentSheet();
 			Schematics schematics = getCurrentTabbook().getSchematics();
 			schematics.moveSheet(sheet, false);
 			ApplicationUndoManager.instance().getCurrentUndoManager().addEdit(new UndoMoveSheet(schematics, sheet, false));
-		} else if (e.getSource() == sa.sheetSizeItem) {
+		} else if(e.getSource() == sa.sheetSizeItem) {
 			Sheet sheet = getCurrentTabbook().getCurrentSheet();
 			Document document = application.getActiveDocument();
 			StandardDialog.showDialog(application.getDialogOwner(document), new SheetSizePanel(sheet), new Dimension(300, 200));
-		} else if (e.getSource() == sa.renameSheetItem) {
+		} else if(e.getSource() == sa.renameSheetItem) {
 			Sheet sheet = getCurrentTabbook().getCurrentSheet();
 			String name = sheet.getTitle();
 			name = (String) JOptionPane.showInputDialog(application.getActiveDocument().getContainer(), Translator.translate("RENAME_SHEET"), Translator.translate("RENAME_SHEET_TITLE"),
-							JOptionPane.QUESTION_MESSAGE, null, null, name);
-			if (name != null) {
+					JOptionPane.QUESTION_MESSAGE, null, null, name);
+			if(name != null) {
 				String oldTitle = sheet.getTitle();
 				sheet.setTitle(name);
 				ApplicationUndoManager.instance().getCurrentUndoManager().addEdit(new UndoRenameSheet(sheet, oldTitle));
 			}
-		} else if (e.getSource() == sa.deleteSheetItem) {
+		} else if(e.getSource() == sa.deleteSheetItem) {
 			Sheet sheet = getCurrentTabbook().getCurrentSheet();
 			int r = JOptionPane.showConfirmDialog(application.getActiveDocument().getContainer(), Translator.translate("DELETE_SHEET"), Translator.translate("DELETE_SHEET_TITLE"),
 					JOptionPane.YES_NO_OPTION);
-			if (r == JOptionPane.YES_OPTION) {
+			if(r == JOptionPane.YES_OPTION) {
 				Schematics schematics = getCurrentTabbook().getSchematics();
 				int idx = schematics.removeSheet(sheet, false);
 				ApplicationUndoManager.instance().getCurrentUndoManager().addEdit(new UndoDeleteSheet(schematics, sheet, idx));
 			}
-		} else if (e.getSource() == aa.deleteItem) {
-			SheetPanel sp = getCurrentTabbook().getCurrentEditor(); 
-			//List sel = sp.getSelection();
-			//ApplicationUndoManager.instance().getCurrentUndoManager().addEdit(new UndoDelete(sp.getSheet(), sel));
+		} else if(e.getSource() == aa.deleteItem) {
+			SheetPanel sp = getCurrentTabbook().getCurrentEditor();
+			List sel = sp.getSelection();
+			ApplicationUndoManager.instance().getCurrentUndoManager().addEdit(new UndoDelete(sp.getSheet(), sel));
 			sp.removeSelection();
-		} else if (e.getSource() == aa.cutItem) {
+		} else if(e.getSource() == aa.cutItem) {
 			copy();
 			getCurrentTabbook().getCurrentEditor().removeSelection();
-		} else if (e.getSource() == aa.copyItem) {
+		} else if(e.getSource() == aa.copyItem) {
 			copy();
-		} else if (e.getSource() == aa.pasteItem) {
+		} else if(e.getSource() == aa.pasteItem) {
 			paste();
-		} else if (e.getSource() == aa.undoItem) {
+		} else if(e.getSource() == aa.undoItem) {
 			ApplicationUndoManager.instance().getCurrentUndoManager().undo();
-		} else if (e.getSource() == aa.redoItem) {
+		} else if(e.getSource() == aa.redoItem) {
 			ApplicationUndoManager.instance().getCurrentUndoManager().redo();
-		} else if (e.getSource() == aa.selectAllItem) {
+		} else if(e.getSource() == aa.selectAllItem) {
 			getCurrentTabbook().getCurrentEditor().selectAll();
-		} else if (e.getSource() == aa.deselectAllItem) {
+		} else if(e.getSource() == aa.deselectAllItem) {
 			getCurrentTabbook().getCurrentEditor().clearSelection();
-		} else if (e.getSource() == sa.toFrontItem) {
+		} else if(e.getSource() == sa.toFrontItem) {
 			getCurrentTabbook().getCurrentEditor().selectionToFront();
-		} else if (e.getSource() == sa.toBackItem) {
+		} else if(e.getSource() == sa.toBackItem) {
 			getCurrentTabbook().getCurrentEditor().selectionToBack();
-		} else if (e.getSource() == sa.autoNumberItem) {
+		} else if(e.getSource() == sa.autoNumberItem) {
 			int pageNr = getCurrentTabbook().getSelectedIndex() + 1;
 			int partsPerSheet = SchemOptions.instance().getIntOption(SchemOptions.PROPERTY_AUTONUMBER_PAGE_OFFSET);
 			getCurrentTabbook().getCurrentEditor().getSheet().autoAssignIds(pageNr * partsPerSheet + 1);
@@ -655,7 +719,7 @@ public class SchemApplication implements ApplicationListener, ActionListener, Ed
 		SchemTabbook schemTabbook = (SchemTabbook) document.getDocumentPane();
 
 		List components = new ArrayList();
-		for(Iterator it=schemTabbook.getCurrentEditor().getSelection().iterator(); it.hasNext();) {
+		for(Iterator it = schemTabbook.getCurrentEditor().getSelection().iterator(); it.hasNext();) {
 			AbstractComponent c = (AbstractComponent) it.next();
 			c = c.duplicate();
 			components.add(c);
@@ -666,16 +730,16 @@ public class SchemApplication implements ApplicationListener, ActionListener, Ed
 	private void paste() {
 		Document document = application.getActiveDocument();
 		SchemTabbook schemTabbook = (SchemTabbook) document.getDocumentPane();
-		
+
 		SheetPanel p = schemTabbook.getCurrentEditor();
 		p.clearSelection();
 		Sheet s = schemTabbook.getCurrentSheet();
-		
+
 		Point off = p.constrainScreenPoint(PASTE_OFFSET, PASTE_OFFSET, false);
 		pasteOffset.translate(off.x, off.y);
-		
+
 		List newObjects = new ArrayList();
-		for(Iterator it=SchemClipBoard.instance().iterator(); it.hasNext();) {
+		for(Iterator it = SchemClipBoard.instance().iterator(); it.hasNext();) {
 			AbstractComponent c = (AbstractComponent) it.next();
 			c = c.duplicate();
 			newObjects.add(c);
@@ -684,35 +748,42 @@ public class SchemApplication implements ApplicationListener, ActionListener, Ed
 			s.addComponent(c, true);
 			p.addToSelection(c);
 		}
-		
-//		ApplicationUndoManager.instance().getCurrentUndoManager().addEdit(new UndoNew(s, newObjects));
+
+		ApplicationUndoManager.instance().getCurrentUndoManager().addEdit(new UndoNew(s, newObjects));
 	}
 
+	@Override
 	public void documentCreated(final Document document) {
 		document.addDocumentListener(new DocumentAdapter() {
+
+			@Override
 			public void documentClosing(Document document, boolean inApplicationQuit) throws DocumentCloseVetoException {
 				SchemTabbook tb = (SchemTabbook) document.getDocumentPane();
 				Schematics schematics = tb.getSchematics();
-				if(!schematics.isDirty())
+				if(!schematics.isDirty()) {
 					document.dispose();
-				else {
+				} else {
 					document.setSelected();
 					int ask = DefaultMessages.askSave(document.getContainer());
-					if(ask == DefaultMessages.OPTION_CANCEL)
+					if(ask == DefaultMessages.OPTION_CANCEL) {
 						throw new DocumentCloseVetoException();
-					else if(ask == DefaultMessages.OPTION_SAVE) {
-						if(!save(document))
+					} else if(ask == DefaultMessages.OPTION_SAVE) {
+						if(!save(document)) {
 							throw new DocumentCloseVetoException();
+						}
 					}
 					document.dispose();
 				}
 			}
+
 		});
 	}
 
+	@Override
 	public void toolChanged(Document document, EditTool tool) {
 		SchemTabbook schemTabbook = (SchemTabbook) document.getDocumentPane();
 		schemTabbook.setEditTool(tool);
 		application.getToolBar(document).addExtraObjects(tool.getToolbarObjects());
 	}
+
 }

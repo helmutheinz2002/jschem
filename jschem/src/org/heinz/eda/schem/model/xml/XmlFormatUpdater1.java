@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.model.xml;
 
 import org.heinz.eda.schem.model.components.AbstractComponent;
@@ -7,10 +8,12 @@ import org.heinz.eda.schem.model.components.Symbol;
 import org.heinz.eda.schem.model.components.Text;
 
 public class XmlFormatUpdater1 extends XmlFormatUpdater {
+
 	public XmlFormatUpdater1() {
 		super(1);
 	}
 
+	@Override
 	public void updateComponent(AbstractComponent ac) {
 		if(ac instanceof Symbol) {
 			Text t = (Text) ac.elementAt(0);
@@ -30,4 +33,5 @@ public class XmlFormatUpdater1 extends XmlFormatUpdater {
 			t2.setKey(Pin.KEY_PIN_NAME);
 		}
 	}
+
 }

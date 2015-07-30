@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.model.xml;
 
 import java.util.ArrayList;
@@ -10,60 +11,73 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class XmlComponentReader extends XmlObjectReader {
+
 	private AbstractComponent parent;
+
 	private List stack = new ArrayList();
+
 	private List newComponents = new ArrayList();
-	private DefaultHandler handler;
+
+	private final DefaultHandler handler;
+
 	private int version;
-	
+
 	public XmlComponentReader(final boolean autoUpdate) {
 		super(AbstractComponent.PROPERTIES, AbstractComponent.class.getPackage().getName());
-		
+
 		handler = new DefaultHandler() {
+
+			@Override
+			@SuppressWarnings("CallToPrintStackTrace")
 			public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 				if(parent == null) {
 					version = 0;
 					if(autoUpdate) {
 						String vs = attributes.getValue(XmlFormatVersion.VERSION_ATTRIBUTE);
 						try {
-							version = new Integer(vs).intValue();
+							version = new Integer(vs);
 						} catch(Exception ex) {
 						}
 					}
 				}
-				
+
 				try {
 					AbstractComponent c = (AbstractComponent) createObject(qName, attributes);
-					
+
 					stack.add(0, parent);
-					if(parent != null)
+					if(parent != null) {
 						parent.addComponent(c);
-					else
+					} else {
 						newComponents.add(c);
+					}
 					parent = c;
-				} catch (Exception e) {
+				} catch(Exception e) {
 					e.printStackTrace();
 					throw new SAXException(e);
 				}
 			}
 
+			@Override
 			public void endElement(String uri, String localName, String qName) throws SAXException {
-				if(autoUpdate)
+				if(autoUpdate) {
 					XmlFormatVersionUpdate.upgradeToCurrentVersion(version, parent);
+				}
 				parent = (AbstractComponent) stack.remove(0);
 			}
+
 		};
 	}
 
 	public DefaultHandler getHandler() {
 		return handler;
 	}
-	
+
 	public List getComponents() {
 		return newComponents;
 	}
-	
+
 	public void reset() {
 		newComponents.clear();
 	}
+
 }

@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.ui.dialog;
 
 import org.heinz.eda.schem.model.components.AbstractComponent;
@@ -6,31 +7,36 @@ import org.heinz.eda.schem.ui.beans.ArcBean;
 import org.heinz.framework.crossplatform.utils.Translator;
 
 public class ArcPropertyPanel extends AbstractComponentPropertyPanel {
+
 	private ArcBean arcBean;
 
 	public ArcPropertyPanel() {
 		this(Translator.translate("ARC_PROPERTIES"), true);
 	}
-	
+
+	@SuppressWarnings("LeakingThisInConstructor")
 	protected ArcPropertyPanel(String title, boolean fill) {
 		super(title, true);
 
 		arcBean = new ArcBean();
 		nextRow = arcBean.addTo(this, nextRow);
 
-		if(fill)
+		if(fill) {
 			addFiller();
+		}
 	}
 
+	@Override
 	public void setComponent(AbstractComponent c) {
 		super.setComponent(c);
-		
+
 		Arc arc = (Arc) getComponent();
 		arcBean.setArcType(arc.getArcType());
 		arcBean.setRadius(arc.getRadius());
 		fillColorBean.setColor(arc.getFillColor());
 	}
 
+	@Override
 	public void ok() {
 		super.ok();
 
@@ -39,8 +45,10 @@ public class ArcPropertyPanel extends AbstractComponentPropertyPanel {
 		arc.setRadius(arcBean.getRadius());
 		arc.setFillColor(fillColorBean.getColor());
 	}
-	
+
+	@Override
 	public void prepareToShow() {
 		arcBean.radiusField.requestFocusInWindow();
 	}
+
 }

@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.model.expresssch;
 
 import java.awt.Font;
@@ -30,34 +31,35 @@ import express.sch.objects.CircuitObject;
 import express.sch.objects.CompoundObject;
 
 public class ExpressImport {
+
 	public static Schematics importFile(File file) throws IOException {
 		ExpressSchReader reader = new ExpressSchReader();
 		Circuit circuit = reader.readFile(file);
 		return digest(circuit);
 	}
-	
+
 	public static Component importComponent(InputStream is) throws IOException {
 		ExpressSchReader reader = new ExpressSchReader();
 		CompoundObject component = reader.readCompoundObject(is);
 		return convertComponent(component);
 	}
-	
+
 	private static Schematics digest(Circuit circuit) {
 		Schematics schematics = new Schematics();
-		
-		for(Enumeration e=circuit.children(); e.hasMoreElements();) {
+
+		for(Enumeration e = circuit.children(); e.hasMoreElements();) {
 			express.sch.objects.Sheet iSheet = (express.sch.objects.Sheet) e.nextElement();
-			
+
 			Sheet sheet = new Sheet(iSheet.name, new SheetSize(toMetric(iSheet.width), toMetric(iSheet.height)), false);
 			schematics.addSheet(sheet);
-			
-			for(Enumeration objects=iSheet.children(); objects.hasMoreElements();) {
+
+			for(Enumeration objects = iSheet.children(); objects.hasMoreElements();) {
 				CircuitObject co = (CircuitObject) objects.nextElement();
-				
+
 				if((co instanceof express.sch.objects.Component) || (co instanceof express.sch.objects.Symbol)) {
 					List subComponents = new ArrayList();
-					
-					for(Enumeration subObjects=co.children(); subObjects.hasMoreElements();) {
+
+					for(Enumeration subObjects = co.children(); subObjects.hasMoreElements();) {
 						CircuitObject so = (CircuitObject) subObjects.nextElement();
 						AbstractComponent component = createPrimitiveComponent(so);
 						if(component != null) {
@@ -65,12 +67,12 @@ public class ExpressImport {
 							subComponents.add(component);
 						}
 					}
-					
+
 					if(co instanceof express.sch.objects.Component) {
 						express.sch.objects.Component iComponent = (express.sch.objects.Component) co;
 						Component group = sheet.groupComponent(subComponents);
 						Point base = group.getPosition();
-						
+
 						setAttributes(group.getAttributeText(Component.KEY_PART_ID), base, iComponent.partId, null);
 						setAttributes(group.getAttributeText(Component.KEY_PART_NAME), base, iComponent.partName, null);
 						Text orderNr = group.getAttributeText(Component.KEY_ORDER_NO);
@@ -80,42 +82,44 @@ public class ExpressImport {
 						express.sch.objects.Symbol iSymbol = (express.sch.objects.Symbol) co;
 						Symbol group = sheet.groupSymbol(subComponents);
 						Point base = group.getPosition();
-							
+
 						setAttributes(group.getAttributeText(Symbol.KEY_NET_NAME), base, iSymbol.netName, null);
 					}
 				}
 				AbstractComponent component = createPrimitiveComponent(co);
-				if(component != null)
+				if(component != null) {
 					sheet.addComponent(component);
+				}
 			}
 		}
-		
+
 		return schematics;
 	}
-	
+
 	public static Component convertComponent(CompoundObject co) {
 		int num = co.getChildCount();
 		List components = new ArrayList();
-		
-		for(int i=0; i<num; i++) {
+
+		for(int i = 0; i < num; i++) {
 			CircuitObject o = (CircuitObject) co.getChildAt(i);
 			AbstractComponent so = createPrimitiveComponent(o);
 			components.add(so);
 		}
-		
-		Component group = null;
-		if(co instanceof express.sch.objects.Component)
+
+		Component group;
+		if(co instanceof express.sch.objects.Component) {
 			group = new Component(0, 0);
-		else
+		} else {
 			group = new Symbol(0, 0);
-		
+		}
+
 		Sheet.group(components, group, null);
 		return group;
 	}
-	
+
 	private static AbstractComponent createPrimitiveComponent(CircuitObject co) {
 		AbstractComponent component = null;
-		
+
 		if(co instanceof express.sch.objects.Line) {
 			express.sch.objects.Line iLine = (express.sch.objects.Line) co;
 			component = new Line(toMetric(iLine.x), toMetric(iLine.y), toMetric(iLine.x2 - iLine.x), toMetric(iLine.y2 - iLine.y));
@@ -125,8 +129,9 @@ public class ExpressImport {
 		} else if(co instanceof express.sch.objects.Circle) {
 			express.sch.objects.Circle iCircle = (express.sch.objects.Circle) co;
 			Orientation o = convertToOrientation(iCircle.direction);
-			if(iCircle.shape != 6)
+			if(iCircle.shape != 6) {
 				o = o.getPrevOrientation();
+			}
 			component = new Arc(toMetric(iCircle.x), toMetric(iCircle.y), toMetric(iCircle.radius), iCircle.shape - 1);
 			component.setOrientation(o);
 		} else if(co instanceof express.sch.objects.Text) {
@@ -139,7 +144,7 @@ public class ExpressImport {
 		} else if(co instanceof express.sch.objects.Pin) {
 			express.sch.objects.Pin iPin = (express.sch.objects.Pin) co;
 			Pin pin = new Pin(toMetric(iPin.x), toMetric(iPin.y));
-			
+
 			setAttributes(pin.getAttributeText(Pin.KEY_PIN_NO), null, iPin.pinNoText, "0");
 			setAttributes(pin.getAttributeText(Pin.KEY_PIN_NAME), null, iPin.pinNameText, null);
 			component = pin;
@@ -147,26 +152,28 @@ public class ExpressImport {
 			express.sch.objects.Wire iWire = (express.sch.objects.Wire) co;
 			component = new Wire(toMetric(iWire.x), toMetric(iWire.y), toMetric(iWire.x2 - iWire.x), toMetric(iWire.y2 - iWire.y));
 		}
-		
-		if(component != null)
+
+		if(component != null) {
 			component.setColor(SchemOptions.instance().getColorOption(SchemOptions.PROPERTY_COMPONENT_COLOR));
+		}
 		return component;
 	}
-	
+
 	private static int toMetric(int inch) {
 		double id = (double) inch;
 		double me = id * 2.4;
 		int p = (int) me;
 		return p;
 	}
-	
+
 	private static Orientation convertToOrientation(int direction) {
-		if((direction < 1) || (direction > 4))
+		if((direction < 1) || (direction > 4)) {
 			direction = 1;
+		}
 		Orientation o = Orientation.DIRECTIONS[direction - 1];
 		return o;
 	}
-	
+
 	private static void setAttributes(Text attr, Point basePoint, express.sch.objects.Text iText, String hiddenName) {
 		int fontSize = toMetric(iText.attributes.size);
 		Orientation orientation = convertToOrientation(iText.attributes.direction);
@@ -185,4 +192,5 @@ public class ExpressImport {
 		attr.setX(x);
 		attr.setY(y);
 	}
+
 }

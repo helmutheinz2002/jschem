@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.ui.dialog.library;
 
 import java.awt.GridBagConstraints;
@@ -17,9 +18,11 @@ import org.heinz.framework.crossplatform.dialog.StandardDialogPanel;
 import org.heinz.framework.crossplatform.utils.Translator;
 
 public class ComponentDiffPanel extends StandardDialogPanel {
+
 	private ComponentPreviewPanel orgCompPanel;
+
 	private ComponentPreviewPanel newCompPanel;
-	
+
 	public ComponentDiffPanel() {
 		super(Translator.translate("COMPARE_COMPONENTS"));
 		init();
@@ -29,13 +32,13 @@ public class ComponentDiffPanel extends StandardDialogPanel {
 		try {
 			AbstractComponent orgComp = Library.loadComponent(new FileInputStream(orgCompFile));
 			orgCompPanel.showComponent(orgComp);
-		} catch (FileNotFoundException e) {
+		} catch(FileNotFoundException e) {
 		}
-		
+
 		AbstractComponent newComp = Library.loadComponent(newCompStream);
 		newCompPanel.showComponent(newComp);
 	}
-	
+
 	private void init() {
 		setLayout(new GridBagLayout());
 
@@ -47,33 +50,36 @@ public class ComponentDiffPanel extends StandardDialogPanel {
 		c.weightx = 0;
 		c.weighty = 0;
 		c.insets = new Insets(5, 5, 5, 5);
-		
+
 		JLabel l1 = new JLabel(Translator.translate("ORIGINAL_LIBRARY_COMPONENT"));
 		JLabel l2 = new JLabel(Translator.translate("NEW_LIBRARY_COMPONENT"));
-		
+
 		add(l1, c);
-		c.gridx ++;
+		c.gridx++;
 		add(l2, c);
-		
+
 		c.gridx = 0;
 		c.gridy = 1;
 		c.fill = GridBagConstraints.BOTH;
 		c.anchor = GridBagConstraints.CENTER;
 		c.weightx = 0.5;
 		c.weighty = 0.5;
-		
+
 		orgCompPanel = new ComponentPreviewPanel();
 		newCompPanel = new ComponentPreviewPanel();
-		
+
 		add(orgCompPanel, c);
-		c.gridx ++;
+		c.gridx++;
 		add(newCompPanel, c);
 	}
 
+	@Override
 	public String check() {
 		return null;
 	}
 
+	@Override
 	public void ok() {
 	}
+
 }

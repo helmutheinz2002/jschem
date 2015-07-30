@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.model.xml;
 
 import org.heinz.eda.schem.model.Schematics;
@@ -7,30 +8,38 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class XmlSchematicsReader {
+
 	private Schematics schematics;
-	private DefaultHandler handler;
+
+	private final DefaultHandler handler;
+
 	private XmlSheetReader sheetReader;
+
 	private int version;
-	
+
 	public XmlSchematicsReader() {
 		final String schematicsClassName = XmlObjectManager.getSimpleClassName(Schematics.class);
 
 		handler = new DefaultHandler() {
+
+			@Override
 			public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 				if(schematics == null) {
 					String vs = attributes.getValue(XmlFormatVersion.VERSION_ATTRIBUTE);
 					try {
-						version = new Integer(vs).intValue();
+						version = new Integer(vs);
 					} catch(Exception ex) {
 					}
 					schematics = new Schematics();
 				} else {
-					if(sheetReader == null)
+					if(sheetReader == null) {
 						sheetReader = new XmlSheetReader();
+					}
 					sheetReader.getHandler().startElement(uri, localName, qName, attributes);
 				}
 			}
 
+			@Override
 			public void endElement(String uri, String localName, String qName) throws SAXException {
 				if(qName.equals(schematicsClassName)) {
 					schematics.addSheets(sheetReader.getSheets());
@@ -39,14 +48,16 @@ public class XmlSchematicsReader {
 					sheetReader.getHandler().endElement(uri, localName, qName);
 				}
 			}
+
 		};
 	}
-	
+
 	public DefaultHandler getHandler() {
 		return handler;
 	}
-	
+
 	public Schematics getSchematics() {
 		return schematics;
 	}
+
 }

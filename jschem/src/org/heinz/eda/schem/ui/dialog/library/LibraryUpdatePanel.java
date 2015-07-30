@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.ui.dialog.library;
 
 import java.awt.GridBagConstraints;
@@ -30,21 +31,30 @@ import org.heinz.framework.crossplatform.dialog.StandardDialog;
 import org.heinz.framework.crossplatform.utils.Translator;
 
 public class LibraryUpdatePanel extends StandardDialogPanel implements ActionListener {
+
 	private JTable table;
+
 	private LibraryUpdateTableModel tableModel;
+
 	private JCheckBox hideBox;
+
 	private JButton overwriteButton;
+
 	private JButton renameButton;
+
 	private JButton defaultButton;
+
 	private JButton skipButton;
+
 	private JButton diffButton;
-	private Map buttons = new HashMap();
-	
+
+	private final Map buttons = new HashMap();
+
 	public LibraryUpdatePanel() {
 		super(Translator.translate("LIBRARY_UPDATE"));
 		init();
 	}
-	
+
 	public void display(List updateActions) {
 		tableModel = new LibraryUpdateTableModel(updateActions);
 		table.setModel(tableModel);
@@ -53,18 +63,18 @@ public class LibraryUpdatePanel extends StandardDialogPanel implements ActionLis
 		tableModel.filterSkipActions(hideBox.isSelected());
 		checkButtons();
 	}
-	
+
 	private void init() {
 		setLayout(new GridBagLayout());
-		
+
 		table = new JTable(new LibraryUpdateTableModel(new ArrayList()));
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		setColumnWidths();
-		
+
 		JScrollPane tableScroller = new JScrollPane(table);
 		tableScroller.getViewport().setBackground(table.getBackground());
 		table.setGridColor(table.getBackground());
-		
+
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
@@ -75,7 +85,7 @@ public class LibraryUpdatePanel extends StandardDialogPanel implements ActionLis
 		c.weighty = 1.0;
 		c.insets = new Insets(5, 5, 5, 5);
 		add(tableScroller, c);
-		
+
 		hideBox = new JCheckBox(Translator.translate("HIDE_UP_TO_DATE_FILES"));
 		c.gridheight = 1;
 		c.weightx = 0;
@@ -84,7 +94,7 @@ public class LibraryUpdatePanel extends StandardDialogPanel implements ActionLis
 		c.fill = GridBagConstraints.NONE;
 		c.anchor = GridBagConstraints.CENTER;
 		add(hideBox, c);
-		
+
 		defaultButton = new JButton(Translator.translate("UPDATE_ACTION_DEFAULT"));
 		defaultButton.setToolTipText(Translator.translate("UPDATE_ACTION_DEFAULT_TOOLTIP"));
 		overwriteButton = new JButton(Translator.translate("UPDATE_ACTION_OVERWRITE"));
@@ -94,7 +104,7 @@ public class LibraryUpdatePanel extends StandardDialogPanel implements ActionLis
 		skipButton = new JButton(Translator.translate("UPDATE_ACTION_IGNORE"));
 		skipButton.setToolTipText(Translator.translate("UPDATE_ACTION_IGNORE_TOOLTIP"));
 		diffButton = new JButton(Translator.translate("COMPARE_COMPONENT_VERSIONS"));
-		
+
 		c.gridx = 1;
 		c.gridy = 0;
 		c.gridwidth = 1;
@@ -104,37 +114,47 @@ public class LibraryUpdatePanel extends StandardDialogPanel implements ActionLis
 
 		addButton(defaultButton, -1, c);
 		add(new JSeparator(), c);
-		c.gridy ++;
+		c.gridy++;
 		addButton(overwriteButton, Library.UPDATE_ACTION_OVERWRITE, c);
 		addButton(renameButton, Library.UPDATE_ACTION_RENAME, c);
 		addButton(skipButton, Library.UPDATE_ACTION_SKIP, c);
 		add(new JSeparator(), c);
-		c.gridy ++;
+		c.gridy++;
 		addButton(diffButton, Library.UPDATE_ACTION_SKIP, c);
-		
+
 		hideBox.addActionListener(new ActionListener() {
+
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				tableModel.filterSkipActions(hideBox.isSelected());
 			}
+
 		});
 
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				checkButtons();
 			}
+
 		});
-		
+
 		table.addMouseListener(new MouseAdapter() {
+
+			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(e.getClickCount() == 2)
+				if(e.getClickCount() == 2) {
 					compare(table.getSelectedRow());
+				}
 			}
+
 		});
 	}
-	
+
 	private void checkButtons() {
 		int sel = table.getSelectedRowCount();
-		for(Iterator it=buttons.keySet().iterator(); it.hasNext();) {
+		for(Iterator it = buttons.keySet().iterator(); it.hasNext();) {
 			JButton b = (JButton) it.next();
 			b.setEnabled(sel > 0);
 		}
@@ -142,31 +162,33 @@ public class LibraryUpdatePanel extends StandardDialogPanel implements ActionLis
 	}
 
 	private void addButton(JButton b, int action, GridBagConstraints c) {
-		buttons.put(b, new Integer(action));
+		buttons.put(b, action);
 		add(b, c);
 		b.addActionListener(this);
-		c.gridy ++;
-	}
-	
-	private void setColumnWidths() {
-		JTableHeader th = table.getTableHeader();
-		for(int i=0; i<LibraryUpdateTableModel.DEFAULT_COLUMN_WIDTHS.length; i++)
-			th.getColumnModel().getColumn(i).setPreferredWidth(LibraryUpdateTableModel.DEFAULT_COLUMN_WIDTHS[i]);
+		c.gridy++;
 	}
 
+	private void setColumnWidths() {
+		JTableHeader th = table.getTableHeader();
+		for(int i = 0; i < LibraryUpdateTableModel.DEFAULT_COLUMN_WIDTHS.length; i++) {
+			th.getColumnModel().getColumn(i).setPreferredWidth(LibraryUpdateTableModel.DEFAULT_COLUMN_WIDTHS[i]);
+		}
+	}
+
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == diffButton) {
 			compare(table.getSelectedRow());
 			return;
 		}
-		
+
 		Integer rawAction = (Integer) buttons.get(e.getSource());
-		int action = rawAction.intValue();
+		int action = rawAction;
 		int[] selRows = table.getSelectedRows();
-		for(int i=0; i<selRows.length; i++) {
-			if(action != -1)
+		for(int i = 0; i < selRows.length; i++) {
+			if(action != -1) {
 				tableModel.setActionAt(selRows[i], action);
-			else {
+			} else {
 				int a = tableModel.getRowAt(selRows[i]).defaultAction;
 				tableModel.setActionAt(selRows[i], a);
 			}
@@ -174,19 +196,23 @@ public class LibraryUpdatePanel extends StandardDialogPanel implements ActionLis
 	}
 
 	private void compare(int row) {
-		if(row < 0)
+		if(row < 0) {
 			return;
-		
+		}
+
 		ComponentDiffPanel diffPanel = new ComponentDiffPanel();
 		Library.UpdateAction action = tableModel.getRowAt(row);
 		diffPanel.compare(action.file, new ByteArrayInputStream(action.data));
 		StandardDialog.showDialog((Window) getTopLevelAncestor(), diffPanel, StandardDialog.CLOSE_BUTTON);
 	}
 
+	@Override
 	public String check() {
 		return null;
 	}
 
+	@Override
 	public void ok() {
 	}
+
 }

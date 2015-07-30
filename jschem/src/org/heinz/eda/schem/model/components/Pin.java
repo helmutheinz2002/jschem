@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.model.components;
 
 import java.awt.Color;
@@ -11,107 +12,130 @@ import org.heinz.eda.schem.model.SchemOptions;
 import org.heinz.eda.schem.util.ExtRect;
 
 public class Pin extends Arc {
+
 	public static final String KEY_PIN_NO = "PIN_NR";
+
 	public static final String KEY_PIN_NAME = "PIN_NAME";
-	
+
 	private static final Font font = new Font("SansSerif", Font.PLAIN, 10);
-	private static final boolean DEBUG = false; 
-	
+
+	private static final boolean DEBUG = false;
+
 	private boolean smartJunctionsOutline = SchemOptions.instance().getBoolOption(SchemOptions.PROPERTY_SMART_JUNCTIONS_OUTLINE);
-	
+
 	public Pin() {
 	}
-	
+
 	public Pin(int x, int y) {
 		super(x, y, SchemOptions.instance().getIntOption(SchemOptions.PROPERTY_PIN_RADIUS), ArcType.ARC_FULL, SchemOptions.instance().getColorOption(SchemOptions.PROPERTY_COMPONENT_COLOR));
-		
+
 		int ay = 0;
 		ay = addAttributeText(KEY_PIN_NO, "", ay, false);
-		ay = addAttributeText(KEY_PIN_NAME, "", ay, false);
+		addAttributeText(KEY_PIN_NAME, "", ay, false);
 	}
 
 	public Pin(Pin pin) {
 		super(pin);
 	}
-	
+
+	@Override
 	protected void addHandles() {
 		addHandle(new Handle(this, false, true) {
+
+			@Override
 			protected Point getPosition() {
 				return new Point(0, 0);
 			}
 
+			@Override
 			public void setPosition(Point offset, boolean dragging) {
 			}
+
 		});
 	}
-	
+
+	@Override
 	protected void draw(Graphics g, double zoom, boolean selected) {
 		Handle h = (Handle) getHandles().get(0);
-		boolean drawPin = true;
-		
+		boolean drawPin;
+
 		int wires = 0;
 		try {
-			if(hasSmartJunctions())
+			if(hasSmartJunctions()) {
 				wires = h.getConnectedWires();
-			else
+			} else {
 				wires = 1;
+			}
 		} catch(Exception e) {
 		}
-		
+
 		drawPin = (wires <= 1);
 		if(DEBUG) {
 			g.setColor(Color.black);
 			g.setFont(font);
-			g.drawString(""+wires, 10, -6);
+			g.drawString("" + wires, 10, -6);
 		}
-		
-		if(drawPin || smartJunctionsOutline)
+
+		if(drawPin || smartJunctionsOutline) {
 			super.drawArc(g, zoom, selected, drawPin ? getFillColor(selected) : null, false, !drawPin);
+		}
 	}
 
+	@Override
 	protected void init() {
 		super.init();
-		
+
 		setFillColor(SchemOptions.instance().getColorOption(SchemOptions.PROPERTY_COMPONENT_COLOR));
 		super.setRadius(SchemOptions.instance().getIntOption(SchemOptions.PROPERTY_PIN_RADIUS));
 	}
 
+	@Override
 	protected ExtRect getBounds() {
-		if(!isVisible())
+		if(!isVisible()) {
 			return null;
-		
+		}
+
 		ExtRect b = super.getBounds();
 		ExtRect r = getChildBounds();
-		
-		if(r != null)
+
+		if(r != null) {
 			b.add(r);
-		
+		}
+
 		return b;
 	}
-	
+
+	@Override
 	public boolean contains(int x, int y, int clickTolerance) {
 		boolean r = super.contains(x, y, clickTolerance);
-		if(!r)
+		if(!r) {
 			return childContains(x, y, clickTolerance) != null;
-		
+		}
+
 		return true;
 	}
-	
+
+	@Override
 	public AbstractComponent duplicate() {
 		return new Pin(this);
 	}
-	
+
+	@Override
 	public void setArcType(int arcType) {
 	}
 
+	@Override
 	public void setRadius(int radius) {
 	}
-	
+
+	@Override
 	public void propertyChange(PropertyChangeEvent e) {
 		if(e.getPropertyName().equals(SchemOptions.PROPERTY_SMART_JUNCTIONS_OUTLINE)) {
-			smartJunctionsOutline = ((Boolean) e.getNewValue()).booleanValue();
+			smartJunctionsOutline = ((Boolean) e.getNewValue());
 			fireChanged();
-		} else
+		} else {
 			super.propertyChange(e);
+		}
 	}
+
 }

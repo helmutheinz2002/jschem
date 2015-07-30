@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.ui;
 
 import javax.swing.JMenu;
@@ -6,6 +7,7 @@ import org.heinz.framework.crossplatform.PopupMenu;
 import org.heinz.framework.crossplatform.platforms.basic.ApplicationActions;
 
 public class SheetPopupMenu extends PopupMenu {
+
 	public SheetPopupMenu() {
 		add(ApplicationActions.instance().cutItem);
 		add(ApplicationActions.instance().copyItem);
@@ -31,4 +33,5 @@ public class SheetPopupMenu extends PopupMenu {
 		addSeparator();
 		add(ApplicationActions.instance().propertiesItem);
 	}
+
 }

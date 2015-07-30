@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.model.components;
 
 import java.awt.Dimension;
@@ -12,17 +13,19 @@ import org.heinz.framework.utils.xml.XmlPropertyConverterInteger;
 
 
 public class Square extends AbstractComponent {
+
 	static {
 		PROPERTIES.put(new XmlProperty("width", XmlPropertyConverterInteger.instance()), Square.class);
 		PROPERTIES.put(new XmlProperty("height", XmlPropertyConverterInteger.instance()), Square.class);
 	}
 
 	private int width;
+
 	private int height;
-	
+
 	public Square() {
 	}
-	
+
 	public Square(int x, int y, int width, int height) {
 		super(x, y);
 		this.width = width;
@@ -35,10 +38,12 @@ public class Square extends AbstractComponent {
 		height = square.height;
 	}
 
+	@Override
 	public boolean hasBecomeInvalid() {
 		return (width == 0) && (height == 0);
 	}
-	
+
+	@Override
 	public void snapToGrid(int snapGrid) {
 		fireWillChange();
 		super.snapToGrid(snapGrid);
@@ -47,33 +52,43 @@ public class Square extends AbstractComponent {
 		setSize(new Dimension(w, h));
 		fireChanged();
 	}
-	
+
+	@Override
 	protected void addHandles() {
 		addHandle(new Handle(this, true, false) {
+
+			@Override
 			protected Point getPosition() {
 				return new Point(0, 0);
 			}
 
+			@Override
 			public void setPosition(Point offset, boolean dragging) {
 				Square.this.setPosition(getX() + offset.x, getY() + offset.y);
 				offset = getOrientation().unTransform(offset);
 				setWidth(width - offset.x);
 				setHeight(height - offset.y);
 			}
+
 		});
 		addHandle(new Handle(this, true, false) {
+
+			@Override
 			protected Point getPosition() {
 				return new Point(width, height);
 			}
 
+			@Override
 			public void setPosition(Point offset, boolean dragging) {
 				offset = getOrientation().unTransform(offset);
 				setWidth(width + offset.x);
 				setHeight(height + offset.y);
 			}
+
 		});
 	}
-	
+
+	@Override
 	protected void draw(Graphics g, double zoom, boolean selected) {
 		ExtRect r = getBounds().normalize();
 
@@ -82,16 +97,16 @@ public class Square extends AbstractComponent {
 		int ry = (int) ((double) r.y * zoom);
 		int rw = (int) ((double) r.width * zoom);
 		int rh = (int) ((double) r.height * zoom);
-		
+
 		if(getFillColor() != null) {
 			g.setColor(getFillColor(selected));
 			g.fillRect(rx, ry, rw, rh);
 		}
-		
+
 		g.setColor(getColor(selected));
 		g.drawRect(rx, ry, rw, rh);
 	}
-	
+
 	public void setSize(Dimension size) {
 		fireWillChange();
 		width = size.width;
@@ -99,17 +114,21 @@ public class Square extends AbstractComponent {
 		fireChanged();
 	}
 
+	@Override
 	protected ExtRect getBounds() {
-		if(!isVisible())
+		if(!isVisible()) {
 			return null;
-		
+		}
+
 		ExtRect b = new ExtRect(0, 0, width, height);
 		return b;
 	}
 
+	@Override
 	public boolean contains(int x, int y, int clickTolerance) {
-		if(!isVisible())
+		if(!isVisible()) {
 			return false;
+		}
 
 		int w = SchemOptions.instance().getIntOption(SchemOptions.PROPERTY_LINE_WIDTH);
 		clickTolerance += w;
@@ -117,26 +136,28 @@ public class Square extends AbstractComponent {
 		ExtRect r = getBounds().normalize();
 		int x2 = r.x + r.width;
 		int y2 = r.y + r.height;
-		
-		boolean inY = (y >= (r.y - clickTolerance)) && (y<= (y2 + clickTolerance));
-		boolean inX = (x >= (r.x - clickTolerance)) && (x<= (x2 + clickTolerance));
-		
-		if(getFillColor() != null)
+
+		boolean inY = (y >= (r.y - clickTolerance)) && (y <= (y2 + clickTolerance));
+		boolean inX = (x >= (r.x - clickTolerance)) && (x <= (x2 + clickTolerance));
+
+		if(getFillColor() != null) {
 			return inX && inY;
-		
-		if((Math.abs(x - r.x) < clickTolerance) && inY)
+		}
+
+		if((Math.abs(x - r.x) < clickTolerance) && inY) {
 			return true;
-		if((Math.abs(x - x2) < clickTolerance) && inY)
+		}
+		if((Math.abs(x - x2) < clickTolerance) && inY) {
 			return true;
-		
-		if((Math.abs(y - r.y) < clickTolerance) && inX)
+		}
+
+		if((Math.abs(y - r.y) < clickTolerance) && inX) {
 			return true;
-		if((Math.abs(y - y2) < clickTolerance) && inX)
-			return true;
-		
-		return false;
+		}
+		return (Math.abs(y - y2) < clickTolerance) && inX;
 	}
 
+	@Override
 	public AbstractComponent duplicate() {
 		return new Square(this);
 	}
@@ -160,4 +181,5 @@ public class Square extends AbstractComponent {
 		this.width = width;
 		fireChanged();
 	}
+
 }

@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.ui.tools;
 
 import java.awt.Point;
@@ -24,22 +25,31 @@ import org.heinz.eda.schem.util.ExtRect;
 import org.heinz.framework.crossplatform.platforms.basic.ApplicationActions;
 
 public class SelectionTool extends SchemEditTool {
+
 	private AbstractComponent startComponent;
+
 	private Robot robot;
+
 	private Point lastPosition;
+
 	private Point lastScreenPoint;
+
 	private Map orgLocations = new HashMap();
+
 	private boolean shiftDown;
+
 	private boolean toggle;
+
 	private boolean wasDragged;
-	
+
+	@SuppressWarnings("CallToPrintStackTrace")
 	public SelectionTool() {
 		try {
 			robot = new Robot();
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		
+
 		addToolbarObject(new JButton(SchemActions.instance().rotateItem));
 		addToolbarObject(new JButton(SchemActions.instance().rotateNoTextItem));
 		addToolbarObject(new JToolBar.Separator());
@@ -48,13 +58,16 @@ public class SelectionTool extends SchemEditTool {
 		addToolbarObject(new JButton(SchemActions.instance().flipTopBottomItem));
 		addToolbarObject(new JButton(SchemActions.instance().flipTopBottomNoTextItem));
 	}
-	
+
+	@Override
 	protected void handleCancel() {
 		sheetPanel.drawSelectionFrame(null);
-		if(start != null)
+		if(start != null) {
 			moveComponents(0, 0, true, false);
+		}
 	}
 
+	@Override
 	protected void handleMouseClicked(MouseEvent e) {
 		if((e.getButton() == MouseEvent.BUTTON1) && (e.getClickCount() == 2)) {
 			lastScreenPoint = e.getPoint();
@@ -69,14 +82,16 @@ public class SelectionTool extends SchemEditTool {
 		}
 	}
 
+	@Override
+	@SuppressWarnings("null")
 	protected void handleMouseDown(MouseEvent e) {
 		lastScreenPoint = e.getPoint();
 		startComponent = sheetPanel.findComponentOnScreen(lastScreenPoint);
 		shiftDown = e.isShiftDown();
 		toggle = false;
 		wasDragged = false;
-		
-		if (startComponent != null) {
+
+		if(startComponent != null) {
 			Handle handle = sheetPanel.findHandleOnScreen(startComponent, lastScreenPoint);
 			AbstractComponent subComp = sheetPanel.findSubComponent(startComponent, lastScreenPoint);
 
@@ -84,22 +99,26 @@ public class SelectionTool extends SchemEditTool {
 			lastPosition = new Point(0, 0);
 
 			toggle = (handle == null) && (shiftDown || e.isControlDown());
-			if ((handle != null) || (!sheetPanel.isSelected(startComponent) && !toggle))
+			if((handle != null) || (!sheetPanel.isSelected(startComponent) && !toggle)) {
 				sheetPanel.clearSelection();
-			if (toggle)
+			}
+			if(toggle) {
 				sheetPanel.toggleSelection(startComponent);
-			else
+			} else {
 				sheetPanel.addToSelection(startComponent);
+			}
 
 			boolean subCompHit = ((subComp != null) && subComp.isMobile());
 			boolean handleHit = (handle != null);
-			if (!toggle && (subCompHit || handleHit) && (sheetPanel.getSelectionCount() == 1) && sheetPanel.isSelected(startComponent)) {
-				if(subCompHit)
+			if(!toggle && (subCompHit || handleHit) && (sheetPanel.getSelectionCount() == 1) && sheetPanel.isSelected(startComponent)) {
+				if(subCompHit) {
 					orgLocations.put(subComp, subComp.getPosition());
-				if(handleHit)
+				}
+				if(handleHit) {
 					orgLocations.put(handle, handle.getHandlePosition());
+				}
 			} else {
-				for (Iterator it = sheetPanel.getSelection().iterator(); it.hasNext();) {
+				for(Iterator it = sheetPanel.getSelection().iterator(); it.hasNext();) {
 					AbstractComponent c = (AbstractComponent) it.next();
 					orgLocations.put(c, c.getPosition());
 				}
@@ -107,12 +126,13 @@ public class SelectionTool extends SchemEditTool {
 		}
 	}
 
+	@Override
 	protected boolean handleKey(KeyEvent e) {
 		if((startComponent != null) && (robot != null)) {
 			int ox = 0;
 			int oy = 0;
 			int grid = 1;
-			
+
 			switch(e.getKeyCode()) {
 				case KeyEvent.VK_UP:
 					oy = -grid;
@@ -129,7 +149,7 @@ public class SelectionTool extends SchemEditTool {
 				default:
 					break;
 			}
-			
+
 			Point p = new Point(lastScreenPoint);
 			SwingUtilities.convertPointToScreen(p, sheetPanel);
 			if((ox != 0) || (oy != 0)) {
@@ -139,7 +159,8 @@ public class SelectionTool extends SchemEditTool {
 		}
 		return false;
 	}
-	
+
+	@Override
 	protected void handleMouseDrag(MouseEvent e) {
 		lastScreenPoint = e.getPoint();
 		wasDragged = true;
@@ -147,59 +168,66 @@ public class SelectionTool extends SchemEditTool {
 		int ox = lastScreenPoint.x - start.x;
 		int oy = lastScreenPoint.y - start.y;
 
-		if (startComponent == null) {
+		if(startComponent == null) {
 			ExtRect frame = new ExtRect(start.x, start.y, ox, oy);
 			sheetPanel.drawSelectionFrame(frame);
-		} else
+		} else {
 			moveComponents(ox, oy, false, true);
+		}
 	}
 
+	@Override
 	protected void handleMouseUp(MouseEvent e) {
 		lastScreenPoint = e.getPoint();
 		int ox = lastScreenPoint.x - start.x;
 		int oy = lastScreenPoint.y - start.y;
-		
+
 		ExtRect frame = new ExtRect(start.x, start.y, ox, oy);
 		sheetPanel.drawSelectionFrame(null);
 
-		if (startComponent == null) {
-			if (!toggle)
+		if(startComponent == null) {
+			if(!toggle) {
 				sheetPanel.clearSelection();
+			}
 
 			List comps = sheetPanel.findComponentsIn(frame);
-			for (Iterator it = comps.iterator(); it.hasNext();) {
+			for(Iterator it = comps.iterator(); it.hasNext();) {
 				AbstractComponent c = (AbstractComponent) it.next();
-				if (toggle)
+				if(toggle) {
 					sheetPanel.toggleSelection(c);
-				else
+				} else {
 					sheetPanel.addToSelection(c);
+				}
 			}
 		} else {
-			if(wasDragged)
+			if(wasDragged) {
 				moveComponents(ox, oy, false, false);
+			}
 		}
-		
+
 		done();
 	}
 
+	@Override
 	protected void done() {
 		if((startComponent != null) && (sheetPanel.getSelectionCount() > 0)) {
 			Map oldPos = new HashMap(orgLocations);
 			Map newPos = new HashMap();
-			for (Iterator it = sheetPanel.getSelection().iterator(); it.hasNext();) {
+			for(Iterator it = sheetPanel.getSelection().iterator(); it.hasNext();) {
 				AbstractComponent c = (AbstractComponent) it.next();
 				Point op = (Point) oldPos.get(c);
 				if(op != null) {
 					Point np = c.getPosition();
-					if(!op.equals(np))
+					if(!op.equals(np)) {
 						newPos.put(c, c.getPosition());
+					}
 				}
 			}
-		
+
 //			if(newPos.size() > 0)
 //				ApplicationUndoManager.instance().getUndoManager(sheetPanel).addEdit(new UndoMove(sheetPanel.getSheet(), sheetPanel.getSelection(), oldPos, newPos));
 		}
-		
+
 		super.done();
 	}
 
@@ -207,120 +235,128 @@ public class SelectionTool extends SchemEditTool {
 		Point op = sheetPanel.convertScreenToUnits(ox, oy);
 		Point cop = sheetPanel.constrainPoint(op.x, op.y, snap);
 		Point offset = new Point(cop);
-		if(lastPosition == null)
+		if(lastPosition == null) {
 			return;
+		}
 		offset.translate(-lastPosition.x, -lastPosition.y);
-		
+
 		Map movedHandles = new HashMap();
-		
-		for (Iterator it = orgLocations.keySet().iterator(); it.hasNext();) {
+
+		for(Iterator it = orgLocations.keySet().iterator(); it.hasNext();) {
 			Object key = it.next();
-			
+
 			if(key instanceof AbstractComponent) {
 				Point l = (Point) orgLocations.get(key);
 				l = sheetPanel.constrainPoint(l, snap);
 				AbstractComponent c = (AbstractComponent) key;
-				
+
 				Point p = new Point(cop);
 				AbstractComponent parent = c.getParent();
-				if(parent != null)
+				if(parent != null) {
 					p = parent.getOrientation().unTransform(p);
-			
+				}
+
 				Map compHandles = c.getHandlePositions();
 				movedHandles.putAll(compHandles);
 				c.setPosition(l.x + p.x, l.y + p.y, false, dragging);
 			} else if(key instanceof Handle) {
 				Handle h = (Handle) key;
-				
-				if(shiftDown && !dragging)
+
+				if(shiftDown && !dragging) {
 					h.setHandlePosition(offset, true, dragging);
-				else
+				} else {
 					h.setHandlePosition(offset, !shiftDown, dragging);
+				}
 			}
 		}
-		
+
 		lastPosition = cop;
-		if(movedHandles.size() > 0)
+		if(movedHandles.size() > 0) {
 			sheetPanel.getSheet().handlesMoved(movedHandles, offset, dragging);
+		}
 	}
 
 	/*
-	private Map getOrientations(List sel) {
-		Map os = new HashMap();
+	 private Map getOrientations(List sel) {
+	 Map os = new HashMap();
 		
-		for (Iterator it = sel.iterator(); it.hasNext();) {
-			AbstractComponent c = (AbstractComponent) it.next();
-			Orientation o = c.getOrientation();
-			os.put(c, o);
-		}
+	 for (Iterator it = sel.iterator(); it.hasNext();) {
+	 AbstractComponent c = (AbstractComponent) it.next();
+	 Orientation o = c.getOrientation();
+	 os.put(c, o);
+	 }
 		
-		return os;
-	}
-	*/
-	
+	 return os;
+	 }
+	 */
+
 	private void rotateTextsBackwards(AbstractComponent c) {
 		if(c instanceof Text) {
 			Orientation o = c.getOrientation();
 			o = o.getPrevOrientation();
 			c.setOrientation(o);
 		}
-		
-		for(Iterator it=c.elements(); it.hasNext();) {
+
+		for(Iterator it = c.elements(); it.hasNext();) {
 			rotateTextsBackwards((AbstractComponent) it.next());
 		}
 	}
-	
+
 	private List findTexts(AbstractComponent c) {
 		List ret = new ArrayList();
-		
-		if(c instanceof Text)
+
+		if(c instanceof Text) {
 			ret.add(c);
-		
-		for(Iterator it=c.elements(); it.hasNext();) {
+		}
+
+		for(Iterator it = c.elements(); it.hasNext();) {
 			AbstractComponent child = (AbstractComponent) it.next();
 			ret.addAll(findTexts(child));
 		}
-		
+
 		return ret;
 	}
-	
+
 	private void rotateObjects(boolean noTexts) {
 		List sel = sheetPanel.getSelection();
 //		Map oldOs = getOrientations(sel);
-		
-		for (Iterator it = sel.iterator(); it.hasNext();) {
+
+		for(Iterator it = sel.iterator(); it.hasNext();) {
 			AbstractComponent c = (AbstractComponent) it.next();
 			Orientation orientation = c.getOrientation().getNextOrientation();
 			c.setOrientation(orientation);
-			if(noTexts)
+			if(noTexts) {
 				rotateTextsBackwards(c);
+			}
 		}
-		
+
 //		Map newOs = getOrientations(sel);
 //		ApplicationUndoManager.instance().getUndoManager(sheetPanel).addEdit(new UndoOrientation(sheetPanel.getSheet(), sel, oldOs, newOs));
 	}
-	
+
 	private void flipObjects(List objects, boolean lr, boolean withTexts) {
 //		Map oldOs = getOrientations(objects);
-		
-		for (Iterator it = objects.iterator(); it.hasNext();) {
+
+		for(Iterator it = objects.iterator(); it.hasNext();) {
 			AbstractComponent c = (AbstractComponent) it.next();
 			Orientation o = c.getOrientation();
-			if(lr)
+			if(lr) {
 				c.setOrientation(o.flipHorizontal());
-			else
+			} else {
 				c.setOrientation(o.flipVertical());
-			
+			}
+
 			if(!withTexts) {
 				List texts = findTexts(c);
 				flipObjects(texts, lr, true);
 			}
 		}
-		
+
 //		Map newOs = getOrientations(objects);
 //		ApplicationUndoManager.instance().getUndoManager(sheetPanel).addEdit(new UndoOrientation(sheetPanel.getSheet(), objects, oldOs, newOs));
 	}
-	
+
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == SchemActions.instance().rotateItem) {
 			rotateObjects(false);
@@ -336,4 +372,5 @@ public class SelectionTool extends SchemEditTool {
 			flipObjects(sheetPanel.getSelection(), false, false);
 		}
 	}
+
 }

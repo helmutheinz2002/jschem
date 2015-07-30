@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.ui.dialog;
 
 import java.awt.Dimension;
@@ -16,9 +17,10 @@ import org.heinz.eda.schem.ui.undo.UndoPropertyChange;
 import org.heinz.framework.crossplatform.dialog.StandardDialog;
 
 public class ComponentPropertyDialog {
+
 	public static void openDialog(Frame owner, AbstractComponent c) {
 		AbstractComponentPropertyPanel editPanel = null;
-		
+
 		if(c instanceof Text) {
 			editPanel = new TextPropertyPanel();
 		} else if(c instanceof Pin) {
@@ -34,11 +36,16 @@ public class ComponentPropertyDialog {
 		} else if(c instanceof Polygon) {
 			editPanel = new PolygonPropertyPanel();
 		}
-		
+
+		if(editPanel == null) {
+			throw new IllegalArgumentException("Unknown component type");
+		}
+
 		editPanel.setComponent(c);
-		
+
 		UndoPropertyChange undo = new UndoPropertyChange(c);
 		StandardDialog.showDialog(owner, editPanel, new Dimension(400, 200));
 		undo.stopListening();
 	}
+
 }

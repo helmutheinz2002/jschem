@@ -1,3 +1,4 @@
+
 package org.heinz.eda.schem.ui.tools;
 
 import java.awt.Point;
@@ -18,44 +19,55 @@ import org.heinz.framework.crossplatform.EditTool;
 import org.heinz.framework.crossplatform.EditToolListener;
 
 public abstract class SchemEditTool implements EditTool, ActionListener {
+
 	protected Point start;
+
 	protected Point startPosition;
+
 	protected SheetPanel sheetPanel;
+
 	protected boolean cancel;
-	private List toolbarObjects = new ArrayList();
-	private String icon; 
+
+	private final List toolbarObjects = new ArrayList();
+
+	private String icon;
+
 	private EditToolListener toolListener;
-	
+
 	public SchemEditTool() {
 		this(null);
 	}
-	
+
+	@Override
 	public void addEditToolListener(EditToolListener toolListener) {
 		this.toolListener = toolListener;
 	}
-	
+
+	@Override
 	public void removeEditToolListener(EditToolListener toolListener) {
 		toolListener = null;
 	}
-	
+
+	@SuppressWarnings("LeakingThisInConstructor")
 	protected SchemEditTool(String icon) {
 		SchemActions.instance().addActionListener(this);
 		this.icon = icon;
 	}
-	
+
 	public String getIcon() {
 		return icon;
 	}
-	
+
 	public void cancel() {
-		if(cancel)
+		if(cancel) {
 			return;
-		
+		}
+
 		cancel = true;
 		handleCancel();
 		done();
 	}
-	
+
 	public void setSheetPanel(SheetPanel sheetPanel) {
 		this.sheetPanel = sheetPanel;
 		setup();
@@ -69,20 +81,23 @@ public abstract class SchemEditTool implements EditTool, ActionListener {
 			handleMouseDown(e);
 		}
 	}
-	
+
 	public final void mouseDrag(MouseEvent e) {
-		if(!cancel && (start != null))
+		if(!cancel && (start != null)) {
 			handleMouseDrag(e);
+		}
 	}
 
 	public final void mouseMove(MouseEvent e) {
-		if(!cancel && (start != null))
+		if(!cancel && (start != null)) {
 			handleMouseMove(e);
+		}
 	}
 
 	public final void mouseUp(MouseEvent e) {
-		if(!cancel && (start != null))
+		if(!cancel && (start != null)) {
 			handleMouseUp(e);
+		}
 	}
 
 	public final void mouseClicked(MouseEvent e) {
@@ -91,20 +106,25 @@ public abstract class SchemEditTool implements EditTool, ActionListener {
 
 
 	public boolean keyPressed(KeyEvent e) {
-		if(!cancel && (start != null))
+		if(!cancel && (start != null)) {
 			return handleKey(e);
+		}
 		return false;
 	}
-	
+
 	protected abstract void handleCancel();
+
 	protected abstract void handleMouseDown(MouseEvent e);
+
 	protected abstract void handleMouseDrag(MouseEvent e);
+
 	protected abstract void handleMouseUp(MouseEvent e);
+
 	protected abstract boolean handleKey(KeyEvent e);
-	
+
 	protected void handleMouseMove(MouseEvent e) {
 	}
-	
+
 	protected void handleMouseClicked(MouseEvent e) {
 	}
 
@@ -119,25 +139,27 @@ public abstract class SchemEditTool implements EditTool, ActionListener {
 		} catch(Exception e) {
 		}
 	}
-	
+
 	protected void start(Point p) {
 		start = p;
 		startPosition = sheetPanel.constrainScreenPoint(start.x, start.y, false);
 		cancel = false;
 	}
-	
+
+	@Override
 	public List getToolbarObjects() {
 		return toolbarObjects;
 	}
-	
+
 	protected void addToolbarObject(JComponent c) {
 		if(c instanceof AbstractButton) {
 			AbstractButton b = (AbstractButton) c;
 			final Action a = b.getAction();
-			if(a == null)
+			if(a == null) {
 				b.addActionListener(this);
-			else
+			} else {
 				b.setText(null);
+			}
 		}
 
 		toolbarObjects.add(c);
@@ -146,7 +168,9 @@ public abstract class SchemEditTool implements EditTool, ActionListener {
 	public boolean isActive() {
 		return (start != null);
 	}
-	
+
+	@Override
 	public void actionPerformed(ActionEvent e) {
 	}
+
 }
