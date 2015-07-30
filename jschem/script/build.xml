@@ -3,38 +3,42 @@
 <project basedir=".." default="Dist" name="Schem">
 	<taskdef name="jsmoothgen" classname="net.charabia.jsmoothgen.ant.JSmoothGen" classpath="data/os/windows/jsmooth/jsmoothgen-ant.jar"/>
 	<taskdef resource="proguard/ant/task.properties" classpath="script/proguard.jar" />
+        <taskdef name="bundleapp" classname="com.oracle.appbundler.AppBundlerTask" classpath="script/appbundler-1.0.jar"/>
 
 	<target name="init">
+                <property name="TMP_BUILD" value="dist/tmp"/>
+                
 		<property name="PACKAGE_PATH" value="org/heinz/eda/schem"/>
-		<property name="JAR_FILE" value="build/JSchem.jar"/>
+		<property name="JAR_FILE" value="${TMP_BUILD}/JSchem.jar"/>
 		<property name="CONSTANTS_FILE" value="SchemConstants"/>
 		<property name="PLATFORMS_PATH" value="../platforms"/>
 		<property name="PLATFORMS_LIB" value="${PLATFORMS_PATH}/lib"/>
-		<property name="PLATFORMS_JAR" value="${PLATFORMS_PATH}/build/platforms-1.0.jar"/>
+		<property name="PLATFORMS_JAR" value="${PLATFORMS_PATH}/dist/platforms.jar"/>
 		<property name="CLASS_PATH" value="${PLATFORMS_LIB}/itext-1.4.jar:${PLATFORMS_LIB}/looks-2.0.4.jar:${PLATFORMS_LIB}/osxadapter.jar:${PLATFORMS_LIB}/registry.jar:${PLATFORMS_LIB}/cmdline.jar:${PLATFORMS_JAR}:lib/expresslib.jar"/>
 		<property name="WIN_BUNDLE" value="JSchemWindows.zip"/>
 		<property name="MAC_BUNDLE" value="JSchemMacOs.tgz"/>
 		<property name="LIN_BUNDLE" value="JSchemUnix.bin"/>
 		<property name="SRC_BUNDLE" value="JSchemSource.zip"/>
+                <property name="JAVA_API" value="1.4"/>
+                
+                <mkdir dir="${TMP_BUILD}"/>
 	</target>
 	
 	<target name="Compile" depends="init" description="Uebersetzt die Klassen">
-		<delete dir="build/*"/>
+		<delete dir="${TMP_BUILD}"/>
 		
-		<mkdir dir="build/tmp"/>
-		<javac classpath="${CLASS_PATH}" debug="true" source="1.4" target="1.4" srcdir="src" destdir="build/tmp" includes="**/*.java"/>
-		
+		<mkdir dir="${TMP_BUILD}"/>
 		<antcall target="GetDate"/>
 		
-		<copy file="src/${PACKAGE_PATH}/${CONSTANTS_FILE}.java" todir="build/tmp/${PACKAGE_PATH}"/>
-		<replace file="build/tmp/${PACKAGE_PATH}/${CONSTANTS_FILE}.java" token="COMPILATION_DATE" value="${TODAY}"/>
-		<javac source="1.4" target="1.4" debug="true" srcdir="build"/>
+		<copy file="src/${PACKAGE_PATH}/${CONSTANTS_FILE}.java" todir="${TMP_BUILD}/${PACKAGE_PATH}"/>
+		<replace file="${TMP_BUILD}/${PACKAGE_PATH}/${CONSTANTS_FILE}.java" token="COMPILATION_DATE" value="${TODAY}"/>
+		<javac source="${JAVA_API}" target="${JAVA_API}" debug="true" srcdir="${TMP_BUILD}"/>
 	</target>
 	
 	<target name="Source_bundle" depends="init" description="Macht ein Source Bundle">
-		<delete file="build/${SRC_BUNDLE}"/>
+		<delete file="dist/${SRC_BUNDLE}"/>
 		
-		<zip destfile="build/${SRC_BUNDLE}">
+		<zip destfile="dist/${SRC_BUNDLE}">
 			<fileset dir=".">
 				<include name="**"/>
 				<exclude name="build/**"/>
@@ -50,139 +54,150 @@
 	</target>
 	
 	<target name="Jar" depends="init" description="Erzeugt das JAR-File">
-		<unjar src="${PLATFORMS_PATH}/lib/looks-2.0.4.jar" dest="build/tmp"/>
-		<unjar src="${PLATFORMS_PATH}/lib/osxadapter.jar" dest="build/tmp"/>
-		<unjar src="${PLATFORMS_PATH}/lib/itext-1.4.jar" dest="build/tmp"/>
-		<unjar src="${PLATFORMS_PATH}/lib/registry.jar" dest="build/tmp"/>
-		<unjar src="${PLATFORMS_PATH}/lib/cmdline.jar" dest="build/tmp"/>
+		<unjar src="${PLATFORMS_PATH}/lib/looks-2.0.4.jar" dest="${TMP_BUILD}"/>
+		<unjar src="${PLATFORMS_PATH}/lib/osxadapter.jar" dest="${TMP_BUILD}"/>
+		<unjar src="${PLATFORMS_PATH}/lib/itext-1.4.jar" dest="${TMP_BUILD}"/>
+		<unjar src="${PLATFORMS_PATH}/lib/registry.jar" dest="${TMP_BUILD}"/>
+		<unjar src="${PLATFORMS_PATH}/lib/cmdline.jar" dest="${TMP_BUILD}"/>
 		
-		<unjar src="${PLATFORMS_JAR}" dest="build/tmp"/>
-		<unjar src="lib/expresslib.jar" dest="build/tmp"/>
+		<unjar src="${PLATFORMS_JAR}" dest="${TMP_BUILD}"/>
+		<unjar src="lib/expresslib.jar" dest="${TMP_BUILD}"/>
 		
-		<delete dir="build/tmp/META-INF"/>
+		<delete dir="${TMP_BUILD}/META-INF"/>
 		
-		<copy todir="build/tmp">
+		<copy todir="${TMP_BUILD}">
 			<fileset dir="." includes="data/**"/>
 		</copy>
 
-		<copy file="data/translations/JSchem.properties" tofile="build/tmp/data/translations/JSchem_en.properties"/>
+		<copy file="data/translations/JSchem.properties" tofile="${TMP_BUILD}/data/translations/JSchem_en.properties"/>
 
 		<delete>
-			<fileset dir="build/tmp" includes="**/*.java"/>
+			<fileset dir="${TMP_BUILD}" includes="**/*.java"/>
 		</delete>
 
-		<zip basedir="data/library" zipfile="build/tmp/library.zip">
+		<zip basedir="data/library" zipfile="${TMP_BUILD}/library.zip">
 		</zip>
 		
-		<jar basedir="build/tmp" compress="true" jarfile="${JAR_FILE}">
+		<jar basedir="${TMP_BUILD}" compress="true" jarfile="${JAR_FILE}">
 			<manifest>
 				<attribute name="Main-Class" value="org.heinz.eda.schem.JSchem"/>
 			</manifest>
 			<include name="**"/>
 		</jar>
-		<delete dir="build/tmp"/>
+		<delete dir="${TMP_BUILD}"/>
 	</target>
 	
 	<target name="Bundles" depends="Linux_bundle,Mac_bundle,Windows_bundle,Source_bundle">
 	</target>
 	
 	<target name="Linux_bundle" depends="init">
-		<delete file="build/${LIN_BUNDLE}"/>
-		<exec dir="build" executable="tar">
+		<delete file="dist/${LIN_BUNDLE}"/>
+		<exec dir="dist" executable="tar">
 			<arg value="czf"/>
 			<arg value="JSchem.tgz"/>
 			<arg value="JSchem.jar"/>
 		</exec>
-		<concat binary="true" destfile="build/${LIN_BUNDLE}">
+		<concat binary="true" destfile="dist/${LIN_BUNDLE}">
 			<fileset dir="data/os/linux" includes="sfx_header.sh"/>
-			<fileset dir="build" includes="JSchem.tgz"/>
+			<fileset dir="dist" includes="JSchem.tgz"/>
 		</concat>
-		<exec dir="build" executable="/bin/chmod">
+		<exec dir="dist" executable="/bin/chmod">
 			<arg value="+x"/>
 			<arg value="${LIN_BUNDLE}"/>
 		</exec>
-		<delete file="build/JSchem.tgz"/>
+		<delete file="dist/JSchem.tgz"/>
 	</target>
 	
 	<target name="Windows_bundle" depends="init">
 		<jsmoothgen project="data/os/windows/JSchem.jsmooth" skeletonroot="data/os/windows/jsmooth/skeletons"/>
-		<delete file="build/${WIN_BUNDLE}"/>
-		<zip destfile="build/${WIN_BUNDLE}" basedir="build" includes="JSchem.exe"/>
-		<delete file="build/JSchem.exe"/>
+		<delete file="dist/${WIN_BUNDLE}"/>
+		<zip destfile="dist/${WIN_BUNDLE}" basedir="dist" includes="JSchem.exe"/>
+		<delete file="dist/JSchem.exe"/>
 	</target>
 	
 	<target name="Mac_bundle" depends="init">
-		<delete dir="build/${MAC_BUNDLE}"/>
-		<exec dir="build" executable="/bin/tar">
+            <!--
+		<delete dir="dist/${MAC_BUNDLE}"/>
+		<exec dir="dist" executable="/bin/tar">
 			<arg value="xzpf"/>
 			<arg value="../data/os/macos/macapp.tgz"/>
 		</exec>
 		
-		<copy todir="build/JSchem.app/Contents/Resources/Java">
-			<fileset dir="build" includes="JSchem.jar"/>
+		<copy todir="dist/JSchem.app/Contents/Resources/Java">
+			<fileset dir="dist" includes="JSchem.jar"/>
 		</copy>
 		
-		<exec dir="build" executable="/bin/tar">
-			<arg value="czf"/>
-			<arg value="${MAC_BUNDLE}"/>
-			<arg value="JSchem.app"/>
-		</exec>
-		<delete dir="build/JSchem.app"/>
-	</target>
+        <exec dir="dist" executable="/bin/tar">
+                <arg value="czf"/>
+                <arg value="${MAC_BUNDLE}"/>
+                <arg value="JSchem.app"/>
+        </exec>
+        <delete dir="dist/JSchem.app"/>
+        -->
+            <bundleapp outputdirectory="dist"
+               name="JSchem"
+               displayname="JSchem schematics editor"
+               identifier="JSchem"
+               mainclassname="org.heinz.eda.schem.JSchem">
+<!--                <runtime dir="${env.JAVA_HOME}" /> -->
+                <classpath file="dist/JSchem.jar" />
+            </bundleapp>
+            <echo message="${java.home}"/>
+        </target>
 	
-	<target name="shrink" depends="init">
-		<property name="SHRINK_JAR" value="build/Test.jar"/>
-		<delete file="${SHRINK_JAR}"/>
-		<proguard obfuscate="true" shrink="false" optimize="false" ignorewarnings="true">
-			<injar file="${JAR_FILE}"/>
-			<outjar file="${SHRINK_JAR}"/>
-			<libraryjar file="${java.home}/lib/rt.jar"/>
-			<keep name="org.heinz.eda.schem.JSchem"/>
-		</proguard>
-	</target>
+        <target name="shrink" depends="init">
+            <property name="SHRINK_JAR" value="build/Test.jar"/>
+            <delete file="${SHRINK_JAR}"/>
+            <proguard obfuscate="true" shrink="false" optimize="false" ignorewarnings="true">
+                <injar file="${JAR_FILE}"/>
+                <outjar file="${SHRINK_JAR}"/>
+                <libraryjar file="${java.home}/lib/rt.jar"/>
+                <keep name="org.heinz.eda.schem.JSchem"/>
+            </proguard>
+        </target>
 	
-	<target name="GetDate" depends="init">
-		<tstamp>
-			<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" locale="en"/>
-		</tstamp>
-		<mkdir dir="build/tmp/${PACKAGE_PATH}"/>
-		<delete dir="build/tmp/${PACKAGE_PATH}" includes="${CONSTANTS_FILE}.*"/>
-		<copy file="src/${PACKAGE_PATH}/${CONSTANTS_FILE}.java" todir="build/tmp/${PACKAGE_PATH}"/>
-		<replace file="build/tmp/${PACKAGE_PATH}/${CONSTANTS_FILE}.java" token="COMPILATION_DATE" value="${TODAY}"/>
-		<javac source="1.3" target="1.3" srcdir="build/tmp"/>
-		<delete file="build/tmp/${PACKAGE_PATH}/${CONSTANTS_FILE}.java"/>
-	</target>
+        <target name="GetDate" depends="init">
+            <tstamp>
+                <format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" locale="en"/>
+            </tstamp>
+            <mkdir dir="${TMP_BUILD}/${PACKAGE_PATH}"/>
+            <delete dir="${TMP_BUILD}/${PACKAGE_PATH}" includes="${CONSTANTS_FILE}.*"/>
+            <copy file="src/${PACKAGE_PATH}/${CONSTANTS_FILE}.java" todir="${TMP_BUILD}/${PACKAGE_PATH}"/>
+            <replace file="${TMP_BUILD}/${PACKAGE_PATH}/${CONSTANTS_FILE}.java" token="COMPILATION_DATE" value="${TODAY}"/>
+            <javac source="${JAVA_API}" target="${JAVA_API}" srcdir="${TMP_BUILD}"/>
+            <delete file="${TMP_BUILD}/${PACKAGE_PATH}/${CONSTANTS_FILE}.java"/>
+        </target>
 	
-	<target name="Translation_fi" depends="init">
-		<property name="locale" value="fi"/>
-		<antcall target="-translationBundle">
-		</antcall>
-	</target>
+        <target name="Translation_fi" depends="init">
+            <property name="locale" value="fi"/>
+            <antcall target="-translationBundle">
+            </antcall>
+        </target>
 	
-	<target name="Translation_fr" depends="init">
-		<property name="locale" value="fr"/>
-		<antcall target="-translationBundle">
-		</antcall>
-	</target>
+        <target name="Translation_fr" depends="init">
+            <property name="locale" value="fr"/>
+            <antcall target="-translationBundle">
+            </antcall>
+        </target>
 	
-	<target name="-translationBundle" depends="init">
-		<property name="bundle" value="JSchem"/>
-		<property name="filename" value="translation_${locale}.zip"/>
-		<property name="localefile" value="Locale_${locale}.properties"/>
-		<property name="newbundle" value="${bundle}_${locale}.properties"/>
-		<property name="appDefBundle" value="Application.properties"/>
-		<property name="appBundle" value="Application_${locale}.properties"/>
-		<touch file="data/translations/${newbundle}"/>
-		<propertyfile file="data/translations/${localefile}">
-			<entry key="Locale" value="${locale}"/>
-		</propertyfile>
-		<delete file="${filename}" failonerror="false"/>
-		<copy file="../platforms/data/translations/${appDefBundle}" todir="data/translations"/>
-		<touch file="data/translations/${appBundle}"/>
-		<copy file="../platforms/data/translations/${appBundle}" todir="data/translations" failonerror="false" overwrite="true"/>
-		<zip basedir="data/translations" zipfile="build/${filename}" includes="${bundle}.properties ${bundle}_${locale}.properties ${localefile} ${appDefBundle} ${appBundle}"/>
+        <target name="-translationBundle" depends="init">
+            <property name="bundle" value="JSchem"/>
+            <property name="filename" value="translation_${locale}.zip"/>
+            <property name="localefile" value="Locale_${locale}.properties"/>
+            <property name="newbundle" value="${bundle}_${locale}.properties"/>
+            <property name="appDefBundle" value="Application.properties"/>
+            <property name="appBundle" value="Application_${locale}.properties"/>
+            <touch file="data/translations/${newbundle}"/>
+            <propertyfile file="data/translations/${localefile}">
+                <entry key="Locale" value="${locale}"/>
+            </propertyfile>
+            <delete file="${filename}" failonerror="false"/>
+            <copy file="../platforms/data/translations/${appDefBundle}" todir="data/translations"/>
+            <touch file="data/translations/${appBundle}"/>
+            <copy file="../platforms/data/translations/${appBundle}" todir="data/translations" failonerror="false" overwrite="true"/>
+            <zip basedir="data/translations" zipfile="build/${filename}" includes="${bundle}.properties ${bundle}_${locale}.properties ${localefile} ${appDefBundle} ${appBundle}"/>
 		
-		<delete file="data/translations/${localefile}" failonerror="false"/>
-		<delete dir="data/translations" includes="Application*.properties" failonerror="false"/>
-	</target>
+            <delete file="data/translations/${localefile}" failonerror="false"/>
+            <delete dir="data/translations" includes="Application*.properties" failonerror="false"/>
+        </target>
 </project>
