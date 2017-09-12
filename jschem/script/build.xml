@@ -117,24 +117,6 @@
 	</target>
 	
 	<target name="Mac_bundle" depends="init">
-            <!--
-		<delete dir="dist/${MAC_BUNDLE}"/>
-		<exec dir="dist" executable="/bin/tar">
-			<arg value="xzpf"/>
-			<arg value="../data/os/macos/macapp.tgz"/>
-		</exec>
-		
-		<copy todir="dist/JSchem.app/Contents/Resources/Java">
-			<fileset dir="dist" includes="JSchem.jar"/>
-		</copy>
-		
-		<exec dir="dist" executable="/bin/tar">
-						<arg value="czf"/>
-						<arg value="${MAC_BUNDLE}"/>
-						<arg value="JSchem.app"/>
-		</exec>
-		<delete dir="dist/JSchem.app"/>
-		-->
 		<delete dir="dist/JSchem.app"/>
 		<bundleapp outputdirectory="dist"
 							 name="JSchem"
@@ -147,6 +129,12 @@
 		</bundleapp>
 		<loadfile srcfile="data/os/macos/filetype.plist" property="FILE_TYPE"/>
 		<replace file="dist/JSchem.app/Contents/Info.plist" token="&lt;/dict&gt;" value="${FILE_TYPE}"/>
+		<exec dir="dist" executable="tar">
+						<arg value="czf"/>
+						<arg value="${MAC_BUNDLE}"/>
+						<arg value="JSchem.app"/>
+		</exec>
+		<delete dir="dist/JSchem.app"/>
 	</target>
 	
 	<target name="GetDate" depends="init">
