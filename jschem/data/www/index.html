@@ -1,0 +1,223 @@
+<html>
+<head><TITLE>JSchem</TITLE></head>
+<body>
+<p>
+<link rel="stylesheet" href="style.css">
+<table class="header">
+<tr><TD class="headercell">
+<table border="0" cellpadding="10">
+<TR><TD><IMG src="jschem_title.png" alt="JSchem"></td><td><h1>JSchem</h1>
+<h2>Free Cross-Platform Schematic Editor</h2>
+Bernhard Walter, December 2006<br>
+a.k.a Heinz<br>
+<br>
+Last Updated: 12. Sep. 2017<br>
+</TD></TR>
+</table>
+</td>
+</tr>
+</table>
+<p>
+<h3>Mac support is back!</h3>
+<!--
+New in this release:<br>
+<ul>
+<li>Fixed a bug in the ExpressSCH importer</li>
+</ul>
+-->
+<br>
+Key features are:<br>
+<ul>
+<li>Free, released under GPL</li>
+<li>Cross platform with near-native OS integration for Windows, Mac OS X, Linux and commercial Unixes</li>
+<li>Multi document support</li>
+<li>Drag &amp; Drop support</li>
+<li>No setup required</li>
+<li>Intuitive user interface</li>
+<li>Keyboard control</li>
+<li>Builtin and extensible library</li>
+<li>File format zipped XML</li>
+<li>Supported export formats: PDF, RTF, JPG, GIF, PNG, Bill of Materials (txt, csv)</li>
+<li>Supported import format: .sch (ExpressSCH schematics), .s (ExpressSCH library components)</li>
+<li>Multi-language. Currently supported: English, German, French, Finnish</li>
+</ul>
+<br>
+Please drop me a note if you have suggestions, find bugs or simply like JSchem.<br>
+My address is:<br>
+<img align="bottom" src="email.png"><br>
+<br>
+</p>
+<hr>
+<p>
+<h3>Library Update</h3>
+JSchem can now perform a library update. Each time the program detects that a new release has been launched for the first time, it will automatically invoke the library update tool. This tool compares the library files on disk with the ones that come bundled with JSchem and presents a list of differences and how to deal with them.<br>
+You can choose the following actions to resolve conflicts:<br>
+<ul>
+	<li><strong>Skip</strong>: Leave the original file on disk untouched. This does not add the new file from the builtin library.</li>
+	<li><strong>Overwrite</strong>: Overwrite the original file on disk with the file from the builtin library. The original file will be lost.</li>
+	<li><strong>Rename</strong>: Rename the original file to a safe name (by adding a numbered suffix, e.g. triode.jcmp to triode_0.jcmp) and add the new file from the new library. This preserves the original file under a different name and adds the new component from the builtin library.</li>
+</ul>
+JSchem checks the contents of the library and compiles a list with the following defaults:<br>
+<ul>
+	<li>New files: Overwrite (no risk of losing data, there is no original file to lose)</li>
+	<li>Unchanged files: Skip (nothing to do, the file is up-to-date)</li>
+	<li>Modified files: Rename (Preserves the original file, adds new files)</li>
+</ul>
+If you simply press 'Ok' you will get an updated library without losing any of your private components. However, you may get a lot of backup files from the rename operation, even if you did not modify the files.<br>
+Therefore, it is highly recommended to check the list of differences for files that you actually modified. Leave these on 'Rename' and set all the others to 'Overwrite'. If you want to compare the old and new components you can select the file and press 'Compare...'<br>
+To change the scheduled action for files select them in the list and press the appropriate button on the right. The button 'Default' sets the action back to the default initially suggested.<br>
+<br>
+If you do not want to deal with the library update now, you can simply press Cancel to abort the process. JSchem will not ask you to do it again until a new release is installed. However, you can invoke the library update tool at any time by choosing the menu entry 'Component->Library Update...'.<br>
+<br>
+</p>
+<hr>
+<p>
+<h3>Translations</h3>
+I have created the language support for English and German to the best of my abilities. Please send me a note if there are words or phrases that need to be changed.<br>
+<br>
+I am still looking for volunteers to add support for other languages like Spanish, Italian or even Chinese. This is much easier than it may sound. All phrases (currently around 300) are contained within a translation bundle that can be edited with my translation editor in an hour or maybe less. As soon as the translation bundle is included in JSchem your name will appear in the About-box.<br>
+<A href="translation.html">Here is a description of the process</A>.<br>
+<br>
+</p>
+<hr>
+<p>
+<h3>ExpressSCH Import</h3>
+JSchem can read ExpressSCH (.sch) files.<br>
+Please note that .sch sheets including all components come out about 6% smaller in JSchem due to inch/mm conversion issues.<br>
+ExpressSCH uses a proprietary and encrypted file format. Writing .sch files will therefore not be implemented.<br>
+<br>
+</p>
+<hr>
+<p>
+<h3>JSchem File Format</h3>
+JSchem stores its data files with the suffix &quot;.jsch&quot;. These files are actually ZIP archives that contain a single entry &quot;schematics.xml&quot;. If you open a JSchem file with a zip-tool (e.g. by changing its extension to .zip), you can extract &quot;schematics.xml&quot; and view it with a text editor. The format is human readable and should not need further explanation.<br>
+<br>
+</p>
+<hr>
+<p>
+<h3>Debugging</h3>
+<strong>You can help!</strong> JSchem now has a debug console that displays errors in detail. If an error occurs you will see a little red flag in the lower right corner of the window. Click it to open the debug console and send its contents to my PM or to:<br>
+<img align="bottom" src="email.png"><br>
+<br>
+</p>
+<hr>
+<p>
+<h3>Download &amp; Installation</h3>
+JSchem is written in Java and runs on all systems that have a Java Runtime Environment (JRE) 1.4 or newer. It has been tested on
+<ul>
+<li>Windows</li>
+<li>Mac OS X</li>
+<li>Linux</li>
+<li>HP-UX 11i</li>
+<li>Solaris 10</li>
+</ul>
+with Java 1.4, 5.0, 6.0 and the preview of 7.0.<br> 
+<br>
+Download and install a bundle according to your operating system:<br>
+<br>
+<table class="standard">
+	<tr>
+		<th>Operating System</th>
+		<th>Download</th>
+		<th>OS Specific Installation Instructions</th>
+	</tr>
+	<tr>
+		<td><strong>Windows</strong></td>
+		<td><A href="JSchemWindows.zip">JSchemWindows.zip</A></td>
+		<td>Extract JSchem.exe</td>
+	</tr>
+	<tr>
+		<td><strong>Mac OS</strong></td>
+		<td><A href="JSchemMacOs.tgz">JSchemMacOs.tgz</A></td>
+		<td>Extract the JSchem application</td>
+	</tr>
+	<tr>
+		<td><strong>Linux/Unix</strong></td>
+		<td><A href="JSchemUnix.bin">JSchemUnix.bin</A></td>
+		<td>Be sure you have a suitable 'java' in your PATH.<br>Make the program executable with the command 'chmod +x JSchemUnix.bin'</td>
+	</tr>
+	<tr>
+		<td><strong>Any other OS</strong></td>
+		<td><A href="JSchem.jar">JSchem.jar</A></td>
+		<td>Run it with the command 'java -Xmx256m -jar JSchem.jar'</td>
+	</tr>
+	<tr>
+		<td><strong>Sources</strong></td>
+		<td><A href="JSchemSource.zip">JSchemSource.zip</A></td>
+		<td>This file contains an eclipse project</td>
+	</tr>
+</table>
+<br>
+<br>
+There is no setup for JSchem. Simply store the application in your favorite location and create a shortcut to your dock/menu/desktop.<br>
+Make sure you have a Java Runtime Environment 1.4 or newer. If you need one you can get it from the <A href="http://java.sun.com">Java website</A><br>
+When starting for the first time JSchem will create the directory &quot;.jschem&quot; in the user's home directory (Mac OS/Unix) or in My Documents\&lt;Username&gt; (Windows) and place the library and the initial settings there<br>
+If you want to play with JSchem you can download an archive containing the demo file of my <A href="T1.zip">4W practice amp</A>.<br>
+<br>
+<strong>Note for Windows users:</strong> JSchem creates the file association .jsch every time it runs. If you move the application to a new installation directory, you have to run it once to update the file association to the new path. The file association of ExpressSCH files (.sch) will remain unchanged.<br>
+<br>
+</p>
+<hr>
+<p>
+<h3>License</h3>
+JSchem is free software, released under the <A href="http://www.fsf.org/licensing/licenses/gpl.html">GPL</A>.<br>
+There are no license restrictions on files produced with JSchem. They are your property.<br>
+<br>
+</p>
+<hr>
+<p>
+<h3>How to use JSchem</h3>
+Please read <A href="about.html">this document</A>. It will hopefully answer most of your questions.<br>
+<br>
+</p>
+<hr>
+<p>
+<h3>Your Requests</h3>
+The following featues were requested by users. I will investigate possible solutions as soon as I find the time. Please be patient.<br>
+<ul>
+<li>Undo/Redo. I know...</li>
+<li>Higher precision drawing/exporting</li>
+<li>Add/remove edges for polygons</li>
+<li>Import from other EDA programs, e.g. CadSoft Eagle</li>
+</ul>
+<br>
+</p>
+<hr>
+<p>
+<h3>History</h3>
+<table>
+<tr><td>2017-09-12</td><td>Version 0.9.35</td><td>Support for Oracle Java on Mac OS</td></tr>
+<tr><td>2010-06-26</td><td>Version 0.9.35</td><td>Windows Vista, paste bug, BOM, ExpressSCH importer bug</td></tr>
+<tr><td>2008-11-17</td><td>Version 0.9.34</td><td>Bug in wire tool fixed</td></tr>
+<tr><td>2008-11-16</td><td>Version 0.9.33</td><td>Bug in accelerator keys on Mac OS fixed</td></tr>
+<tr><td>2008-11-16</td><td>Version 0.9.32</td><td>French translation</td></tr>
+<tr><td>2008-09-07</td><td>Version 0.9.31</td><td>Finnish translation, pin outlines</td></tr>
+<tr><td>2008-08-11</td><td>Version 0.9.30</td><td>Multi-document, library-tool, general overhaul</td></tr>
+<tr><td>2007-11-02</td><td>Version 0.9.22</td><td>Improved performance for load/save/repaint, 'dirty' flag</td></tr>
+<tr><td>2007-10-31</td><td>Version 0.9.21</td><td>Bug in library tool fixed</td></tr>
+<tr><td>2007-10-29</td><td>Version 0.9.20</td><td>Wire/Pin attachment bug fixed, many new library components</td></tr>
+<tr><td>2007-05-20</td><td>Version 0.9.19</td><td>Another snap grid problem fixed, .sch files associated on Mac OS</td></tr>
+<tr><td>2007-05-20</td><td>Version 0.9.18</td><td>Snap grid problem fixed</td></tr>
+<tr><td>2007-05-19</td><td>Version 0.9.17</td><td>Fixed a bug in wire tool</td></tr>
+<tr><td>2007-05-18</td><td>Version 0.9.16</td><td>ExpressSCH import, performance and handling improvements</td></tr>
+<tr><td>2007-02-12</td><td>Version 0.9.15</td><td>Snap grid guessing, several minor bug fixes</td></tr>
+<tr><td>2007-01-08</td><td>Version 0.9.14</td><td>Smart junction dots</td></tr>
+<tr><td>2007-01-08</td><td>Version 0.9.13</td><td>Selection movement with cursor keys</td></tr>
+<tr><td>2007-01-05</td><td>Version 0.9.12</td><td>Line selection problem fixed</td></tr>
+<tr><td>2007-01-05</td><td>Version 0.9.11</td><td>Polygon shapes, settings problem fixed</td></tr>
+<tr><td>2007-01-04</td><td>Version 0.9.10</td><td>Grid problem on Macs, antialiasing</td></tr>
+<tr><td>2007-01-04</td><td>Version 0.9.9</td><td>Easier handling for colors, more debug info in startup code</td></tr>
+<tr><td>2007-01-02</td><td>Version 0.9.8</td><td>Improved drawing quality on Mac OS, filled arcs/rectangles, stacking</td></tr>
+<tr><td>2006-12-30</td><td>Version 0.9.7</td><td>Mac app runs on PPC and x86, file type association on Mac and Windows (.jsch files double-clickable)</td></tr>
+<tr><td>2006-12-29</td><td>Version 0.9.6</td><td>Fixed another selection problem, grid dot size, debug console</td></tr>
+<tr><td>2006-12-28</td><td>Version 0.9.5</td><td>Flip object bodies (without texts), fixed selection problem, export wait dialog</td></tr>
+<tr><td>2006-12-27</td><td>Version 0.9.4</td><td>OS bundles, memory problem solved</td></tr>
+<tr><td>2006-12-26</td><td>Version 0.9.3</td><td>Library tool, component colors, 16/64 color picker</td></tr>
+<tr><td>2006-12-25</td><td>Version 0.9.2</td><td>GIF export</td></tr>
+<tr><td>2006-12-24</td><td>Version 0.9.1</td><td>User defined paper sizes, recent files in file menu</td></tr>
+<tr><td>2006-12-23</td><td>Version 0.9.0</td><td>Initial release</td></tr>
+</table>
+<br>
+</p>
+</body>
+</html>

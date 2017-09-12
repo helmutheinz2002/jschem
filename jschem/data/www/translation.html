@@ -1,0 +1,79 @@
+<html>
+<head><TITLE>JSchem</TITLE></head>
+<link rel="stylesheet" href="style.css">
+<h1>How to create a translation bundle</h1>
+<hr>
+<p>
+<h3>1. Tools and Principles</h3>
+A translation bundle is a set of (or sometimes only one) java properties files that define a token and a translation for one language.<br>
+One translation bundle per language is required. The English translation bundle is the default language bundle.<br>
+Whenever the program tries to switch to a language for which it cannot find a translation bundle it will revert to the default (English) bundle.<br>
+Java properties use Unicode characters which can be difficult to handle on some operating systems. The <A href="TranslationEditor.jar">translation editor</A> tool helps to
+facilitate the process of translation bundle creation. It is a very simple Java program that loads/saves a translation bundle, provides
+an editor and an error check. You can run it by double clicking TranslationEditor.jar (if your OS supports this) or launch it with the command<br>
+<pre>
+java -jar TranslationEditor.jar
+</pre>
+If you are interested in providing a translation bundle for a new language send me an <A href="mailto:helmutheinz2002@yahoo.com">email</a> and I will prepare an empty translation bundle for your language.<br>
+</p>
+<br>
+
+<p>
+<h3>2. Getting started</h3>
+The translation bundle comes as a zip-file that contains all required files. Do not unpack it. You can load it in the Translation Editor
+via the File->Open menu item. When loaded you will see a table with three columns:<br>
+<ul>
+   <li><strong>Token:</strong> The token that is used to identify the word or phrase. You cannot change it. Just for your information.</li>
+   <li><strong>Default:</strong> The translation provided by the default (English) translation bundle. This explains the meaning of the entry.</li>
+   <li><strong>Your language:</strong> Your translation of the word or phrase.</li>
+</ul>
+You will also find several pages, one for each category of phrases.
+<br>
+</p>
+<br>
+
+<p>
+<h3>3. Editing</h3>
+If you start from scratch the right column (your translations) will be empty. You can edit a line by selecting it with the mouse.
+As you select it, the editor in the lower part of the window will gain the focus and you can start typing. The text you type will
+appear in the editor below and in the selected table row.<br>
+If the default text does not need a translation, simply double click the row in the table. This will copy the default text to your language.<br>
+Some translations contain HTML and should be translated with a similar formatting. This requires some very basic knowledge of HTML. If in doubt,
+replace the words and copy the HTML code. HTML formatted text can be larger than the table row which makes it very difficult (or impossible) to
+check the appearance. To solve this problem, the table cells provide a tooltip that shows the formatted text in full size.<br>
+<br>
+There are some tokens that have a special meaning:<br>
+<ul>
+   <li><strong>LOCALE</strong>: the name of your language in your language</li>
+   <li><strong>TRANSLATOR_NAME</strong>: place your name here, it will be visible in the &quot;About&quot; box of JSchem later</li>
+   <li>Tokens of the form &lt;ITEM&gt;<strong>_TOOLTIP</strong>: these are explanations for the GUI items that display the text contained in the token &lt;ITEM&gt;</li>
+   <li>Tokens of the form <strong>MENU_</strong>&lt;ITEM&gt;: these are menu items. Many of these also have a _TOOLTIP token. Please do not forget the trailing &quot;...&quot; if the default translation has 
+them</li>
+   <li>Tokens of the form &lt;ITEM&gt;<strong>_ACC_MAC</strong>: These are menu accelerator key for Mac OS where they are different from other OSses and should simply be copied</li>
+</ul>
+</p>
+<br>
+
+<p>
+<h3>4. Checking</h3>
+When you think you are finished, you can use the menu entry File->Check to run a simple consistency check. If there are potential problems
+you will be prompted with a list of errors. Double click an error in the list to jump to the entry in your translation for correction.<br>
+</p>
+<br>
+
+<p>
+<h3>5. Saving</h3>
+If everything is fine you can save the translation bundle via File->Save As.<br>
+The translation bundle can be saved at any stage of the translation process and re-opened later.<br>
+<strong>Please note: due to its simplicity the Translation Editor does not check whether you overwrite an existing file. Be careful!</strong><br>
+</p>
+<br>
+
+<p>
+<h3>6. Testing in JSchem</h3>
+To check your translation bundle in JSchem, save the translation bundle to a file named "translation.zip" in the same directory as the JSchem application and
+restart JSchem.<br>
+JSchem will use the translation in that file (if it is present) instead of the builtin data.<br>
+</p>
+</body>
+</html>

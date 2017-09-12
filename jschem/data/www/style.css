@@ -1,0 +1,52 @@
+body {
+	font-family: arial, helvetica, sansserif;
+	padding-left: 2em;
+	padding-right: 2em;
+	padding-top: 2em;
+	padding-bottom: 2em;
+	font-size: 13;
+}
+
+td {
+	font-family: arial, helvetica, sansserif;
+	font-size: 13;
+	padding: 4;
+}
+
+th {
+	font-family: arial, helvetica, sansserif;
+	font-size: 13;
+	font-weight: bold;
+	padding: 4;
+	text-align: left;
+}
+
+h1 {
+  font-family: arial, helvetica, sansserif;
+}
+
+h2 {
+  font-family: arial, helvetica, sansserif;
+}
+
+h3 {
+  font-family: arial, helvetica, sansserif;
+}
+
+table.header {
+  border:2;
+  border-style:groove;
+  width:100%;
+  border-spacing:10;
+}
+
+table.standard {
+  border:2;
+  border-style:groove;
+  border-spacing:5;
+}
+
+td.headercell {
+  padding:10;
+  background-color:#D5E8FF;
+}

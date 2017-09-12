@@ -1,0 +1,117 @@
+<head>
+	<title>
+	About JSchem
+	</title>
+</head>
+
+<body>
+<link rel="stylesheet" href="style.css">
+<h1>About JSchem</h1>
+<hr>
+<h2>Schematic Basics</h2>
+A schematic is composed of different types of objects. They all have an appearance (what you see on the screen/printout) and high-level information that provides structural data about the schematic. This high-level information could (in the future) be used to generate data like netlists, parts lists or import data for other programs (like spice).<br>
+
+<h3>Shapes</h3>
+A shape is an object that is used for drawing. JSchem supports the following shapes:<br>
+<ul>
+<li>Line</li>
+<li>Rectangle</li>
+<li>Arc</li>
+<li>Polygon</li>
+<li>Text</li>
+</ul>
+Shapes can be used as 'decoration' or as elements that can be grouped to form symbols or components.<br>
+High level information:<br>
+<ul>
+<li>none</li>
+</ul>
+
+<h3>Wires</h3>
+Wires are the connecting parts of a schematic. They have connectors at both ends that can be attached to<br>
+<ul>
+<li>other wire connectors</li>
+<li>pins</li>
+</ul>
+If a wire or one of its connectors is moved it will drag the attached objects with it.<br>
+High level information:<br>
+<ul>
+<li>topology information</li>
+</ul>
+
+<h3>Pins</h3>
+A pin is an object that is used as a connector for grouped objects.<br>
+High level information:<br>
+<ul>
+<li>pin name</li>
+<li>pin number</li>
+</ul>
+
+<h3>Symbols</h3>
+A symbol is a grouped object that assigns a net name to its pins (like ground or B+). Symbols can be used to interconnect schematics on different sheets.<br>
+High level information:<br>
+<ul>
+<li>net name</li>
+</ul>
+
+<h3>Components</h3>
+A component is a grouped object that represents a physical component. It consists of shapes and pins.<br>
+High level information:<br>
+<ul>
+<li>part id (e.g. R12, C3)</li>
+<li>part name (e.g. 12ax7, 100k, 10n)</li>
+<li>order number</li>
+</ul>
+
+<hr>
+<h2>Drawing Schematics</h2>
+
+<h3>Customizing Program Appearance</h3>
+Open the options dialog via the menu (View->Options) or the toolbar button. Adjust colors, grid spacings and font defaults as needed.<br>
+Note: there are two grid settings. The 'Visible Grid' defines the distance between the dots that drawn on the sheet. The 'Snap Grid' defines the spacing of the (invisible) snap grid. If you wish to make the objects snap to the visible dots then set them to equal values.<br>
+
+<h3>Picking components from the library</h3>
+Choose 'Load from Library' from the menu and navigate through the library folders. Select the desired symbol/component and click 'Open'. The selected component will be inserted in the middle of the window.<br>
+If wish to insert a component that you have picked from the library earlier as described above, you can activate the 'Library Tool' <IMG src="img/librarytool.png"> and select it in the list that appears in the toolbar. Each time you load a symbol or component from the library (using one of the methods described) it will move to the top of this list.<br>
+
+<h3>Setting objects properties</h3>
+All objects on a sheet can be modified by double-clicking them or choosing 'Edit->Properties' from the menu. This opens a property dialog that contains all editable data of the selected object.<br>
+Some objects have handles (the yellow squares) that can be used to modify the position/size/appearance of the object.<br>
+Grouped objects (symbols or components) have a list of text attributes that is displayed in a table in the properties dialog. You can add, remove and modify entries. The column 'Purpose' explains the purpose of the attribute. These attributes contain the high-level information mentioned above. User created entries are labeled 'Info', other entries are builtin attributes and cannot be removed.<br>
+To modify a cell in the column 'Text' double-click the cell and type your text. You can also single-click the cell and start typing, this will append the typed text to the contents of the cell. Finish with &lt;Enter&gt; and the focus moves to the cell below. This makes it very easy and efficient to edit a number of attributes without using the mouse.<br>
+New text attributes will be created with the current font defaults set in the options dialog.<br>
+To modify orientation, font, size or style scroll to the right and enter the desired values.<br>
+
+<h3>Rotating/Flipping objects</h3>
+Rotating objects rotates them around their anchor point. In most cases this will be the upper left corner.<br>
+You can rotate/flip grouped objects with or without included texts ('Rotate/Flip Body') by selecting them and clicking the approriate buttons in the toolbar.<br>
+Note: if a grouped object is rotated or flipped it transforms the coordinate system of its elements, meaning that the orientation of any object is relative to the group it belongs to.<br>
+If you have rotated/flipped a component or symbol and the attribute texts have become unreadable, double click the component and set the text orientations as described above.<br>
+
+<h3>Drawing Shapes</h3>
+There is a tool for all types of shapes.<br>
+The tool starts working by clicking into the sheet and stops working when it is done or cancelled. You can cancel a tool by either pressing 'Escape' or clicking the right mouse button<br>
+<ul>
+<li>Lines: activate the 'Line Tool' <IMG src="img/linetool.png">. Start the first line by clicking into the sheet. Cancel the tool when you're done.</li>
+<li>Rectangles: activate the 'Rectangle Tool' <IMG src="img/squaretool.png">. Draw the rectangle by clicking into the sheet and dragging it to the right size.</li>
+<li>Circles: activate the 'Arc Tool' <IMG src="img/circletool.png">. Choose an arc type from the toolbar. Click into the sheet at the center of the arc and drag it to the right size.</li>
+<li>Texts: activate the 'Text Tool' <IMG src="img/texttool.png">. Select font, size and style and enter the text in the toolbar. Click into the sheet to place the text.</li>
+</ul>
+Shapes with zero extension are dropped silently.<br>
+
+<h3>Connecting Objects with Wires</h3>
+Activate the 'Wire Tool' <IMG src="img/wiretool.png">. Click on a pin of a component, a wire connector, a wire mid-section or somewhere into the sheet. Draw wires until you're done, then cancel the tool. Placing a wire connector in another wire's mid-section will split that wire in two pieces and create a new joint. If you missed the pin/connector you wanted to connect, you can move the connector handle to the right position later. If you find it hard to hit the pins/connectors you should zoom in.<br>
+Crossing wires does not connect them.<br>
+
+<h3>Disconnecting Objects and Wires</h3>
+To disconnect a wire from a pin of a component simply move the wire or the handle to a different location. To disconnect a wire from another wire select it and drag its handle away with the Shift key down.<br>
+
+<h3>Creating Custom Symbols/Components</h3>
+The library has a (very basic) set of components and symbols that are common in tube amps. You will sooner or later need symbols/components that are not contained in the library.<br>
+To create a custom component draw it with shapes and place its pins. Set the pin numbers (and names if appropriate) by double clicking each pin. These will later be used to connect wires. Choose 'Component->Group Component' or 'Component->Group Symbol' from the menu.<br>
+If you wish to preserve the new component for future use, you can add it to the library. Choose 'Component->Add to Library' from the menu, navigate to the desired folder (or create a new one) and save the component.<br>
+
+<h3>Multiple Sheets</h3>
+If your schematics are too large to fit on a single sheet or you want to divide them logically, you can add/rename/move sheets to your schematics. Use input and output symbols to make inter-sheet connections. All symbols with the same net name are treated as connected.<br>
+<hr>
+</body>
+</html>
