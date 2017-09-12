@@ -2,11 +2,11 @@
 
 <project basedir=".." default="Dist" name="Schem">
 	<taskdef name="jsmoothgen" classname="net.charabia.jsmoothgen.ant.JSmoothGen" classpath="data/os/windows/jsmooth/jsmoothgen-ant.jar"/>
-	<taskdef resource="proguard/ant/task.properties" classpath="script/proguard.jar" />
-        <taskdef name="bundleapp" classname="com.oracle.appbundler.AppBundlerTask" classpath="script/appbundler-1.0.jar"/>
+	<!-- <taskdef resource="proguard/ant/task.properties" classpath="script/proguard.jar" /> -->
+	<taskdef name="bundleapp" classname="com.oracle.appbundler.AppBundlerTask" classpath="script/appbundler-1.0.jar"/>
 
 	<target name="init">
-                <property name="TMP_BUILD" value="dist/tmp"/>
+		<property name="TMP_BUILD" value="dist/tmp"/>
                 
 		<property name="PACKAGE_PATH" value="org/heinz/eda/schem"/>
 		<property name="JAR_FILE" value="${TMP_BUILD}/JSchem.jar"/>
@@ -19,9 +19,9 @@
 		<property name="MAC_BUNDLE" value="JSchemMacOs.tgz"/>
 		<property name="LIN_BUNDLE" value="JSchemUnix.bin"/>
 		<property name="SRC_BUNDLE" value="JSchemSource.zip"/>
-                <property name="JAVA_API" value="1.8"/>
+		<property name="JAVA_API" value="1.8"/>
                 
-                <mkdir dir="${TMP_BUILD}"/>
+		<mkdir dir="${TMP_BUILD}"/>
 	</target>
 	
 	<target name="Compile" depends="init" description="Uebersetzt die Klassen">
@@ -138,25 +138,15 @@
 		<delete dir="dist/JSchem.app"/>
 		<bundleapp outputdirectory="dist"
 							 name="JSchem"
-							 displayname="JSchem schematics editor"
-							 identifier="JSchem"
+							 displayname="JSchem Schematics Sditor"
+							 identifier="org.heinz.eda.schem.JSchem"
 							 icon="data/os/macos/JSchem.icns"
 							 mainclassname="org.heinz.eda.schem.JSchem">
 			<runtime dir="${java.home}/.." />
 			<classpath file="dist/tmp/JSchem.jar" />
 		</bundleapp>
-		<echo message="${java.home}"/>
-	</target>
-	
-	<target name="shrink" depends="init">
-		<property name="SHRINK_JAR" value="build/Test.jar"/>
-		<delete file="${SHRINK_JAR}"/>
-		<proguard obfuscate="true" shrink="false" optimize="false" ignorewarnings="true">
-			<injar file="${JAR_FILE}"/>
-			<outjar file="${SHRINK_JAR}"/>
-			<libraryjar file="${java.home}/lib/rt.jar"/>
-			<keep name="org.heinz.eda.schem.JSchem"/>
-		</proguard>
+		<loadfile srcfile="data/os/macos/filetype.plist" property="FILE_TYPE"/>
+		<replace file="dist/JSchem.app/Contents/Info.plist" token="&lt;/dict&gt;" value="${FILE_TYPE}"/>
 	</target>
 	
 	<target name="GetDate" depends="init">

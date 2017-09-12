@@ -1,0 +1,17 @@
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>jsch</string>
+				<string>sch</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>Resources/JSchem.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>JSchem Schematics</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+		</dict>
+	</array>
+</dict>

@@ -7,12 +7,12 @@
 <JVMSearchPath>exepath</JVMSearchPath>
 <JVMSearchPath>jview</JVMSearchPath>
 <arguments></arguments>
-<classPath>../../../build/translation.zip</classPath>
+<classPath>../../../dist/translation.zip</classPath>
 <embeddedJar>true</embeddedJar>
-<executableName>../../../build/JSchem.exe</executableName>
+<executableName>../../../dist/JSchem.exe</executableName>
 <iconLocation>../../icons/menu/icon.png</iconLocation>
 <initialMemoryHeap>-1</initialMemoryHeap>
-<jarLocation>../../../build/JSchem.jar</jarLocation>
+<jarLocation>../../../dist/tmp/JSchem.jar</jarLocation>
 <mainClassName>org.heinz.eda.schem.JSchem</mainClassName>
 <maximumMemoryHeap>268435456</maximumMemoryHeap>
 <maximumVersion></maximumVersion>
