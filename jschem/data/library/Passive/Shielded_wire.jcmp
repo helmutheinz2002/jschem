@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component version="2">
+   <Text fontName="Monospaced" visible="false" mobile="true" x="100" fontSize="160" key="PART_ID"></Text>
+   <Text fontName="Monospaced" visible="false" mobile="true" x="100" y="192" fontSize="160" key="PART_NAME"></Text>
+   <Text fontName="Monospaced" visible="false" mobile="true" x="100" y="384" fontSize="160" key="ORDER_NR"></Text>
+   <Text fontName="Monospaced" visible="false" mobile="true" x="100" y="576" fontSize="160" key="PART_MODEL"></Text>
+   <Line dx="600" color="-16777216" y="50"></Line>
+   <Line dx="100" color="-16777216" x="100" y="100"></Line>
+   <Line dx="100" color="-16777216" x="250" y="100"></Line>
+   <Line color="-16777216" dy="100" x="300" y="100"></Line>
+   <Pin color="-16777216" y="50">
+      <Text fontName="Monospaced" visible="false" color="-16777216" mobile="true" x="100" fontSize="160" text="1" key="PIN_NR"></Text>
+      <Text fontName="Monospaced" visible="false" color="-16777216" mobile="true" x="100" y="192" fontSize="160" key="PIN_NAME"></Text>
+   </Pin>
+   <Pin color="-16777216" x="600" y="50">
+      <Text fontName="Monospaced" visible="false" color="-16777216" mobile="true" x="100" fontSize="160" text="2" key="PIN_NR"></Text>
+      <Text fontName="Monospaced" visible="false" color="-16777216" mobile="true" x="100" y="192" fontSize="160" key="PIN_NAME"></Text>
+   </Pin>
+   <Pin color="-16777216" x="300" y="200">
+      <Text fontName="Monospaced" visible="false" color="-16777216" mobile="true" x="100" fontSize="160" text="3" key="PIN_NR"></Text>
+      <Text fontName="Monospaced" visible="false" color="-16777216" mobile="true" x="100" y="192" fontSize="160" key="PIN_NAME"></Text>
+   </Pin>
+   <Line dx="100" color="-16777216" x="400" y="100"></Line>
+   <Line dx="100" color="-16777216" x="100"></Line>
+   <Line dx="100" color="-16777216" x="250"></Line>
+   <Line dx="100" color="-16777216" x="400"></Line>
+</Component>
