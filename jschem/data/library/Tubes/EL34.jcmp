@@ -5,60 +5,66 @@
    <Text fontName="Monospaced" visible="false" x="100" mobile="true" y="192" fontSize="160" key="PART_NAME"></Text>
    <Text fontName="Monospaced" visible="false" x="100" mobile="true" y="384" fontSize="160" key="ORDER_NR"></Text>
    <Text fontName="Monospaced" visible="false" x="100" mobile="true" y="576" fontSize="160" key="PART_MODEL"></Text>
-   <Component y="200">
-      <Text mobile="true" y="-50" fontSize="160" text="V" key="PART_ID"></Text>
-      <Text visible="false" x="100" mobile="true" y="192" fontSize="160" key="PART_NAME"></Text>
-      <Text visible="false" x="100" mobile="true" y="384" fontSize="160" key="ORDER_NR"></Text>
-      <Line dy="-500" x="750" y="500"></Line>
-      <Line dy="550" x="1050" y="1100"></Line>
-      <Line dx="-50" x="900" y="950"></Line>
-      <Line dx="-50" x="750" y="950"></Line>
-      <Line dx="-50" x="600" y="950"></Line>
-      <Pin x="1050" y="1650">
-         <Text visible="false" x="100" mobile="true" fontSize="160" text="6" key="PIN_NR"></Text>
-         <Text visible="false" x="100" mobile="true" y="192" fontSize="160" key="PIN_NAME"></Text>
-      </Pin>
-      <Pin y="950">
-         <Text visible="false" x="100" mobile="true" fontSize="160" text="3" key="PIN_NR"></Text>
-         <Text visible="false" x="100" mobile="true" y="192" fontSize="160" key="PIN_NAME"></Text>
-      </Pin>
-      <Pin x="750">
-         <Text visible="false" x="100" mobile="true" fontSize="160" text="1" key="PIN_NR"></Text>
-         <Text visible="false" x="100" mobile="true" y="192" fontSize="160" key="PIN_NAME"></Text>
-      </Pin>
-      <Line dx="-600" x="1050" y="1100"></Line>
-      <Line dx="450" y="950"></Line>
-      <Line dx="-50" x="1050" y="950"></Line>
-      <Line dx="600" x="450" y="500"></Line>
-      <Arc orientation="1" x="750" y="950" radius="500" arcType="3"></Arc>
-      <Arc orientation="3" x="750" y="650" radius="500" arcType="3"></Arc>
-      <Line dy="300" x="250" y="650"></Line>
-      <Line dy="300" x="1250" y="650"></Line>
-      <Line dy="100" x="450" y="1100"></Line>
-      <Line dx="-50" x="800" y="800"></Line>
-      <Line dx="-50" x="650" y="800"></Line>
-      <Line dx="-50" x="500" y="800"></Line>
-      <Pin x="1500" y="800">
-         <Text visible="false" x="100" mobile="true" fontSize="160" text="3" key="PIN_NR"></Text>
-         <Text visible="false" x="100" mobile="true" y="192" fontSize="160" key="PIN_NAME"></Text>
-      </Pin>
-      <Line dx="450" x="1050" y="800"></Line>
-      <Line dx="-50" x="950" y="800"></Line>
-      <Line dx="-50" x="900" y="650"></Line>
-      <Line dx="-50" x="750" y="650"></Line>
-      <Line dx="-50" x="600" y="650"></Line>
-      <Pin y="650">
-         <Text visible="false" x="100" mobile="true" fontSize="160" text="3" key="PIN_NR"></Text>
-         <Text visible="false" x="100" mobile="true" y="192" fontSize="160" key="PIN_NAME"></Text>
-      </Pin>
-      <Line dx="450" y="650"></Line>
-      <Line dx="-50" x="1050" y="650"></Line>
-      <Text fontName="Monospaced" visible="false" x="100" mobile="true" fontSize="160" key="PART_MODEL"></Text>
-   </Component>
    <Text color="-16777216" fontSize="160" text="EL34"></Text>
-   <Text fontName="Monospaced" color="-16777216" x="850" y="200" fontSize="160" text="3"></Text>
-   <Text fontName="Monospaced" color="-16777216" x="100" y="650" fontSize="160" text="1"></Text>
-   <Text fontName="Monospaced" color="-16777216" x="100" y="1000" fontSize="160" text="5"></Text>
-   <Text fontName="Monospaced" color="-16777216" x="1100" y="1650" fontSize="160" text="8"></Text>
-   <Text fontName="Monospaced" color="-16777216" x="1350" y="800" fontSize="160" text="4"></Text>
+   <Component y="50">
+      <Text fontName="Monospaced" visible="false" x="100" mobile="true" fontSize="160" key="PART_ID"></Text>
+      <Text fontName="Monospaced" visible="false" x="100" mobile="true" y="192" fontSize="160" key="PART_NAME"></Text>
+      <Text fontName="Monospaced" visible="false" x="100" mobile="true" y="384" fontSize="160" key="ORDER_NR"></Text>
+      <Text fontName="Monospaced" visible="false" x="100" mobile="true" y="576" fontSize="160" key="PART_MODEL"></Text>
+      <Text fontName="Monospaced" color="-16777216" x="850" fontSize="160" text="3"></Text>
+      <Text fontName="Monospaced" color="-16777216" x="100" y="450" fontSize="160" text="1"></Text>
+      <Text fontName="Monospaced" color="-16777216" x="100" y="800" fontSize="160" text="5"></Text>
+      <Text fontName="Monospaced" color="-16777216" x="1100" y="1450" fontSize="160" text="8"></Text>
+      <Text fontName="Monospaced" color="-16777216" x="1350" y="600" fontSize="160" text="4"></Text>
+      <Component>
+         <Text mobile="true" y="-200" fontSize="160" text="V" key="PART_ID"></Text>
+         <Text visible="false" x="100" mobile="true" y="192" fontSize="160" key="PART_NAME"></Text>
+         <Text visible="false" x="100" mobile="true" y="384" fontSize="160" key="ORDER_NR"></Text>
+         <Line dy="-500" x="750" y="500"></Line>
+         <Line dy="550" x="1050" y="1100"></Line>
+         <Line dx="-50" x="900" y="950"></Line>
+         <Line dx="-50" x="750" y="950"></Line>
+         <Line dx="-50" x="600" y="950"></Line>
+         <Pin x="1050" y="1650">
+            <Text visible="false" x="100" mobile="true" fontSize="160" text="6" key="PIN_NR"></Text>
+            <Text visible="false" x="100" mobile="true" y="192" fontSize="160" key="PIN_NAME"></Text>
+         </Pin>
+         <Pin y="950">
+            <Text visible="false" x="100" mobile="true" fontSize="160" text="3" key="PIN_NR"></Text>
+            <Text visible="false" x="100" mobile="true" y="192" fontSize="160" key="PIN_NAME"></Text>
+         </Pin>
+         <Pin x="750">
+            <Text visible="false" x="100" mobile="true" fontSize="160" text="1" key="PIN_NR"></Text>
+            <Text visible="false" x="100" mobile="true" y="192" fontSize="160" key="PIN_NAME"></Text>
+         </Pin>
+         <Line dx="-600" x="1050" y="1100"></Line>
+         <Line dx="450" y="950"></Line>
+         <Line dx="-50" x="1050" y="950"></Line>
+         <Line dx="600" x="450" y="500"></Line>
+         <Arc orientation="1" x="750" y="950" radius="500" arcType="3"></Arc>
+         <Arc orientation="3" x="750" y="650" radius="500" arcType="3"></Arc>
+         <Line dy="300" x="250" y="650"></Line>
+         <Line dy="300" x="1250" y="650"></Line>
+         <Line dy="100" x="450" y="1100"></Line>
+         <Line dx="-50" x="800" y="800"></Line>
+         <Line dx="-50" x="650" y="800"></Line>
+         <Line dx="-50" x="500" y="800"></Line>
+         <Pin x="1500" y="800">
+            <Text visible="false" x="100" mobile="true" fontSize="160" text="3" key="PIN_NR"></Text>
+            <Text visible="false" x="100" mobile="true" y="192" fontSize="160" key="PIN_NAME"></Text>
+         </Pin>
+         <Line dx="450" x="1050" y="800"></Line>
+         <Line dx="-50" x="950" y="800"></Line>
+         <Line dx="-50" x="900" y="650"></Line>
+         <Line dx="-50" x="750" y="650"></Line>
+         <Line dx="-50" x="600" y="650"></Line>
+         <Pin y="650">
+            <Text visible="false" x="100" mobile="true" fontSize="160" text="3" key="PIN_NR"></Text>
+            <Text visible="false" x="100" mobile="true" y="192" fontSize="160" key="PIN_NAME"></Text>
+         </Pin>
+         <Line dx="450" y="650"></Line>
+         <Line dx="-50" x="1050" y="650"></Line>
+         <Text fontName="Monospaced" visible="false" x="100" mobile="true" fontSize="160" key="PART_MODEL"></Text>
+      </Component>
+   </Component>
 </Component>
